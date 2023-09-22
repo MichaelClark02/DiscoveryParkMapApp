@@ -35,7 +35,7 @@ export default class App extends Component {
         latitudeDelta: 0.0025,
         longitudeDelta: 0.0025,}}
         mapType='hybrid'
-        minZoomLevel = {17.5}
+        // minZoomLevel = {17.5}
         rotateEnabled
         >
           
