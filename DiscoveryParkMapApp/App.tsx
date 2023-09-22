@@ -14,13 +14,13 @@ type Coordinate = [number, number];
 
 
 
-  
+33.252490
 
-const leftTopOverlay:Coordinate = [
-  33.252528,-97.151805
-]
 const bottomRightOverlay:Coordinate = [
-  33.254951,-97.153992
+  33.255164, -97.151177
+]
+const topLeftOverlay:Coordinate = [
+  33.252490, -97.154320
 ]
 
 export default class App extends Component {
@@ -46,10 +46,9 @@ export default class App extends Component {
             description={"description"}
          />
          <Overlay
-            bounds = {[leftTopOverlay,bottomRightOverlay]}
+            bounds = {[topLeftOverlay,bottomRightOverlay]}
             image ={{ uri: 'https://cdn.3axis.co/user-images/e1gklqmo.jpg'}}
-            
-
+            opacity={.70}
          />
       </MapView>
 
