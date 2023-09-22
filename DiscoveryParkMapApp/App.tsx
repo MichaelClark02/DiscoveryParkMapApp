@@ -6,8 +6,7 @@ import { Overlay } from 'react-native-maps';
 
 
 
-const OVERLAY_TOP_LEFT_COORDINATE = [35.68184060244454, 139.76531982421875];
-const OVERLAY_BOTTOM_RIGHT_COORDINATE = [35.679609609368576, 139.76806640625];
+
 
 type Coordinate = [number, number];
 
@@ -27,14 +26,17 @@ const b:Coordinate = [
 export default class App extends Component {
   render() {
     return (
-      
+
       <MapView style={styles.map}
+      showsBuildings
       initialRegion={{
-        latitude: 33.2543,
-        longitude: -97.1518,
-        latitudeDelta: 0.0,
-        longitudeDelta: 0.0,}}
-        mapType='satellite'
+        latitude: 33.25405149775475,
+        longitude: -97.15271196603254,
+        latitudeDelta: 0.0025,
+        longitudeDelta: 0.0025,}}
+        mapType='hybrid'
+        minZoomLevel = {17.5}
+        rotateEnabled
         >
           
         <Marker
@@ -53,15 +55,6 @@ export default class App extends Component {
     );
   }
 }
-
-const tokyoRegion = {
-  latitude: 35.6762,
-  longitude: 139.6503,
-  latitudeDelta: 0.01,
-  longitudeDelta: 0.01,
-};
-
-
 
 const styles = StyleSheet.create({
   container: {
