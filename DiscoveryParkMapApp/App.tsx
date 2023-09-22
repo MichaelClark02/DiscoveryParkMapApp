@@ -11,17 +11,17 @@ import { Overlay } from 'react-native-maps';
 type Coordinate = [number, number];
 
 
-const a:Coordinate = [
-  33.252528,-97.151805
-]
-const b:Coordinate = [
-  33.254951,-97.153992
-]
 
 
 
   
 
+const leftTopOverlay:Coordinate = [
+  33.252528,-97.151805
+]
+const bottomRightOverlay:Coordinate = [
+  33.254951,-97.153992
+]
 
 export default class App extends Component {
   render() {
@@ -46,8 +46,9 @@ export default class App extends Component {
             description={"description"}
          />
          <Overlay
-            bounds = {[a,b]}
+            bounds = {[leftTopOverlay,bottomRightOverlay]}
             image ={{ uri: 'https://cdn.3axis.co/user-images/e1gklqmo.jpg'}}
+            
 
          />
       </MapView>
