@@ -1,1 +1,5 @@
-{}
+{
+  "dependencies": {
+    "@react-navigation/native-stack": "^6.9.13"
+  }
+}

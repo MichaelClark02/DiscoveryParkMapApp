@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { Component, useState, useEffect } from 'react';
+import { StyleSheet, TouchableOpacity, Button, View, SafeAreaView } from 'react-native';
 import MapView from 'react-native-maps'
 import { Marker, Overlay } from "react-native-maps";
+
 
 
 type Coordinate = [number, number];
@@ -13,10 +14,19 @@ const topLeftOverlay:Coordinate = [
   33.252490, -97.154320
 ]
 
+var floor1 = true;
+var op = 0.7
+
 export default class App extends Component {
   render() {
+    if(floor1){
+      op = 0.7
+    }
+    else{
+      op =0
+    };
     return (
-
+      <SafeAreaView>
       <MapView style={styles.map}
       showsBuildings
       initialRegion={{
@@ -38,10 +48,18 @@ export default class App extends Component {
          <Overlay
             bounds = {[topLeftOverlay,bottomRightOverlay]}
             image ={{ uri: 'https://i.ibb.co/svVK4qL/FLOOR1.png'}}
-            opacity={.70}
+            opacity={op}
          />
-      </MapView>
 
+          
+      </MapView>
+      <Button
+            onPress={() => (floor1=!floor1)}
+            title="Learn More"
+            color="#841584"
+            accessibilityLabel="Learn more about this purple button"
+          />
+      </SafeAreaView>
     );
   }
 }
@@ -52,7 +70,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: '100%',
-    height: '100%',
+    height: '95%',
   },
 
 })
