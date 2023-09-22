@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import MapView from 'react-native-maps'
-import { Marker } from "react-native-maps";
-import { Overlay } from 'react-native-maps';
-
-
-
+import { Marker, Overlay } from "react-native-maps";
 
 
 type Coordinate = [number, number];
-
-
-
-
-
-33.252490
 
 const bottomRightOverlay:Coordinate = [
   33.255164, -97.151177
