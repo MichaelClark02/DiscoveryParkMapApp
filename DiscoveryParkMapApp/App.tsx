@@ -47,7 +47,7 @@ export default class App extends Component {
          />
          <Overlay
             bounds = {[topLeftOverlay,bottomRightOverlay]}
-            image ={{ uri: 'https://cdn.3axis.co/user-images/e1gklqmo.jpg'}}
+            image ={{ uri: 'https://i.ibb.co/svVK4qL/FLOOR1.png'}}
             opacity={.70}
          />
       </MapView>
