@@ -10,18 +10,18 @@ import { Component, useState, useEffect } from 'react';
 type Coordinate = [number, number];
 
 const bottomRightOverlay:Coordinate = [
-  33.255164, -97.151177
+  33.256400, -97.150330
 ]
 const topLeftOverlay:Coordinate = [
-  33.252490, -97.154320
+  33.251650, -97.155400
 ]
 
 var floor1 = true;
-var op = 0.7;
+var op = 0.4;
 
 export default function Map() {
       if(floor1){
-        op = 0.7
+        op = 0.4
       }
       else{
         op =0
@@ -49,7 +49,7 @@ export default function Map() {
            />
            <Overlay
               bounds = {[topLeftOverlay,bottomRightOverlay]}
-              image ={{ uri: 'https://i.ibb.co/svVK4qL/FLOOR1.png'}}
+              image ={{ uri: 'https://i.ibb.co/6yfb5qR/FLOOR1-8-1-3.png'}}
               opacity={op}
            />
   
