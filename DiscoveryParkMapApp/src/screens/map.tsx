@@ -31,6 +31,9 @@ export default function Map() {
         <MapView style={styles.map}
         showsBuildings
         showsUserLocation
+        followsUserLocation
+        userLocationPriority = {"high"}
+
         initialRegion={{
           latitude: 33.25405149775475,
           longitude: -97.15271196603254,
