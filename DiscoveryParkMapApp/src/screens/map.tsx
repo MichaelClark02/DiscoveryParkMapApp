@@ -1,8 +1,9 @@
 import React from "react";
 import { Text, View, StyleSheet, SafeAreaView,TouchableOpacity, Button, } from 'react-native'
 import MapView from 'react-native-maps'
-import { Marker, Overlay } from "react-native-maps";
+import { Marker, Overlay,AnimatedRegion ,PROVIDER_GOOGLE} from "react-native-maps";
 import { Component, useState, useEffect } from 'react';
+import * as Location from 'expo-location';
 
 
 
@@ -19,7 +20,61 @@ const topLeftOverlay:Coordinate = [
 var floor1 = true;
 var op = 0.4;
 
+
+
+
 export default function Map() {
+  
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [initialRegion, setInitialRegion] = useState(null);
+
+  const [lat,setLat] = useState(0.0);
+  const [long,setLong] = useState(0.0)
+  useEffect(() => {
+    
+    const getLocation = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.log("Permission to access location was denied");
+        return;
+      }
+
+    //   let location = await Location.getCurrentPositionAsync({});
+    //   setCurrentLocation(location.coords);
+
+    //   setInitialRegion({
+    //     latitude: location.coords.latitude,
+    //     longitude: location.coords.longitude,
+    //     latitudeDelta: 0.005,
+    //     longitudeDelta: 0.005,
+    //   });
+    // };
+    Location.watchPositionAsync(
+      {
+        accuracy: Location.Accuracy.High,
+        timeInterval: 10, // Update location every second (adjust as needed)
+      },
+      (location) => {
+        const newLocation = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        };
+        setCurrentLocation(newLocation);
+      }
+    );
+  };
+
+
+
+    getLocation();
+  }, []);
+
+
+
+
+
       if(floor1){
         op = 0.4
       }
@@ -55,15 +110,23 @@ export default function Map() {
               image ={{ uri: 'https://i.ibb.co/6yfb5qR/FLOOR1-8-1-3.png'}}
               opacity={op}
            />
-  
+            {currentLocation && (
+            <Marker
+              coordinate={{
+                latitude: currentLocation.latitude,
+                longitude: currentLocation.longitude,
+              }}
+              title="Your Location"
+            />
+          )}
             
         </MapView>
-        <Button
-              onPress={() => (floor1=!floor1)}
+        { <Button
+              onPress={() => (console.log(currentLocation.latitude))}
               title="Learn More"
               color="#841584"
               accessibilityLabel="Learn more about this purple button"
-            />
+            /> }
         </SafeAreaView>
     )
 }
