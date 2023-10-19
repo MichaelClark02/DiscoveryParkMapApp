@@ -33,14 +33,14 @@ export default function Map() {
 
   const [lat,setLat] = useState(0.0);
   const [long,setLong] = useState(0.0)
-  useEffect(() => {
+  // useEffect(() => {
     
-    const getLocation = async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log("Permission to access location was denied");
-        return;
-      }
+  //   const getLocation = async () => {
+  //     let { status } = await Location.requestForegroundPermissionsAsync();
+  //     if (status !== "granted") {
+  //       console.log("Permission to access location was denied");
+  //       return;
+  //     }
 
     //   let location = await Location.getCurrentPositionAsync({});
     //   setCurrentLocation(location.coords);
@@ -52,25 +52,25 @@ export default function Map() {
     //     longitudeDelta: 0.005,
     //   });
     // };
-    Location.watchPositionAsync(
-      {
-        accuracy: Location.Accuracy.High,
-        timeInterval: 10, // Update location every second (adjust as needed)
-      },
-      (location) => {
-        const newLocation = {
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-        };
-        setCurrentLocation(newLocation);
-      }
-    );
-  };
+  //   Location.watchPositionAsync(
+  //     {
+  //       accuracy: Location.Accuracy.High,
+  //       timeInterval: 10, // Update location every second (adjust as needed)
+  //     },
+  //     (location) => {
+  //       const newLocation = {
+  //         latitude: location.coords.latitude,
+  //         longitude: location.coords.longitude,
+  //       };
+  //       setCurrentLocation(newLocation);
+  //     }
+  //   );
+  // };
 
 
 
-    getLocation();
-  }, []);
+  //   getLocation();
+  // }, []);
 
 
 
@@ -88,10 +88,11 @@ export default function Map() {
         showsBuildings
         showsUserLocation
         followsUserLocation
+        
         provider={PROVIDER_GOOGLE}
         userLocationPriority = {"high"}
 
-        initialRegion={{
+        initialRegion={{  
           latitude: 33.25405149775475,
           longitude: -97.15271196603254,
           latitudeDelta: 0.0025,
@@ -112,7 +113,7 @@ export default function Map() {
               image ={{ uri: 'https://i.ibb.co/6yfb5qR/FLOOR1-8-1-3.png'}}
               opacity={op}
            />
-            {currentLocation && (
+            {/* {currentLocation && (
             <Marker
               coordinate={{
                 latitude: currentLocation.latitude,
@@ -120,15 +121,15 @@ export default function Map() {
               }}
               title="Your Location"
             />
-          )}
+          )} */}
             
         </MapView>
-        { <Button
+        {/* { <Button
               onPress={() => (console.log(currentLocation.latitude))}
               title="Learn More"
               color="#841584"
               accessibilityLabel="Learn more about this purple button"
-            /> }
+            /> } */}
         </SafeAreaView>
     )
 }
