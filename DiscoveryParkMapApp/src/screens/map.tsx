@@ -8,6 +8,7 @@ import * as Location from 'expo-location';
 
 
 
+
 type Coordinate = [number, number];
 
 const bottomRightOverlay:Coordinate = [
@@ -87,6 +88,7 @@ export default function Map() {
         showsBuildings
         showsUserLocation
         followsUserLocation
+        provider={PROVIDER_GOOGLE}
         userLocationPriority = {"high"}
 
         initialRegion={{
