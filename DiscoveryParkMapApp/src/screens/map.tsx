@@ -33,6 +33,7 @@ export default function Map() {
 
   const [lat,setLat] = useState(0.0);
   const [long,setLong] = useState(0.0)
+  const [currFloor, setCurrFloor] = useState(0);
   // useEffect(() => {
     
   //   const getLocation = async () => {
