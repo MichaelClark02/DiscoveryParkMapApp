@@ -5,6 +5,7 @@ import { Marker, Overlay,AnimatedRegion ,PROVIDER_GOOGLE} from "react-native-map
 import { Component, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 
+import HomeSearch from '../components/HomeSearch';
 
 
 
@@ -36,12 +37,12 @@ export default function Map() {
   const [currFloor, setCurrFloor] = useState(0);
   // useEffect(() => {
     
-  //   const getLocation = async () => {
-  //     let { status } = await Location.requestForegroundPermissionsAsync();
-  //     if (status !== "granted") {
-  //       console.log("Permission to access location was denied");
-  //       return;
-  //     }
+    const getLocation = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.log("Permission to access location was denied");
+        return;
+      }
 
     //   let location = await Location.getCurrentPositionAsync({});
     //   setCurrentLocation(location.coords);
@@ -53,28 +54,28 @@ export default function Map() {
     //     longitudeDelta: 0.005,
     //   });
     // };
-  //   Location.watchPositionAsync(
-  //     {
-  //       accuracy: Location.Accuracy.High,
-  //       timeInterval: 10, // Update location every second (adjust as needed)
-  //     },
-  //     (location) => {
-  //       const newLocation = {
-  //         latitude: location.coords.latitude,
-  //         longitude: location.coords.longitude,
-  //       };
-  //       setCurrentLocation(newLocation);
-  //     }
-  //   );
-  // };
+    Location.watchPositionAsync(
+      {
+        accuracy: Location.Accuracy.High,
+        timeInterval: 10, // Update location every second (adjust as needed)
+      },
+      (location) => {
+        const newLocation = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        };
+        setCurrentLocation(newLocation);
+      }
+    );
+  };
 
 
 
-  //   getLocation();
-  // }, []);
+    getLocation();
+  }, []);
 
 
-
+  */
 
 
       if(floor1){
@@ -85,36 +86,34 @@ export default function Map() {
       };
       return (
         <SafeAreaView>
-        <MapView style={styles.map}
-        showsBuildings
-        showsUserLocation
-        followsUserLocation
-        
-        provider={PROVIDER_GOOGLE}
-        userLocationPriority = {"high"}
-
-        initialRegion={{  
-          latitude: 33.25405149775475,
-          longitude: -97.15271196603254,
-          latitudeDelta: 0.0025,
-          longitudeDelta: 0.0025,}}
-          mapType='hybrid'
-          // minZoomLevel = {17.5}
+          <MapView style={styles.map}
+          showsBuildings
+          showsUserLocation
+          followsUserLocation
+          //provider={PROVIDER_GOOGLE}
+          userLocationPriority="high"
+          initialRegion={{
+            latitude: 33.25405149775475,
+            longitude: -97.15271196603254,
+            latitudeDelta: 0.0025,
+            longitudeDelta: 0.0025,
+          }}
+          mapType="hybrid"
           rotateEnabled
           >
-            
-          <Marker
-              coordinate={{latitude: 33.2543,
-              longitude: -97.1518}}
-              title={"title"}
-              description={"description"}
-           />
-           <Overlay
-              bounds = {[topLeftOverlay,bottomRightOverlay]}
-              image ={{ uri: 'https://i.ibb.co/6yfb5qR/FLOOR1-8-1-3.png'}}
-              opacity={op}
-           />
-            {/* {currentLocation && (
+    
+            <Marker
+                coordinate={{latitude: 33.2543,
+                longitude: -97.1518}}
+                title={"title"}
+                description={"description"}
+            />
+            <Overlay
+                bounds = {[topLeftOverlay,bottomRightOverlay]}
+                image ={{ uri: 'https://i.ibb.co/6yfb5qR/FLOOR1-8-1-3.png'}}
+                opacity={op}
+            />
+            {currentLocation && (
             <Marker
               coordinate={{
                 latitude: currentLocation.latitude,
@@ -122,15 +121,12 @@ export default function Map() {
               }}
               title="Your Location"
             />
-          )} */}
-            
-        </MapView>
-        {/* { <Button
-              onPress={() => (console.log(currentLocation.latitude))}
-              title="Learn More"
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
-            /> } */}
+            )}        
+          </MapView>
+
+          <View style={styles.bottomBar}>
+            < HomeSearch/>
+          </View>
         </SafeAreaView>
     )
 }
@@ -138,11 +134,19 @@ export default function Map() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 30
+        margin: 20
     },
     map: {
       width: '100%',
-      height: '95%',
+      height: '93%',
+    },
+    bottomBar: {
+      flex: 1,
+      backgroundColor: 'white',
+      marginVertical: 1,
+      paddingTop: 25,
+      justifyContent: 'center', // Center content vertically
+      alignItems: 'center', // Center content horizontally
     },
 })
 
@@ -154,10 +158,3 @@ var markers = [
     subtitle: '1234 Foo Drive'
   }
 ];
-const tokyoRegion = {
-  latitude: 35.6762,
-  longitude: 139.6503,
-  latitudeDelta: 0.01,
-  longitudeDelta: 0.01,
-};
-
