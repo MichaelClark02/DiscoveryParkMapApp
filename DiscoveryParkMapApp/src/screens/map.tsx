@@ -54,28 +54,27 @@ export default function Map() {
     //     longitudeDelta: 0.005,
     //   });
     // };
-    Location.watchPositionAsync(
-      {
-        accuracy: Location.Accuracy.High,
-        timeInterval: 10, // Update location every second (adjust as needed)
-      },
-      (location) => {
-        const newLocation = {
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-        };
-        setCurrentLocation(newLocation);
-      }
-    );
-  };
+  //   Location.watchPositionAsync(
+  //     {
+  //       accuracy: Location.Accuracy.High,
+  //       timeInterval: 10, // Update location every second (adjust as needed)
+  //     },
+  //     (location) => {
+  //       const newLocation = {
+  //         latitude: location.coords.latitude,
+  //         longitude: location.coords.longitude,
+  //       };
+  //       setCurrentLocation(newLocation);
+  //     }
+  //   );
+  // };
 
 
 
-    getLocation();
-  }, []);
+  //   getLocation();
+  // }, []);
 
 
-  */
 
 
       if(floor1){
@@ -130,7 +129,7 @@ export default function Map() {
         </SafeAreaView>
     )
 }
-
+}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
