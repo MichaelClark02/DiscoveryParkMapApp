@@ -86,12 +86,18 @@ nodes.push(h21);
 
 const route = new Graph()
 
-route.addNode('A', { B:1 })
-route.addNode('B', { A:1, C:2, D: 4 })
-route.addNode('C', { B:2, D:1 })
-route.addNode('D', { C:1, B:4 })
+route.addNode('a', {h12:2,h21:2 })
+route.addNode('b', { h11:4})
+route.addNode('g', { h13:2})
+route.addNode('k', { h13:6})
+route.addNode('m', { h21:2})
+route.addNode('h11', { b:4,h21:4})
+route.addNode('h12', { a:2,h11:2,h13:6})
+route.addNode('h13', { g:2,k:6,h12:6})
+route.addNode('h21', { a:2,k:2,h11:4,m:2})
 
-console.log(route.path('A', 'D'));
+
+console.log(route.path('g', 'm'));
 
 // for(let i=0;i<nodes.length;i++){
 //     for(let j=0;i<nodes.length;i++){
@@ -100,7 +106,7 @@ console.log(route.path('A', 'D'));
 // }
 
 
-console.log(adjMatrix[0][1]);
-console.log(adjMatrix);
+//console.log(adjMatrix[0][1]);
+//console.log(adjMatrix);
 
 export default {adjMatrix, addEdge, GraphNode};
