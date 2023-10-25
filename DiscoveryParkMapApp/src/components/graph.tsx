@@ -1,3 +1,4 @@
+const Graph = require('node-dijkstra')
 
 
 //                 a  b  g  k  m h11   h12  h13  h21
@@ -29,6 +30,7 @@ interface Graphs {
     type: string;
     reachable: boolean;
     getIndex(): number;
+    getName(): string;
 }
                   
 class GraphNode implements Graphs {
@@ -49,6 +51,9 @@ class GraphNode implements Graphs {
     }
     getIndex() {
         return this.index;
+    }
+    getName() {
+        return this.name;
     }
 }
                   
@@ -79,6 +84,20 @@ nodes.push(h12);
 nodes.push(h13);
 nodes.push(h21);
 
+const route = new Graph()
+
+route.addNode('A', { B:1 })
+route.addNode('B', { A:1, C:2, D: 4 })
+route.addNode('C', { B:2, D:1 })
+route.addNode('D', { C:1, B:4 })
+
+console.log(route.path('A', 'D'));
+
+// for(let i=0;i<nodes.length;i++){
+//     for(let j=0;i<nodes.length;i++){
+
+//     }
+// }
 
 
 console.log(adjMatrix[0][1]);
