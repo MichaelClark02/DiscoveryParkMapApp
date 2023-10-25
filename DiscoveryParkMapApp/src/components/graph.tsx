@@ -51,9 +51,9 @@ class GraphNode implements Graphs {
 }
                   
                   
-var a: GraphNode = new GraphNode(0, 1, 1, "asd", "room", true);
+let a: GraphNode = new GraphNode(0, 1, 1, "asd", "room", true);
                   
-var b: GraphNode = new GraphNode(1, 2, 2, "bsd", "room", true);
+let b: GraphNode = new GraphNode(1, 2, 2, "bsd", "room", true);
 adjMatrix = addEdge(adjMatrix, a, b, 10);
                   
 console.log(adjMatrix[0][1]);
