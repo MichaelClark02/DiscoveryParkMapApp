@@ -1,3 +1,7 @@
+
+
+
+
 const Graph = require('node-dijkstra')
 
 
@@ -95,7 +99,6 @@ route.addNode('h11', { b:4,h21:4})
 route.addNode('h12', { a:2,h11:2,h13:6})
 route.addNode('h13', { g:2,k:6,h12:6})
 route.addNode('h21', { a:2,k:2,h11:4,m:2})
-
 
 console.log(route.path('g', 'm'));
 

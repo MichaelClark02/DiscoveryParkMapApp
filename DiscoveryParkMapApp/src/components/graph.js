@@ -53,7 +53,7 @@ nodes.push(h12);
 nodes.push(h13);
 nodes.push(h21);
 var route = new Graph();
-route.addNode('a', { h12: 2, h21: 2 });
+route.addNode(a.name, { h12: 2, h21: 2 });
 route.addNode('b', { h11: 4 });
 route.addNode('g', { h13: 2 });
 route.addNode('k', { h13: 6 });

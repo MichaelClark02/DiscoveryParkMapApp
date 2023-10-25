@@ -29,7 +29,9 @@ export default function Map()  {
   
   const [currentLocation, setCurrentLocation] = useState(null);
   const [initialRegion, setInitialRegion] = useState(null);
-
+  const [error, setError] = useState(null);
+  const [lat, setLat] = useState(0);
+  const [lon, setLong] = useState(0);
   // useEffect(() => {
     
     // const getLocation = async () => {
@@ -68,9 +70,20 @@ export default function Map()  {
 
   //   getLocation();
   // }, []);
+  useEffect(()=> {
+    ;(async() => {
+      let { status } = await Location.requestForegroundPermissionsAsync()
+      if (status !== 'granted') {
+        console.log('permission to access location was denied')
+        return
+      }
+      let location = await Location.getCurrentPositionAsync({})
+      setLat(location.coords.latitude)
+      setLong(location.coords.longitude)
+    })()
+  }, [lat, lon])
 
-
-
+      console.log(lat, lon);
 
       if(floor1){
         op = 0.4
@@ -117,6 +130,10 @@ export default function Map()  {
             />
             )}        
           </MapView>
+          <View>
+            <Text>"{lat} {lon}"</Text>
+            
+          </View>
 
           <View style={styles.bottomBar}>
             < HomeSearch/>
