@@ -11,43 +11,50 @@ var adjMatrix = [[ 0,-1,-1,-1,-1, -1 ,  2 , -1 ,  2],
                 ]
 
 
-function addEdge(adj, u : GraphNode,v: GraphNode,wt: number)
-{
-    adj[u.getIndex()][v.getIndex()].push([wt]);
-    return adj;   
+function addEdge(adj: number[][], u: GraphNode, v: GraphNode, wt: number) {
+    adj[u.getIndex()][v.getIndex()] = (wt);
+    return adj;
 }
-
-
-
-
-interface Graph {
+                  
+                  
+                  
+                  
+interface Graphs {
     index: number;
     longitude: number;
     latitude: number;
     name: string;
     type: string;
     reachable: boolean;
-    getIndex():number;
+    getIndex(): number;
 }
-
-class GraphNode implements Graph {
+                  
+class GraphNode implements Graphs {
     index: number;
     longitude: number;
     latitude: number;
     name: string;
     type: string;
     reachable: boolean;
-
-    constructor(longitude: number, latitude: number, name: string, type: string, reachable: boolean) {
+                  
+    constructor(index: number, longitude: number, latitude: number, name: string, type: string, reachable: boolean) {
+        this.index = index;
         this.longitude = longitude;
         this.latitude = latitude;
         this.name = name;
         this.type = type;
         this.reachable = reachable;
     }
-    getIndex(){
+    getIndex() {
         return this.index;
     }
 }
-
-
+                  
+                  
+var a: GraphNode = new GraphNode(0, 1, 1, "asd", "room", true);
+                  
+var b: GraphNode = new GraphNode(1, 2, 2, "bsd", "room", true);
+adjMatrix = addEdge(adjMatrix, a, b, 10);
+                  
+console.log(adjMatrix[0][1]);
+console.log(adjMatrix);
