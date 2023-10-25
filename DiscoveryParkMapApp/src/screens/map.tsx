@@ -25,24 +25,19 @@ var op = 0.4;
 
 
 
-export default function Map() {
+export default function Map()  {
   
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [initialRegion, setInitialRegion] = useState(null);
 
-  const [lat,setLat] = useState(0.0);
-  const [long,setLong] = useState(0.0)
-  const [currFloor, setCurrFloor] = useState(0);
   // useEffect(() => {
     
-    const getLocation = async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log("Permission to access location was denied");
-        return;
-      }
+    // const getLocation = async () => {
+    //   let { status } = await Location.requestForegroundPermissionsAsync();
+    //   if (status !== "granted") {
+    //     console.log("Permission to access location was denied");
+    //     return;
+    //   }
 
     //   let location = await Location.getCurrentPositionAsync({});
     //   setCurrentLocation(location.coords);
@@ -89,7 +84,7 @@ export default function Map() {
           showsBuildings
           showsUserLocation
           followsUserLocation
-          //provider={PROVIDER_GOOGLE}
+          provider={PROVIDER_GOOGLE}
           userLocationPriority="high"
           initialRegion={{
             latitude: 33.25405149775475,
@@ -129,7 +124,7 @@ export default function Map() {
         </SafeAreaView>
     )
 }
-}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -149,11 +144,4 @@ const styles = StyleSheet.create({
     },
 })
 
-var markers = [
-  {
-    latitude: 45.65,
-    longitude: -78.90,
-    title: 'Foo Place',
-    subtitle: '1234 Foo Drive'
-  }
-];
+
