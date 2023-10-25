@@ -1,5 +1,5 @@
 //                 a  b  g  k  m h11   h12  h13  h21
-var adjMatrix = [[ 0,-1,-1,-1,-1, -1 ,  2 , -1 ,  2],
+let adjMatrix = [[ 0,-1,-1,-1,-1, -1 ,  2 , -1 ,  2],
                  [-1, 0,-1,-1,-1,  4 , -1 , -1 , -1],
                  [-1,-1, 0,-1,-1, -1 , -1 ,  2 , -1],
                  [-1,-1,-1, 0,-1, -1 , -1 ,  6 , -1],
@@ -58,3 +58,5 @@ adjMatrix = addEdge(adjMatrix, a, b, 10);
                   
 console.log(adjMatrix[0][1]);
 console.log(adjMatrix);
+
+export default {adjMatrix, addEdge, GraphNode};
