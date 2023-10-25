@@ -83,3 +83,5 @@ nodes.push(h21);
 
 console.log(adjMatrix[0][1]);
 console.log(adjMatrix);
+
+export default {adjMatrix, addEdge, GraphNode};
