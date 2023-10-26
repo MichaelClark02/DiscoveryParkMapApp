@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { Text, View, StyleSheet, SafeAreaView,TouchableOpacity, Button, } from 'react-native'
 import MapView from 'react-native-maps'
-import { Marker, Overlay,AnimatedRegion ,PROVIDER_GOOGLE} from "react-native-maps";
+import { Marker, Overlay,AnimatedRegion } from "react-native-maps";
 import { Component, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
-
 import HomeSearch from '../components/HomeSearch';
-
-
+import BottomSheet, { BottomSheetTextInput } from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Filter from "../components/Filter";
 
 
 type Coordinate = [number, number];
@@ -26,12 +26,21 @@ var op = 0.4;
 
 
 export default function Map()  {
-  
+  // ref
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  // variables
+  const snapPoints = useMemo(() => ['25%', '80%'], []);
+
+  // callbacks
+  const handleSheetChanges = useCallback((index: number) => {
+  }, []);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [initialRegion, setInitialRegion] = useState(null);
   const [error, setError] = useState(null);
   const [lat, setLat] = useState(0);
   const [lon, setLong] = useState(0);
+  const [txt, setTxt] = useState('');
   // useEffect(() => {
     
     // const getLocation = async () => {
@@ -83,21 +92,23 @@ export default function Map()  {
     })()
   }, [lat, lon])
 
-      console.log(lat, lon);
 
       if(floor1){
-        op = 0.4
+        op = 1.0
       }
       else{
-        op =0
+        op=1.0
       };
       return (
-        <SafeAreaView>
+        <GestureHandlerRootView style={{flex: 1}}>
+        <View>
+          
           <MapView style={styles.map}
           showsBuildings
           showsUserLocation
           followsUserLocation
-          provider={PROVIDER_GOOGLE}
+          showsIndoors
+          provider="google"
           userLocationPriority="high"
           initialRegion={{
             latitude: 33.25405149775475,
@@ -109,16 +120,39 @@ export default function Map()  {
           rotateEnabled
           >
     
+            
             <Marker
-                coordinate={{latitude: 33.2543,
-                longitude: -97.1518}}
+                coordinate={{latitude: 33.254146359389125,
+                longitude: -97.15246749126513}}
                 title={"title"}
                 description={"description"}
             />
+            <Marker
+                coordinate={{latitude: 33.25414750828636,
+                longitude: -97.15235330068435}}
+                title={"title"}
+                description={"description"}
+            />
+            <Marker
+                coordinate={{latitude: 33.218971854680454,
+                longitude: -97.14628750676216}}
+                title={"title"}
+                description={"description"}
+                
+            />
+            <Marker
+                coordinate={{latitude: 33.25414841436669,
+                longitude: -97.15243499440697}}
+                title={"title"}
+                description={"description"}
+                
+                
+            />
             <Overlay
                 bounds = {[topLeftOverlay,bottomRightOverlay]}
-                image ={{ uri: 'https://i.ibb.co/6yfb5qR/FLOOR1-8-1-3.png'}}
+                image ={{ uri: 'https://imageupload.io/ib/srjyBOQLsvPDGS6_1698224053.png'}}
                 opacity={op}
+                
             />
             {currentLocation && (
             <Marker
@@ -135,10 +169,27 @@ export default function Map()  {
             
           </View>
 
-          <View style={styles.bottomBar}>
-            < HomeSearch/>
-          </View>
-        </SafeAreaView>
+              
+          <BottomSheet
+              ref={bottomSheetRef}
+              index={0}
+              snapPoints={snapPoints}
+              onChange={handleSheetChanges}
+              backgroundStyle={styles.sheetBackground}
+              keyboardBehavior="fillParent"
+              animateOnMount
+            >
+            <BottomSheetTextInput style={styles.input} placeholder="Where to?" 
+            onChangeText={newText => setTxt(newText)}
+            />
+            <View style={styles.contentContainer}>
+              <Filter />
+            </View>
+          </BottomSheet>
+
+          
+        </View>
+        </GestureHandlerRootView>
     )
 }
 
@@ -149,7 +200,7 @@ const styles = StyleSheet.create({
     },
     map: {
       width: '100%',
-      height: '93%',
+      height: '100%',
     },
     bottomBar: {
       flex: 1,
@@ -159,6 +210,22 @@ const styles = StyleSheet.create({
       justifyContent: 'center', // Center content vertically
       alignItems: 'center', // Center content horizontally
     },
+    contentContainer: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    sheetBackground: {
+      backgroundColor: '#f0f0f0',
+    },
+    input: {
+      margin: 10,
+      fontSize: 16,
+      lineHeight: 20,
+      padding: 10,
+
+      backgroundColor: 'rgba(151, 151, 151, 0.25)',
+      
+    }
 })
 
 
