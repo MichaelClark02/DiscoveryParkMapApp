@@ -1,13 +1,13 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import React from "react";
 import { Text, View, StyleSheet, SafeAreaView,TouchableOpacity, Button, } from 'react-native'
 import MapView from 'react-native-maps'
-import { Marker, Overlay,AnimatedRegion } from "react-native-maps";
+import { Marker, Overlay,AnimatedRegion ,PROVIDER_GOOGLE} from "react-native-maps";
 import { Component, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
+
 import HomeSearch from '../components/HomeSearch';
-import BottomSheet, { BottomSheetTextInput } from '@gorhom/bottom-sheet';
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import Filter from "../components/Filter";
+
+
 
 
 type Coordinate = [number, number];
@@ -24,23 +24,13 @@ var op = 0.4;
 
 
 
-
 export default function Map()  {
-  // ref
-  const bottomSheetRef = useRef<BottomSheet>(null);
-
-  // variables
-  const snapPoints = useMemo(() => ['25%', '80%'], []);
-
-  // callbacks
-  const handleSheetChanges = useCallback((index: number) => {
-  }, []);
+  
   const [currentLocation, setCurrentLocation] = useState(null);
   const [initialRegion, setInitialRegion] = useState(null);
   const [error, setError] = useState(null);
   const [lat, setLat] = useState(0);
   const [lon, setLong] = useState(0);
-  const [txt, setTxt] = useState('');
   // useEffect(() => {
     
     // const getLocation = async () => {
@@ -92,23 +82,24 @@ export default function Map()  {
     })()
   }, [lat, lon])
 
+      const handleMapLongPress = (event) => {
+        const { latitude, longitude } = event.nativeEvent.coordinate;
+        console.log(`Long press at latitude: ${latitude}, longitude: ${longitude}`);
+      };
 
       if(floor1){
-        op = 1.0
+        op = 0.4
       }
       else{
-        op=1.0
+        op =0
       };
       return (
-        <GestureHandlerRootView style={{flex: 1}}>
-        <View>
-          
+        <SafeAreaView>
           <MapView style={styles.map}
           showsBuildings
           showsUserLocation
           followsUserLocation
-          showsIndoors
-          provider="google"
+          provider={PROVIDER_GOOGLE}
           userLocationPriority="high"
           initialRegion={{
             latitude: 33.25405149775475,
@@ -118,41 +109,25 @@ export default function Map()  {
           }}
           mapType="hybrid"
           rotateEnabled
+          onLongPress={handleMapLongPress} // Handle long press on the map
           >
     
-            
             <Marker
-                coordinate={{latitude: 33.254146359389125,
-                longitude: -97.15246749126513}}
+                coordinate={{latitude: 33.2540100377356, 
+                longitude: -97.15214264759469}}
                 title={"title"}
                 description={"description"}
             />
             <Marker
-                coordinate={{latitude: 33.25414750828636,
-                longitude: -97.15235330068435}}
+                coordinate={{latitude: 33.25374300691001, 
+                longitude: -97.15340487225396}}
                 title={"title"}
                 description={"description"}
-            />
-            <Marker
-                coordinate={{latitude: 33.218971854680454,
-                longitude: -97.14628750676216}}
-                title={"title"}
-                description={"description"}
-                
-            />
-            <Marker
-                coordinate={{latitude: 33.25414841436669,
-                longitude: -97.15243499440697}}
-                title={"title"}
-                description={"description"}
-                
-                
             />
             <Overlay
                 bounds = {[topLeftOverlay,bottomRightOverlay]}
-                image ={{ uri: 'https://imageupload.io/ib/srjyBOQLsvPDGS6_1698224053.png'}}
+                image ={{ uri: 'https://i.ibb.co/6yfb5qR/FLOOR1-8-1-3.png'}}
                 opacity={op}
-                
             />
             {currentLocation && (
             <Marker
@@ -164,32 +139,11 @@ export default function Map()  {
             />
             )}        
           </MapView>
-          <View>
-            <Text>"{lat} {lon}"</Text>
-            
+
+          <View style={styles.bottomBar}>
+            < HomeSearch/>
           </View>
-
-              
-          <BottomSheet
-              ref={bottomSheetRef}
-              index={0}
-              snapPoints={snapPoints}
-              onChange={handleSheetChanges}
-              backgroundStyle={styles.sheetBackground}
-              keyboardBehavior="fillParent"
-              animateOnMount
-            >
-            <BottomSheetTextInput style={styles.input} placeholder="Where to?" 
-            onChangeText={newText => setTxt(newText)}
-            />
-            <View style={styles.contentContainer}>
-              <Filter />
-            </View>
-          </BottomSheet>
-
-          
-        </View>
-        </GestureHandlerRootView>
+        </SafeAreaView>
     )
 }
 
@@ -200,7 +154,7 @@ const styles = StyleSheet.create({
     },
     map: {
       width: '100%',
-      height: '100%',
+      height: '93%',
     },
     bottomBar: {
       flex: 1,
@@ -210,22 +164,4 @@ const styles = StyleSheet.create({
       justifyContent: 'center', // Center content vertically
       alignItems: 'center', // Center content horizontally
     },
-    contentContainer: {
-      flex: 1,
-      alignItems: 'center',
-    },
-    sheetBackground: {
-      backgroundColor: '#f0f0f0',
-    },
-    input: {
-      margin: 10,
-      fontSize: 16,
-      lineHeight: 20,
-      padding: 10,
-
-      backgroundColor: 'rgba(151, 151, 151, 0.25)',
-      
-    }
 })
-
-
