@@ -28,6 +28,10 @@ const b:LatLng = {
   latitude: 33.25477609664522, 
   longitude: -97.15381172752063
 }
+const c:LatLng = {
+  latitude: 33.254806348852334, 
+  longitude: -97.153712485778
+}
 
 var floor1 = true;
 var op = 0.4;
@@ -130,7 +134,7 @@ export default function Map()  {
             />
             <Polyline
               coordinates={[
-                a,b
+                a,b,c
               ]}
                   strokeColor="#" // fallback for when `strokeColors` is not supported by the map-provider
                   strokeWidth={6}
@@ -140,6 +144,7 @@ export default function Map()  {
                 longitude: -97.15370578025482}}
                 title={"K110"}
                 description={"Room"}
+                pinColor="purple"
             />
             <Marker
                 coordinate={{latitude: 33.25477609664522, 
@@ -149,7 +154,7 @@ export default function Map()  {
             />
             <Marker
                 coordinate={{latitude: 33.254806348852334, 
-                longitude:   -97.153712485778}}
+                longitude: -97.153712485778}}
                 title={"K130"}
                 description={"Room"}
             />
