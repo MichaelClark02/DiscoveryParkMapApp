@@ -105,9 +105,9 @@ export default function Map()  {
       return (
         <SafeAreaView>
           <MapView style={styles.map}
-          //showsBuildings
+          showsBuildings
           showsUserLocation
-          //followsUserLocation
+          followsUserLocation
           provider={PROVIDER_GOOGLE}
           userLocationPriority="high"
           initialRegion={{
