@@ -130,18 +130,124 @@ export const outline: LatLng[] = [
 
 ];
 
-export const dBlock: LatLng[] = [
+export const dWing: LatLng[] = [
     { latitude: 33.254000931425345, longitude: -97.15209122747183 },
-    { latitude: 33.25427625820642, longitude: -97.15260956436397 },
+    { latitude: 33.25427737969867, longitude: -97.15259782969952 },
     { latitude: 33.25470326533708, longitude: -97.15226255357265 },
     
 ];
 
-export const bBlock: LatLng[] = [
+export const bWing: LatLng[] = [
+    //outline
     { latitude: 33.25395719307885, longitude: -97.15218342840672 },
-    { latitude: 33.25419158550055, longitude: -97.15262129902838 },
-    { latitude: 33.25371887478053, longitude: -97.15299949049951 },
+    { latitude: 33.2541921462472, longitude: -97.15262532234192 },
+    { latitude: 33.25370878128534, longitude: -97.15298373252155 },
     { latitude: 33.25326662897566, longitude: -97.1521220728755 },
+    { latitude: 33.25358934150339, longitude: -97.1518786624074 },
+    { latitude: 33.25380887506134, longitude: -97.15229373425245 },
+    { latitude: 33.2539552304602, longitude: -97.15218342840672 },
+
+    //library
+    { latitude: 33.2540225202165, longitude: -97.15230580419302 },
+    { latitude: 33.2541921462472, longitude: -97.15262532234192 },
+    { latitude: 33.25403906227367, longitude: -97.1527373045683 },
+    { latitude: 33.253876445304705, longitude: -97.15242214500904 },
+    { latitude: 33.25402588470297, longitude: -97.15231485664846 },
+
+    //B157
+    { latitude: 33.2541921462472, longitude: -97.15262532234192 },
+    { latitude: 33.254021398720994, longitude: -97.15275004506113 },
+    { latitude: 33.25399139871067, longitude: -97.1526923775673 },
+    { latitude: 33.25391373508465, longitude: -97.152752391994 },
+    { latitude: 33.25394345474753, longitude: -97.15280771255495 },
+
+    //B158
+    { latitude: 33.25386719295081, longitude: -97.15286470949651 },
+    { latitude: 33.25383803401095, longitude: -97.1528087183833 },
+    { latitude: 33.25391373508465, longitude: -97.152752391994 },
+    { latitude: 33.25399139871067, longitude: -97.1526923775673 },
+
+    //B155
+    { latitude: 33.25394681923704, longitude: -97.15260554105043 },
+    { latitude: 33.25383438914276, longitude: -97.1526900306344 },
+    { latitude: 33.253843361125675, longitude: -97.15270880609751 },
+    { latitude: 33.2538172862978, longitude: -97.15272959321737 },
+    { latitude: 33.253846445244584, longitude: -97.15278424322605 },
+    { latitude: 33.25387139856633, longitude: -97.1527647972107 },
+    { latitude: 33.25387700605339, longitude: -97.15277820825575 },
+    { latitude: 33.25387139856633, longitude: -97.1527647972107 },
+    { latitude: 33.253846445244584, longitude: -97.15278424322605 },
+    { latitude: 33.2538172862978, longitude: -97.15272959321737 },
+    { latitude: 33.253843361125675, longitude: -97.15270880609751 },
+    { latitude: 33.25383438914276, longitude: -97.1526900306344 },
+
+    //B142
+    { latitude: 33.25379373483368, longitude: -97.15260621160269 },
+    { latitude: 33.25389803412663, longitude: -97.15252909809351 },
+    { latitude: 33.253938968761325, longitude: -97.15260956436397 },
+    { latitude: 33.25389803412663, longitude: -97.15252909809351 },
+
+    //B140
+    { latitude: 33.25385205273325, longitude: -97.15243790298699 },
+    { latitude: 33.25374999638347, longitude: -97.1525190398097 },
+    { latitude: 33.25379373483368, longitude: -97.15260621160269 },
+    { latitude: 33.25374999638347, longitude: -97.1525190398097 },
+    
+    //Stair-B
+    { latitude: 33.25371551028226, longitude: -97.15254519134761 },
+    { latitude: 33.2536953232899, longitude: -97.15250629931688 },
+    { latitude: 33.25383242652139, longitude: -97.15239766985178 },
+    { latitude: 33.25385205273325, longitude: -97.15243790298699 },
+    { latitude: 33.253938968761325, longitude: -97.15260956436397 },
+    { latitude: 33.25394681923704, longitude: -97.15260554105043 },
+    { latitude: 33.25402055759936, longitude: -97.15275071561337 },
+
+    //B185
+    { latitude: 33.2538366321386, longitude: -97.15288817882538 },
+    { latitude: 33.25376457586931, longitude: -97.1527423337102 },
+    { latitude: 33.253634481909664, longitude: -97.15284090489149 },
+    { latitude: 33.25376457586931, longitude: -97.1527423337102 },
+
+    //CGNET
+    { latitude: 33.253775230107415, longitude: -97.15273529291154 },
+    { latitude: 33.2537340150212, longitude: -97.15265382081269 },
+    { latitude: 33.25359438825805, longitude: -97.15276278555393 },
+
+    //B192
+    { latitude: 33.25354952820648, longitude: -97.15267360210419 },
+    { latitude: 33.253612893022634, longitude: -97.15262297540903 },
+    { latitude: 33.25365607079136, longitude: -97.1527124941349 },
+
+    //B190
+    { latitude: 33.2537340150212, longitude: -97.15265382081269 },
+    { latitude: 33.2536891550413, longitude: -97.1525626257062 },
+    { latitude: 33.253612893022634, longitude: -97.15262297540903 },
+    { latitude: 33.25354952820648, longitude: -97.15267360210419 },
+    //{ latitude: 33.253714108407955, longitude: -97.15254519134761 },
+
+
+
+    
+    
+    //Collab
+    { latitude: 33.25348363996399, longitude: -97.15254485607147 },
+    { latitude: 33.25380887506134, longitude: -97.1522930637002 },
+    { latitude: 33.25348363996399, longitude: -97.15254485607147 },
+    { latitude: 33.253266068223056, longitude: -97.15212073177099 },
+    { latitude: 33.25359074337974, longitude: -97.1518800035119 },
+
+
+
+
+
+
+    
+];
+
+export const aWing: LatLng[] = [
+    { latitude: 33.25364878103969, longitude: -97.15306151658297 },
+    { latitude: 33.25345307901761, longitude: -97.15268366038799 },
+    { latitude: 33.25324672225594, longitude: -97.1528472751379 },
     
 ];
 
