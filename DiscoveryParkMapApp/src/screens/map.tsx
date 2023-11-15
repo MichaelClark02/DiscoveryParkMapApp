@@ -1,37 +1,24 @@
 import React from "react";
 import { Text, View, StyleSheet, SafeAreaView,TouchableOpacity, Button, } from 'react-native'
-import MapView, { LatLng } from 'react-native-maps'
+import MapView from 'react-native-maps'
 import { Marker, Overlay,AnimatedRegion ,PROVIDER_GOOGLE,Polyline} from "react-native-maps";
 import { Component, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 
 
+import { LatLng, dBlock, bBlock, outline } from '../components/Floor1';
 import HomeSearch from '../components/HomeSearch';
-
-
 
 
 type Coordinate = [number, number];
 
 const bottomRightOverlay:Coordinate = [
-  33.256400, -97.150330
+  33.256340, -97.150260
 ]
 const topLeftOverlay:Coordinate = [
-  33.251650, -97.155400
+  33.2517800, -97.155390
 ]
 
-const a:LatLng = {
-  latitude:33.254716712652636,
-  longitude: -97.15370578025482
-}
-const b:LatLng = {
-  latitude: 33.25477609664522, 
-  longitude: -97.15381172752063
-}
-const c:LatLng = {
-  latitude: 33.254806348852334, 
-  longitude: -97.153712485778
-}
 
 var floor1 = true;
 var op = 0.4;
@@ -126,64 +113,46 @@ export default function Map()  {
           >
             <Overlay
                 bounds = {[topLeftOverlay,bottomRightOverlay]}
-                image ={{ uri: 'https://preview.redd.it/h12geouyt0zb1.png?width=640&crop=smart&auto=webp&s=211838092890ac1a247293645cc70af34a8e06d0'}}
+                image ={{ uri: 'https://preview.redd.it/h12geouyt0zb1.png?width=640&crop=smart&auto=webp&s=211838092890ac1a247293645cc70af34a8e06d'}}
                 opacity={1}
                 //bearing={0}
                 //tappable={false}
 
             />
             <Polyline
-              coordinates={[
-                a,b,c
-              ]}
-                  strokeColor="#" // fallback for when `strokeColors` is not supported by the map-provider
-                  strokeWidth={6}
-            />  
-            <Marker
-                coordinate={{latitude: 33.254716712652636, 
-                longitude: -97.15370578025482}}
-                title={"K110"}
-                description={"Room"}
-                pinColor="purple"
+              coordinates={outline.map((location: LatLng) => ({
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }))}
+              strokeColor="#FF0000"
+              strokeWidth={6}
             />
-            <Marker
-                coordinate={{latitude: 33.25477609664522, 
-                longitude:  -97.15381172752063}}
-                title={"K120"}
-                description={"Room"}
+
+            <Polyline
+              coordinates={dBlock.map((location: LatLng) => ({
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }))}
+              strokeColor="green"
+              strokeWidth={6}
             />
+
+            <Polyline
+              coordinates={bBlock.map((location: LatLng) => ({
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }))}
+              strokeColor="green"
+              strokeWidth={6}
+            />
+            
             <Marker
                 coordinate={{latitude: 33.254806348852334, 
                 longitude: -97.153712485778}}
                 title={"K130"}
                 description={"Room"}
             />
-            <Marker
-                coordinate={{latitude: 33.25482539653292, 
-                longitude: -97.1537701532771}}
-                title={"K140"}
-                description={"Room"}
-            />
-             <Marker
-                coordinate={{latitude: 33.25489038270603, 
-                longitude: -97.15358508083811}}
-                title={"K150"}
-                description={"Room"}
-            />
-            <Marker
-                coordinate={{latitude: 33.25493744162882, 
-                longitude:  -97.15368834589462}}
-                title={"K160"}
-                description={"Room"}
-            />
-            <Marker
-                coordinate={{latitude: 33.25499458457238, 
-                longitude:  -97.15364140723256}}
-                title={"K170"}
-                description={"Room"}
-            />
-
-            
+           
             {/* {currentLocation && (
             <Marker
               coordinate={{
