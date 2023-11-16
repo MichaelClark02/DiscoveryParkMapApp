@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { Text, View, StyleSheet, SafeAreaView,TouchableOpacity, Button, Switch } from 'react-native'
 import MapView from 'react-native-maps'
-import { Marker, Overlay,AnimatedRegion ,PROVIDER_GOOGLE,Polyline, Polygon} from "react-native-maps";
+import { Marker, Overlay,AnimatedRegion ,PROVIDER_GOOGLE,Polyline} from "react-native-maps";
 import { Component, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
+import BottomSheet, { BottomSheetTextInput } from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-
-import { LatLng, dWing, bWing, aWing, outline, kWing, hWing } from '../components/Floor1';
+import { LatLng, dWing, bWing, aWing, outline } from '../components/Floor1';
 import graphData from '../components/Graph_test';
 import HomeSearch from '../components/HomeSearch';
 
@@ -14,16 +15,18 @@ import HomeSearch from '../components/HomeSearch';
 type Coordinate = [number, number];
 
 const bottomRightOverlay:Coordinate = [
-  33.256420, -97.150580
+  33.256340, -97.150260
 ]
 const topLeftOverlay:Coordinate = [
-  33.2516800, -97.155130
+  33.2517800, -97.155390
 ]
 
 const { route, nodes } = graphData;
 
 var floor1 = true;
 var op = 0.4;
+
+
 
 
 export default function Map()  {
@@ -39,6 +42,16 @@ export default function Map()  {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  // variables
+  const snapPoints = useMemo(() => ['25%', '80%'], []);
+  
+  // callbacks
+  const handleSheetChanges = useCallback((index: number) => {
+  }, []);
+  
+    const [txt, setTxt] = useState('');
   const calculateShortestRoute = () => {
     const startNode = 'a'; // Update with your desired starting node
     const endNode = 'g'; // Update with your desired ending node
@@ -78,8 +91,10 @@ export default function Map()  {
         op =0
       };
       return (
+        <GestureHandlerRootView style={{flex: 1}}>
 
         <SafeAreaView>
+          
     <MapView
       style={styles.map}
       showsBuildings
@@ -97,6 +112,23 @@ export default function Map()  {
       rotateEnabled
       onLongPress={handleMapLongPress} // Handle long press on the map
     >
+      
+      
+      {(!isEnabled) ? 
+        // First floor case
+        (
+        <View> 
+          <Overlay
+        bounds={[topLeftOverlay, bottomRightOverlay]}
+        image={{
+          uri: 'https://preview.redd.it/h12geouyt0zb1.png?width=640&crop=smart&auto=webp&s=211838092890ac1a247293645cc70af34a8e06d',
+        }}
+        opacity={1}
+        //bearing={0}
+        //tappable={false}
+      />
+      
+
       {shortestRoute.map((nodeName, index) => {
         const node = nodes.find((n) => n.getName() === nodeName) || { latitude: 0, longitude: 0 };
         const nextNode = nodes.find((n) => n.getName() === shortestRoute[index + 1]);
@@ -124,123 +156,85 @@ export default function Map()  {
           />
         );
       })}
-      
-      {(!isEnabled) ? 
-        // First floor case
-        (
-        <View> 
-          <Polygon
-          coordinates={outline.map((location: LatLng) => ({
-              latitude: location.latitude,
-              longitude: location.longitude,
-            }))}
-            fillColor="rgba(176, 175, 171, 1)" // Specify the fill color (green with some transparency)
-          />
 
-          <Overlay
-            bounds={[topLeftOverlay, bottomRightOverlay]}
-            image={{
-              uri: 'https://preview.redd.it/h12geouyt0zb1.png?width=640&crop=smart&auto=webp&s=211838092890ac1a247293645cc70af34a8e06d',
-            }}
-            opacity={1}
-            //bearing={0}
-            //tappable={false}
-          />
-      
-        <Polyline
-          coordinates={outline.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="#FF0000"
-          strokeWidth={6}
-        />
+      <Polyline
+        coordinates={outline.map((location: LatLng) => ({
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }))}
+        strokeColor="#FF0000"
+        strokeWidth={6}
+      />
 
-    
-        <Polyline
-          coordinates={dWing.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="green"
-          strokeWidth={4}
-        />
+      <Polyline
+        coordinates={dWing.map((location: LatLng) => ({
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }))}
+        strokeColor="green"
+        strokeWidth={6}
+      />
 
+      <Polyline
+        coordinates={bWing.map((location: LatLng) => ({
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }))}
+        strokeColor="green"
+        strokeWidth={4}
+      />
 
-        <Polyline
-          coordinates={bWing.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="green"
-          strokeWidth={4}
-        />
+      <Polyline
+        coordinates={aWing.map((location: LatLng) => ({
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }))}
+        strokeColor="yellow"
+        strokeWidth={6}
+      />
 
-        <Polygon
-          coordinates={bWing.map((location: LatLng) => ({
-              latitude: location.latitude,
-              longitude: location.longitude,
-            }))}
-            fillColor="rgba(0, 128, 0, 0.5)" // Specify the fill color (green with some transparency)
-        />
+      <Marker
+        coordinate={{ latitude: 33.254806348852334, longitude: -97.153712485778 }}
+        title={"K130"}
+        description={"Room"}
+      /></View>
+      ) :
+      // 2nd floor case
+      null}
 
-        <Polyline
-          coordinates={aWing.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="yellow"
-          strokeWidth={6}
-        />
-
-        <Polyline
-          coordinates={hWing.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="green"
-          strokeWidth={4}
-        />
-
-        <Polygon
-          coordinates={hWing.map((location: LatLng) => ({
-              latitude: location.latitude,
-              longitude: location.longitude,
-            }))}
-            fillColor="rgba(255, 253, 248, 0.5)" // Specify the fill color (green with some transparency)
-        />
-
-        <Polyline
-          coordinates={kWing.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="green"
-          strokeWidth={4}
-        />  
-
-        <Marker
-          coordinate={{ latitude: 33.254806348852334, longitude: -97.153712485778 }}
-          title={"K130"}
-          description={"Room"}
-        /></View>
-        ) :
-        // 2nd floor case
-        null}
-      <View style={styles.switchContainer}>
-        <Switch
-          trackColor={{false: '#767577', true: '##0085'}}
-          thumbColor={isEnabled ? '#white' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-          style={styles.switch}
-        />
+     <View style={styles.switchContainer}>
+      <Switch
+        trackColor={{false: '#767577', true: '##0085'}}
+        thumbColor={isEnabled ? '#white' : '#f4f3f4'}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+        style={styles.switch}
+      />
+       
       </View>
     </MapView>
+    <BottomSheet
+              ref={bottomSheetRef}
+              index={0}
+              snapPoints={snapPoints}
+              onChange={handleSheetChanges}
+              backgroundStyle={styles.sheetBackground}
+              keyboardBehavior="fillParent"
+              animateOnMount
+            >
+            <BottomSheetTextInput style={styles.input} placeholder="Where to?" 
+            onChangeText={newText => setTxt(newText)}
+            />
+            <View style={styles.contentContainer}>
+              
+            </View>
+          </BottomSheet>
 
     
   </SafeAreaView>
+  </GestureHandlerRootView>
+
     )
 }
 
@@ -272,6 +266,22 @@ const styles = StyleSheet.create({
     switch: {
       transform: [{ rotate: '270deg' }],
       right: 0
+    },
+    contentContainer: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    sheetBackground: {
+      backgroundColor: '#f0f0f0',
+    },
+    input: {
+      margin: 10,
+      fontSize: 16,
+      lineHeight: 20,
+      padding: 10,
+
+      backgroundColor: 'rgba(151, 151, 151, 0.25)',
+
     }
 
 })
