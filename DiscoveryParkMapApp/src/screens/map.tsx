@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { Text, View, StyleSheet, SafeAreaView,TouchableOpacity, Button, Switch } from 'react-native'
 import MapView from 'react-native-maps'
 import { Marker, Overlay,AnimatedRegion ,PROVIDER_GOOGLE,Polyline} from "react-native-maps";
 import { Component, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
-
+import BottomSheet, { BottomSheetTextInput } from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { LatLng, dWing, bWing, aWing, outline } from '../components/Floor1';
 import graphData from '../components/Graph_test';
@@ -26,6 +27,8 @@ var floor1 = true;
 var op = 0.4;
 
 
+
+
 export default function Map()  {
   
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -39,6 +42,16 @@ export default function Map()  {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  // variables
+  const snapPoints = useMemo(() => ['25%', '80%'], []);
+  
+  // callbacks
+  const handleSheetChanges = useCallback((index: number) => {
+  }, []);
+  
+    const [txt, setTxt] = useState('');
   const calculateShortestRoute = () => {
     const startNode = 'a'; // Update with your desired starting node
     const endNode = 'g'; // Update with your desired ending node
@@ -78,8 +91,10 @@ export default function Map()  {
         op =0
       };
       return (
+        <GestureHandlerRootView style={{flex: 1}}>
 
         <SafeAreaView>
+          
     <MapView
       style={styles.map}
       showsBuildings
@@ -186,6 +201,7 @@ export default function Map()  {
       ) :
       // 2nd floor case
       null}
+
      <View style={styles.switchContainer}>
       <Switch
         trackColor={{false: '#767577', true: '##0085'}}
@@ -195,11 +211,30 @@ export default function Map()  {
         value={isEnabled}
         style={styles.switch}
       />
+       
       </View>
     </MapView>
+    <BottomSheet
+              ref={bottomSheetRef}
+              index={0}
+              snapPoints={snapPoints}
+              onChange={handleSheetChanges}
+              backgroundStyle={styles.sheetBackground}
+              keyboardBehavior="fillParent"
+              animateOnMount
+            >
+            <BottomSheetTextInput style={styles.input} placeholder="Where to?" 
+            onChangeText={newText => setTxt(newText)}
+            />
+            <View style={styles.contentContainer}>
+              
+            </View>
+          </BottomSheet>
 
     
   </SafeAreaView>
+  </GestureHandlerRootView>
+
     )
 }
 
@@ -231,6 +266,22 @@ const styles = StyleSheet.create({
     switch: {
       transform: [{ rotate: '270deg' }],
       right: 0
+    },
+    contentContainer: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    sheetBackground: {
+      backgroundColor: '#f0f0f0',
+    },
+    input: {
+      margin: 10,
+      fontSize: 16,
+      lineHeight: 20,
+      padding: 10,
+
+      backgroundColor: 'rgba(151, 151, 151, 0.25)',
+
     }
 
 })
