@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet, SafeAreaView,TouchableOpacity, Button, } from 'react-native'
+import { Text, View, StyleSheet, SafeAreaView,TouchableOpacity, Button, Switch } from 'react-native'
 import MapView from 'react-native-maps'
 import { Marker, Overlay,AnimatedRegion ,PROVIDER_GOOGLE,Polyline} from "react-native-maps";
 import { Component, useState, useEffect } from 'react';
@@ -36,6 +36,8 @@ export default function Map()  {
 
   const [shortestRoute, setShortestRoute] = useState([]);
   const [polylineCoordinates, setPolylineCoordinates] = useState([]);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const calculateShortestRoute = () => {
     const startNode = 'a'; // Update with your desired starting node
@@ -76,6 +78,7 @@ export default function Map()  {
         op =0
       };
       return (
+
         <SafeAreaView>
     <MapView
       style={styles.map}
@@ -94,7 +97,13 @@ export default function Map()  {
       rotateEnabled
       onLongPress={handleMapLongPress} // Handle long press on the map
     >
-      <Overlay
+      
+      
+      {(!isEnabled) ? 
+        // First floor case
+        (
+        <View> 
+          <Overlay
         bounds={[topLeftOverlay, bottomRightOverlay]}
         image={{
           uri: 'https://preview.redd.it/h12geouyt0zb1.png?width=640&crop=smart&auto=webp&s=211838092890ac1a247293645cc70af34a8e06d',
@@ -103,6 +112,7 @@ export default function Map()  {
         //bearing={0}
         //tappable={false}
       />
+      
 
       {shortestRoute.map((nodeName, index) => {
         const node = nodes.find((n) => n.getName() === nodeName) || { latitude: 0, longitude: 0 };
@@ -172,12 +182,23 @@ export default function Map()  {
         coordinate={{ latitude: 33.254806348852334, longitude: -97.153712485778 }}
         title={"K130"}
         description={"Room"}
+      /></View>
+      ) :
+      // 2nd floor case
+      null}
+     <View style={styles.switchContainer}>
+      <Switch
+        trackColor={{false: '#767577', true: '##0085'}}
+        thumbColor={isEnabled ? '#white' : '#f4f3f4'}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+        style={styles.switch}
       />
+      </View>
     </MapView>
 
-    <View style={styles.bottomBar}>
-      <HomeSearch />
-    </View>
+    
   </SafeAreaView>
     )
 }
@@ -189,7 +210,7 @@ const styles = StyleSheet.create({
     },
     map: {
       width: '100%',
-      height: '93%',
+      height: '100%',
     },
     bottomBar: {
       flex: 1,
@@ -199,4 +220,17 @@ const styles = StyleSheet.create({
       justifyContent: 'center', // Center content vertically
       alignItems: 'center', // Center content horizontally
     },
+    
+    switchContainer: {
+        position: 'absolute',
+        margin: 16,
+        top: '40%',
+        right: 0
+    
+    },
+    switch: {
+      transform: [{ rotate: '270deg' }],
+      right: 0
+    }
+
 })
