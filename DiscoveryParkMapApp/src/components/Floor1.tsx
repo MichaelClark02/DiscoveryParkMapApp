@@ -102,8 +102,10 @@ export const outline: LatLng[] = [
     //D block
     { latitude: 33.254000931425345, longitude: -97.15209122747183 },
     { latitude: 33.254867282623096, longitude: -97.15144950896502 },
+
     { latitude: 33.25500298216203, longitude: -97.15170834213494 },
     { latitude: 33.25457849984496, longitude: -97.15202819555998 },
+
     { latitude: 33.254704947567205, longitude: -97.15226221829653 },
     { latitude: 33.25510027075131, longitude: -97.15196281671525 },
     { latitude: 33.2550770000035, longitude: -97.15191990137099},
@@ -135,8 +137,76 @@ export const dWing: LatLng[] = [
     { latitude: 33.254000931425345, longitude: -97.15209122747183 },
     { latitude: 33.25427093111808, longitude: -97.15259179472925 },
     { latitude: 33.25470326533708, longitude: -97.15226255357265 },
-    
+    { latitude: 33.25457849984496, longitude: -97.15202819555998 },
+    { latitude: 33.25500298216203, longitude: -97.15170834213494 },
+    { latitude: 33.254867282623096, longitude: -97.15144950896502 },
+    { latitude: 33.254000931425345, longitude: -97.15209122747183 },
+
+    //internal
+   
 ];
+
+export const dWing_internal: LatLng[] = [
+    { latitude: 33.254051679094815, longitude: -97.15218510478735 },
+    { latitude: 33.25410102486669, longitude: -97.1521482244134 },
+    { latitude: 33.25408364170025, longitude: -97.15211268514395 },
+    { latitude: 33.25411980989753, longitude: -97.15208686888218 },
+    { latitude: 33.254087847305335, longitude: -97.15202551335096 },
+
+    { latitude: 33.25413915567133, longitude: -97.1521210670471 },
+
+    { latitude: 33.25448990221879, longitude: -97.1518612280488 },
+    { latitude: 33.25443859405875, longitude: -97.15176500380039 },
+    { latitude: 33.25448990221879, longitude: -97.1518612280488 },
+    { latitude: 33.254606537049725, longitude: -97.15177472680807 },
+    { latitude: 33.25455831305195, longitude: -97.15167649090291 },
+    { latitude: 33.254606537049725, longitude: -97.15177472680807 },
+    { latitude: 33.25480728317297, longitude: -97.15162385255097 },
+    { latitude: 33.254756816313886, longitude: -97.15152963995934 },
+    { latitude: 33.25480728317297, longitude: -97.15162385255097 },
+    { latitude: 33.25491550645032, longitude: -97.15154338628054 },
+    { latitude: 33.254606537049725, longitude: -97.15177472680807 },
+    { latitude: 33.25469120935349, longitude: -97.15193968266249 },
+    { latitude: 33.254606537049725, longitude: -97.15177472680807 },
+    { latitude: 33.25448990221879, longitude: -97.1518612280488 },
+    { latitude: 33.25457653724028, longitude: -97.15202685445547 },
+    { latitude: 33.25448990221879, longitude: -97.1518612280488 },
+    { latitude: 33.25434522995255, longitude: -97.15196684002876 },
+    { latitude: 33.254468874287994, longitude: -97.15220354497433 },
+    { latitude: 33.254612144489585, longitude: -97.15209022164345},
+
+    { latitude: 33.25469036823827, longitude: -97.15223673731087 },
+    { latitude: 33.254458220134445, longitude: -97.15241108089685 },
+    { latitude: 33.25445065007722, longitude: -97.15239733457565 },
+    { latitude: 33.25443550996074, longitude: -97.15240940451622 },
+    { latitude: 33.25437074387736, longitude: -97.15228099375965 },
+    { latitude: 33.254468874287994, longitude: -97.15220354497433 },
+    { latitude: 33.25437551021414, longitude: -97.15227663516998 },
+    { latitude: 33.25432420198694, longitude: -97.15217906981707 },
+    { latitude: 33.254417285742996, longitude: -97.15210597962141 },
+    { latitude: 33.25432420198694, longitude: -97.15217906981707 },
+    { latitude: 33.25427822081783, longitude: -97.15209122747183 },
+    { latitude: 33.2543724261139, longitude: -97.15201947838068 },
+    { latitude: 33.25427822081783, longitude: -97.15209122747183 },
+    { latitude: 33.25425046388088, longitude: -97.1520372480154 },
+    { latitude: 33.25413915567133, longitude: -97.1521210670471 },
+    { latitude: 33.254087847305335, longitude: -97.15202551335096 },
+    { latitude: 33.25411980989753, longitude: -97.15208686888218 },
+    { latitude: 33.25408364170025, longitude: -97.15211268514395 },
+    { latitude: 33.25410102486669, longitude: -97.1521482244134 },
+    { latitude: 33.254051679094815, longitude: -97.15218510478735 },
+    { latitude: 33.25410102486669, longitude: -97.1521482244134 },
+    { latitude: 33.25411560429397, longitude: -97.15217538177967 },
+    { latitude: 33.254066819277796, longitude: -97.15221393853426 },
+    { latitude: 33.254088968800005, longitude: -97.15225383639336 },
+    { latitude: 33.254251024627145, longitude: -97.1521321311593 },
+    { latitude: 33.25442765952894, longitude: -97.15247076004744 },
+    { latitude: 33.25434074398699, longitude: -97.15230479836464 },
+    { latitude: 33.25418289392674, longitude: -97.15242985635996 },
+    { latitude: 33.25434074398699, longitude: -97.15230479836464 },
+    { latitude: 33.254251024627145, longitude: -97.1521321311593 },
+];
+
 
 export const bWing: LatLng[] = [
     //outline
@@ -235,6 +305,7 @@ export const bWing: LatLng[] = [
     { latitude: 33.25348363996399, longitude: -97.15254485607147 },
     { latitude: 33.253266068223056, longitude: -97.15212073177099 },
     { latitude: 33.25359074337974, longitude: -97.1518800035119 },
+    { latitude: 33.25380887506134, longitude: -97.15229373425245 },
 
 
     
@@ -290,4 +361,59 @@ export const hWing: LatLng[] = [
     { latitude: 33.25437551021414, longitude: -97.15258073061705 }
    
     
+];
+
+export const gWing: LatLng[] = [
+    { latitude: 33.25477896566119, longitude: -97.15261124074459 },
+    { latitude: 33.25457064942601, longitude: -97.15276848524809 },
+    { latitude: 33.25452971508723, longitude: -97.15268701314928 },
+    { latitude: 33.25441308015375, longitude: -97.15277720242739 },
+    { latitude: 33.25442177170464, longitude: -97.15279396623373 },
+    { latitude: 33.25436401493089, longitude: -97.15283788740635 },
+    { latitude: 33.254404668974644, longitude: -97.15291365981103 },
+    { latitude: 33.254418126860834, longitude: -97.15290796011686 },
+    { latitude: 33.254420369841654, longitude: -97.15295556932688 },
+    { latitude: 33.25444083703906, longitude: -97.15299647301437 },
+    { latitude: 33.25448317328149, longitude: -97.1529696509242 },
+    { latitude: 33.254549341142464, longitude: -97.15308632701635 },
+    { latitude: 33.254514294612164, longitude: -97.15311013162136 },
+    { latitude: 33.25455214486429, longitude: -97.15318255126476 },
+    { latitude: 33.254587471751464, longitude: -97.15315874665976 },
+    { latitude: 33.254549341142464, longitude: -97.15308632701635 },
+    { latitude: 33.254614948209394, longitude: -97.1530407294631 },
+    { latitude: 33.254593359564595, longitude: -97.15299848467112 },
+    { latitude: 33.25486419854021, longitude: -97.15279664844276 },
+    { latitude: 33.25488410489143, longitude: -97.1528372168541 },
+    { latitude: 33.25488410489143, longitude: -97.1528372168541 }, 
+    { latitude: 33.25492868388685, longitude: -97.1528060361743 },
+    { latitude: 33.254813451342656, longitude: -97.15258542448282 },
+    { latitude: 33.25477896566119, longitude: -97.15261124074459 },
+];
+
+export const perks:LatLng[] = [
+    { latitude: 33.2543934540679, longitude: -97.15261258184908 },
+    { latitude: 33.25446382758385, longitude: -97.1525562554598 },
+    { latitude: 33.25444644448955, longitude: -97.15252608060837 },
+    { latitude: 33.2544618649766, longitude: -97.15251367539167 },
+    { latitude: 33.25447980881263, longitude: -97.15254519134761 },
+    { latitude: 33.254545976676155, longitude: -97.15249389410019 },
+    { latitude: 33.2545414907209, longitude: -97.15248383581638 },
+    { latitude: 33.25456616347202, longitude: -97.1524677425623 },
+    { latitude: 33.25456167751778, longitude: -97.15248081833126 },
+    { latitude: 33.25457149054237, longitude: -97.15247310698032 },
+    { latitude: 33.25468083559881, longitude: -97.15268366038799 },
+    { latitude: 33.25461046225767, longitude: -97.15273663401604 },
+    { latitude: 33.25459812588924, longitude: -97.15271048247814 },
+    { latitude: 33.25458691100733, longitude: -97.15271886438131 },
+    { latitude: 33.25456167751778, longitude: -97.1526662260294 },
+    { latitude: 33.254573453147145, longitude: -97.15265918523072 },
+    { latitude: 33.254563359750655, longitude: -97.15264208614828 },
+    { latitude: 33.25455522895817, longitude: -97.1526464447379 },
+    { latitude: 33.25451737870739, longitude: -97.15257469564675 },
+    { latitude: 33.25449214519776, longitude: -97.15259414166212 },
+    { latitude: 33.254513733867576, longitude: -97.15263269841671 },
+    { latitude: 33.254491023708276, longitude: -97.15264979749918 },
+    { latitude: 33.25447083689509, longitude: -97.15261492878199 },
+    { latitude: 33.254415883879936, longitude: -97.15265583246946},
+
 ];
