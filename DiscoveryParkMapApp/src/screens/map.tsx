@@ -6,9 +6,10 @@ import { Component, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 import BottomSheet, { BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-
+import Filter from "../components/Filter";
 import { LatLng, dWing, bWing, aWing, outline,hWing, kWing } from '../components/Floor1';
 import graphData from '../components/Graph_test';
+import MenuButton from "../components/MenuButton";
 import HomeSearch from '../components/HomeSearch';
 
 
@@ -36,14 +37,13 @@ export default function Map()  {
   const [error, setError] = useState(null);
   const [lat, setLat] = useState(0);
   const [lon, setLong] = useState(0);
-
+  const [search, setSearch] = useState('');
   const [shortestRoute, setShortestRoute] = useState([]);
   const [polylineCoordinates, setPolylineCoordinates] = useState([]);
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
-
   // variables
   const snapPoints = useMemo(() => ['25%', '80%'], []);
   
@@ -112,8 +112,18 @@ export default function Map()  {
       rotateEnabled
       onLongPress={handleMapLongPress} // Handle long press on the map
     >
-      
-      
+      <MenuButton />
+      <View style={styles.switchContainer}>
+     <Switch
+        trackColor={{false: '#767577', true: '##0085'}}
+        thumbColor={isEnabled ? '#white' : '#f4f3f4'}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+        style={styles.switch}
+      />
+       
+      </View>
       {(!isEnabled) ? 
         // First floor case
         (
@@ -168,7 +178,7 @@ export default function Map()  {
         <Overlay
           bounds={[topLeftOverlay, bottomRightOverlay]}
             image={{
-              uri: 'https://preview.redd.it/h12geouyt0zb1.png?width=640&crop=smart&auto=webp&s=211838092890ac1a247293645cc70af34a8e06d',
+              uri: 'https://preview.redd.it/h12geouyt0zb1.png?width=640&crop=smart&auto=webp&s=211838092890ac1a247293645cc70af34a8e06d0',
             }}
             opacity={1}
             //bearing={0}
@@ -256,18 +266,9 @@ export default function Map()  {
       // 2nd floor case
       null}
 
-     <View style={styles.switchContainer}>
-      <Switch
-        trackColor={{false: '#767577', true: '##0085'}}
-        thumbColor={isEnabled ? '#white' : '#f4f3f4'}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-        style={styles.switch}
-      />
-       
-      </View>
+     
     </MapView>
+    
     <BottomSheet
               ref={bottomSheetRef}
               index={0}
@@ -277,11 +278,15 @@ export default function Map()  {
               keyboardBehavior="fillParent"
               animateOnMount
             >
-            <BottomSheetTextInput style={styles.input} placeholder="Where to?" 
+            <BottomSheetTextInput
+             style={styles.input} 
+             placeholder="Where to?" 
             onChangeText={newText => setTxt(newText)}
+            onSubmitEditing={searchText => setSearch(txt)}
             />
+            
             <View style={styles.contentContainer}>
-              
+              <Filter />
             </View>
           </BottomSheet>
 
@@ -329,11 +334,12 @@ const styles = StyleSheet.create({
       backgroundColor: '#f0f0f0',
     },
     input: {
-      margin: 10,
+      marginTop: 3,
+      marginHorizontal: 10,
       fontSize: 16,
       lineHeight: 20,
       padding: 10,
-
+      borderRadius: 15,
       backgroundColor: 'rgba(151, 151, 151, 0.25)',
 
     }

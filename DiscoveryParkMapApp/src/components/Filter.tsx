@@ -1,37 +1,122 @@
-import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
-import { FontAwesome5 } from '@expo/vector-icons';
+import React, { useState } from 'react'
+import {View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 
 const Filter = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.filterText}>Bathrooms</Text>
-      <FontAwesome5 name="toilet" size={24} color="black" style={styles.icon} />
-      <View style={styles.color}> 
-      <Text>    </Text>
-       </View>
-    </View>
+  const [bathroom, setBathroom] = useState(false);
+  const filterChange= () => {
+    setBathroom(previousState => !previousState);
+  }
+  const bathroomColor = {
+    backgroundColor: 'green',
+  };
+  
 
+  return (
+    <View style={styles.wrapper}> 
+    <View style={styles.container}>
+    <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#4285F4'}]} onPress={filterChange}>
+        <FontAwesome5 name="toilet" size={30} color="white" style={styles.icon} />
+        <View style={[styles.colorCode, {backgroundColor: 'green'}]}> 
+        </View>
+      </TouchableOpacity>
+      <Text style={styles.iconText}>Bathrooms</Text>
+    </View>
+      
+      
+      
+
+      <View style={styles.container}>
+      <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#FF5A5F'}]}>
+        <MaterialIcons name="stairs" size={30} color="white" style={styles.icon} />
+        <View style={[styles.colorCode, {backgroundColor: 'orange'}]}>
+        </View>
+      </TouchableOpacity>
+      <Text style = {styles.iconText}>Stairs</Text>
+      </View>
+      
+    <View style={styles.container}>
+    <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#4CAF50'}]}>
+        
+        <FontAwesome5 name="money-check-alt" size={30} color="white" />
+        <View style={[styles.colorCode, {backgroundColor: 'purple'}]}>
+
+        </View>
+      </TouchableOpacity>
+      <Text style={styles.iconText}>ATMs</Text>
+    </View>
+     
+    
+      <View style={styles.container}>
+      <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#FFC107'}]}>
+        <FontAwesome name="fire-extinguisher" size={30} color="white" />
+        <View style={[styles.colorCode, {backgroundColor: 'red'}]}>
+        </View>
+      </TouchableOpacity>
+      <Text style={styles.iconText}>Emerg. Exits</Text>
+      </View>
+      
+    <View style={styles.container}>
+    <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#7E57C2'}]}>
+      <Entypo name="shopping-cart" size={30} color="white" />
+        <View style={[styles.colorCode, {backgroundColor: 'cyan'}]}>
+        </View>
+      </TouchableOpacity>
+      <Text style={styles.iconText}>Vending</Text>
+    </View>
+      
+    </View>
+   
+  
     
   )
 }
 
+
+export default Filter
+
 const styles = StyleSheet.create({
+  wrapper: {
+    flexDirection: 'row',
+    
+  },
   container: {
     flex: 1,
+    marginTop: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconContainer: {
+    //flex: 1,
+    alignItems: 'center',
+    borderRadius: 50,
+    margin: 4,
+    height: 70,
+    width: 70,
+    paddingTop: '2%',
+    justifyContent: 'center',
+    alignContent: 'center',
+    
+  },
+  
+  iconText: {
+    //fontWeight: 'bold',
+    fontSize: 10
+  },
+  
+  filterText: {
+    fontSize: 12,
     alignItems: 'center'
   },
-  filterText: {
-    fontSize: 12
-  },
   icon: {
-    marginTop: 4
-  },
-  color: {
     marginTop: 4,
-    backgroundColor: 'green',
+    padding: 10,
+    borderRadius: 50, 
+    
+  },
+  colorCode: {
+    marginTop: 4,
     borderRadius: 20
   }
 })
-
-export default Filter
