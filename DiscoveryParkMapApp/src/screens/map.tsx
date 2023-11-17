@@ -7,16 +7,16 @@ import * as Location from 'expo-location';
 import BottomSheet, { BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Filter from "../components/Filter";
-import { LatLng, dWing, bWing, aWing, outline,hWing, kWing } from '../components/Floor1';
+
+import { LatLng, dWing, bWing, aWing, outline,hWing, kWing, gWing, perks, dWing_internal} from '../components/Floor1';
 import graphData from '../components/Graph_test';
-import MenuButton from "../components/MenuButton";
 import HomeSearch from '../components/HomeSearch';
 
 
 type Coordinate = [number, number];
 
 const bottomRightOverlay:Coordinate = [
-  33.256340, -97.150260
+  33.256380, -97.150260
 ]
 const topLeftOverlay:Coordinate = [
   33.2517800, -97.155390
@@ -37,13 +37,17 @@ export default function Map()  {
   const [error, setError] = useState(null);
   const [lat, setLat] = useState(0);
   const [lon, setLong] = useState(0);
+
+  //search var
   const [search, setSearch] = useState('');
+  const [endNode, setEndNode] = useState('');
   const [shortestRoute, setShortestRoute] = useState([]);
   const [polylineCoordinates, setPolylineCoordinates] = useState([]);
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
+
   // variables
   const snapPoints = useMemo(() => ['25%', '80%'], []);
   
@@ -51,10 +55,11 @@ export default function Map()  {
   const handleSheetChanges = useCallback((index: number) => {
   }, []);
   
-    const [txt, setTxt] = useState('');
+  const [txt, setTxt] = useState('');
+  console.log(endNode);
   const calculateShortestRoute = () => {
-    const startNode = 'a'; // Update with your desired starting node
-    const endNode = 'g'; // Update with your desired ending node
+    const startNode = 'E1'; // Update with your desired starting node
+    const endNode = search; // Update with your desired ending node
 
     const path = route.path(startNode, endNode, { cost: true });
 
@@ -66,7 +71,13 @@ export default function Map()  {
   };
 
   useEffect(()=> {
-    calculateShortestRoute();
+    setEndNode(search)
+    endNode ? (
+      calculateShortestRoute()
+    ) : (
+      null
+    )
+    //calculateShortestRoute();
     ;(async() => {
       let { status } = await Location.requestForegroundPermissionsAsync()
       if (status !== 'granted') {
@@ -77,7 +88,7 @@ export default function Map()  {
       setLat(location.coords.latitude)
       setLong(location.coords.longitude)
     })()
-  }, [lat, lon])
+  }, [lat, lon, search, endNode])
 
       const handleMapLongPress = (event) => {
         const { latitude, longitude } = event.nativeEvent.coordinate;
@@ -112,33 +123,6 @@ export default function Map()  {
       rotateEnabled
       onLongPress={handleMapLongPress} // Handle long press on the map
     >
-      <MenuButton />
-      <View style={styles.switchContainer}>
-     <Switch
-        trackColor={{false: '#767577', true: '##0085'}}
-        thumbColor={isEnabled ? '#white' : '#f4f3f4'}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-        style={styles.switch}
-      />
-       
-      </View>
-      {(!isEnabled) ? 
-        // First floor case
-        (
-        <View> 
-          <Overlay
-        bounds={[topLeftOverlay, bottomRightOverlay]}
-        image={{
-          uri: 'https://preview.redd.it/h12geouyt0zb1.png?width=640&crop=smart&auto=webp&s=211838092890ac1a247293645cc70af34a8e06d',
-        }}
-        opacity={1}
-        //bearing={0}
-        //tappable={false}
-      />
-      
-
       {shortestRoute.map((nodeName, index) => {
         const node = nodes.find((n) => n.getName() === nodeName) || { latitude: 0, longitude: 0 };
         const nextNode = nodes.find((n) => n.getName() === shortestRoute[index + 1]);
@@ -166,135 +150,200 @@ export default function Map()  {
           />
         );
       })}
-
-        <Polygon
-          coordinates={outline.map((location: LatLng) => ({
-              latitude: location.latitude,
-              longitude: location.longitude,
-            }))}
-            fillColor="rgba(176, 175, 171, 1)" // Specify the fill color (green with some transparency)
+      
+      {(!isEnabled) ? 
+        // First floor case
+        (
+        <View> 
+          <Overlay
+            bounds={[topLeftOverlay, bottomRightOverlay]}
+            image={{
+            uri: 'https://preview.redd.it/h12geouyt0zb1.png?width=640&crop=smart&auto=webp&s=211838092890ac1a247293645cc70af34a8e06d',
+          }}
+          opacity={1}
+          //bearing={0}
+          //tappable={false}
           />
 
-        <Overlay
-          bounds={[topLeftOverlay, bottomRightOverlay]}
-            image={{
-              uri: 'https://preview.redd.it/h12geouyt0zb1.png?width=640&crop=smart&auto=webp&s=211838092890ac1a247293645cc70af34a8e06d0',
-            }}
-            opacity={1}
-            //bearing={0}
-            //tappable={false}
-        />
-      
-        <Polyline
-          coordinates={outline.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="#FF0000"
-          strokeWidth={6}
-        />
+          <Polygon
+            coordinates={outline.map((location: LatLng) => ({
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }))}
+              fillColor="rgba(176, 175, 171, 1)" // Specify the fill color (green with some transparency)
+            />
 
-    
-        <Polyline
-          coordinates={dWing.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="green"
-          strokeWidth={4}
-        />
-
-
-        <Polyline
-          coordinates={bWing.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="green"
-          strokeWidth={4}
-        />
-
-        <Polygon
-          coordinates={bWing.map((location: LatLng) => ({
+          <Overlay
+            bounds={[topLeftOverlay, bottomRightOverlay]}
+              image={{
+                uri: 'https://preview.redd.it/h12geouyt0zb1.png?width=640&crop=smart&auto=webp&s=211838092890ac1a247293645cc70af34a8e06d',
+              }}
+              opacity={1}
+              //bearing={0}
+              //tappable={false}
+          />
+        
+          <Polyline
+            coordinates={outline.map((location: LatLng) => ({
               latitude: location.latitude,
               longitude: location.longitude,
             }))}
-            fillColor="rgba(0, 128, 0, 0.5)" // Specify the fill color (green with some transparency)
-        />
+            strokeColor="#FF0000"
+            strokeWidth={6}
+          />
 
-        <Polyline
-          coordinates={aWing.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="yellow"
-          strokeWidth={6}
-        />
-
-        <Polyline
-          coordinates={hWing.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="green"
-          strokeWidth={4}
-        />
-
-        <Polygon
-          coordinates={hWing.map((location: LatLng) => ({
+          <Polyline
+            coordinates={dWing.map((location: LatLng) => ({
               latitude: location.latitude,
               longitude: location.longitude,
             }))}
-            fillColor="rgba(255, 253, 248, 0.5)" // Specify the fill color (green with some transparency)
-        />
+            strokeColor="green"
+            strokeWidth={4}
+          />
 
-        <Polyline
-          coordinates={kWing.map((location: LatLng) => ({
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }))}
-          strokeColor="green"
-          strokeWidth={4}
-        />
+          <Polyline
+            coordinates={dWing_internal.map((location: LatLng) => ({
+              latitude: location.latitude,
+              longitude: location.longitude,
+            }))}
+            strokeColor="green"
+            strokeWidth={4}
+          />
 
-      <Marker
-        coordinate={{ latitude: 33.254806348852334, longitude: -97.153712485778 }}
-        title={"K130"}
-        description={"Room"}
-      /></View>
+          
+
+          <Polygon
+            coordinates={dWing.map((location: LatLng) => ({
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }))}
+              fillColor="rgba(0, 69, 255, 0.5)" // Specify the fill color (green with some transparency)
+          />
+
+          <Polygon
+            coordinates={bWing.map((location: LatLng) => ({
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }))}
+              fillColor="rgba(32, 168, 13, 0.5)" // Specify the fill color (green with some transparency)
+          />
+
+          <Polyline
+            coordinates={bWing.map((location: LatLng) => ({
+              latitude: location.latitude,
+              longitude: location.longitude,
+            }))}
+            strokeColor="green"
+            strokeWidth={4}
+          />
+
+          <Polyline
+            coordinates={aWing.map((location: LatLng) => ({
+              latitude: location.latitude,
+              longitude: location.longitude,
+            }))}
+            strokeColor="yellow"
+            strokeWidth={6}
+          />
+
+          <Polyline
+            coordinates={hWing.map((location: LatLng) => ({
+              latitude: location.latitude,
+              longitude: location.longitude,
+            }))}
+            strokeColor="green"
+            strokeWidth={4}
+          />
+
+          <Polygon
+            coordinates={hWing.map((location: LatLng) => ({
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }))}
+              fillColor="rgba(255, 253, 248, 0.5)" // Specify the fill color (green with some transparency)
+          />
+
+          <Polyline
+            coordinates={kWing.map((location: LatLng) => ({
+              latitude: location.latitude,
+              longitude: location.longitude,
+            }))}
+            strokeColor="green"
+            strokeWidth={4}
+          />
+
+          <Polyline
+            coordinates={gWing.map((location: LatLng) => ({
+              latitude: location.latitude,
+              longitude: location.longitude,
+            }))}
+            strokeColor="green"
+            strokeWidth={4}
+          />
+          <Polygon
+            coordinates={gWing.map((location: LatLng) => ({
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }))}
+              fillColor="rgba(32, 168, 13, 0.5)" // Specify the fill color (green with some transparency)
+          />
+
+          <Polyline
+            coordinates={perks.map((location: LatLng) => ({
+              latitude: location.latitude,
+              longitude: location.longitude,
+            }))}
+            strokeColor="green"
+            strokeWidth={4}
+          />
+          <Polygon
+            coordinates={perks.map((location: LatLng) => ({
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }))}
+              fillColor="rgba(216, 219, 18, 0.5)" // Specify the fill color (green with some transparency)
+          />
+
+        </View>
       ) :
       // 2nd floor case
       null}
 
-     
+      <View style={styles.switchContainer}>
+        <Switch
+          trackColor={{false: '#767577', true: '##0085'}}
+          thumbColor={isEnabled ? '#white' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+          style={styles.switch}
+        />
+       
+      </View>
     </MapView>
-    
     <BottomSheet
-              ref={bottomSheetRef}
-              index={0}
-              snapPoints={snapPoints}
-              onChange={handleSheetChanges}
-              backgroundStyle={styles.sheetBackground}
-              keyboardBehavior="fillParent"
-              animateOnMount
-            >
-            <BottomSheetTextInput
-             style={styles.input} 
-             placeholder="Where to?" 
-            onChangeText={newText => setTxt(newText)}
-            onSubmitEditing={searchText => setSearch(txt)}
-            />
-            
-            <View style={styles.contentContainer}>
-              <Filter />
-            </View>
-          </BottomSheet>
+      ref={bottomSheetRef}
+      index={0}
+      snapPoints={snapPoints}
+      onChange={handleSheetChanges}
+      backgroundStyle={styles.sheetBackground}
+      keyboardBehavior="fillParent"
+      animateOnMount
+    >
+        <BottomSheetTextInput style={styles.input} placeholder="Where to?" 
+        onChangeText={newText => setTxt(newText)}
+        onSubmitEditing={searchText => setSearch(txt)}
+        />
+        <View style={styles.contentContainer}>
+          <Filter />
+        </View>
+      </BottomSheet>
 
     
   </SafeAreaView>
   </GestureHandlerRootView>
 
-    )
+  )
 }
 
 const styles = StyleSheet.create({
@@ -334,12 +383,11 @@ const styles = StyleSheet.create({
       backgroundColor: '#f0f0f0',
     },
     input: {
-      marginTop: 3,
-      marginHorizontal: 10,
+      margin: 10,
       fontSize: 16,
       lineHeight: 20,
       padding: 10,
-      borderRadius: 15,
+
       backgroundColor: 'rgba(151, 151, 151, 0.25)',
 
     }
