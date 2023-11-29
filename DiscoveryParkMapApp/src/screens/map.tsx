@@ -48,9 +48,28 @@ export default function Map()  {
   const [polylineCoordinates, setPolylineCoordinates] = useState([]);
   const [isEnabled, setIsEnabled] = useState(false);
   const [destSelected, setDestSelected] = useState(false);
+  const [showStartButton, setShowStartButton] = useState(false);
+  const [nodeName, setNodeName] = useState(null)
+  const [nodeDept, setNodeDept] = useState(null)
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  
 
   const bottomSheetRef = useRef<BottomSheet>(null);
+
+  useEffect(() => {
+    // This effect will be triggered whenever destSelected is updated
+    if (destSelected && nodeName && nodeDept) {
+      // Render StartButton after a delay of 500 milliseconds
+      const timeoutId = setTimeout(() => {
+        setShowStartButton(true);
+      }, 500);
+
+      // Clear the timeout if the component unmounts or if destSelected changes
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [destSelected]);
 
   // variables
   const snapPoints = useMemo(() => ['25%', '80%', '70%'], []);
@@ -123,6 +142,7 @@ export default function Map()  {
 
   const handleSelection = () => {
     setDestSelected(true)
+
   }
 
       // Function to find the nearest non-reachable node
@@ -202,7 +222,7 @@ export default function Map()  {
       };
       return (
         <GestureHandlerRootView style={{flex: 1}}>
-          <SafeAreaView>
+          <View>
             {isLoading ? (
               <LandingPage />
             ) : (
@@ -539,10 +559,7 @@ export default function Map()  {
               // 2nd floor case
               null}
 
-              {destSelected && (
-                  <StartButton 
-                  getLocation ={getLocation}/>
-              )}
+
               <View style={styles.switchContainer}>
                 <Switch
                   trackColor={{false: '#767577', true: '##0085'}}
@@ -598,15 +615,18 @@ export default function Map()  {
                     setSelectedRoom={setSelectedRoom}
                     bottomSheetRef={bottomSheetRef}
                     handleSelection={handleSelection}
+                    setNodeName={setNodeName}
+                    setNodeDept={setNodeDept}
                   />
                 )}
                 
               </View>
             </BottomSheet>
+              {showStartButton && <StartButton nodeName={nodeName} nodeDept={nodeDept}/>}
             </View>
             )}
            
-          </SafeAreaView>
+          </View>
         </GestureHandlerRootView>
 
   )

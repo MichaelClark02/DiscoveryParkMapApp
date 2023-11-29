@@ -1,38 +1,77 @@
-import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { useCallback, useMemo, useRef } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import BottomSheet from '@gorhom/bottom-sheet';
 
-const App = ({ getLocation }) => {
+const App = ({ nodeName, nodeDept }) => {
+  // ref
+  const bottomSheetRef2 = useRef<BottomSheet>(null);
+
+  // variables
+  const snapPoints = useMemo(() => ['14%', '80%', '70%'], []);
+
+  // callbacks
+  const handleSheetChanges = useCallback((index: number) => {
+  }, []);
+
+  // renders
   return (
-    <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={getLocation}>
-          <Text style={styles.buttonText}>Start Route</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+      <BottomSheet
+        ref={bottomSheetRef2}
+        index={0}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+        //backgroundStyle={styles.sheetBackground}
+        keyboardBehavior="fillParent"
+        animateOnMount
+        
+      >
+        <View style={styles.contentContainer}>
+          <View style={{flex: 1, flexDirection: 'column'}}>
+        <Text style={styles.description}>
+              {nodeName}
+            </Text>
+            <Text style={{color: 'grey'}}>
+              {nodeDept}
+            </Text>
+            </View>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>
+              GO 
+            </Text>
+
+          </TouchableOpacity>
+        </View>
+      </BottomSheet>
   );
 };
 
 const styles = StyleSheet.create({
-    container: {
-      //flex: 1,
-      alignContent: 'center',
-      justifyContent: 'center',
-    },
-  buttonContainer: {
-    position: 'absolute',
-    right: 120,
-    top: 670
+  contentContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20
+  },
+  description: {
+    fontSize: 25,
+    marginTop: 15,
   },
   button: {
-    backgroundColor: '#2266e3',
-    padding: 20,
+    marginTop: 5,
+    justifyContent: 'center',
+    backgroundColor: '#2ecc71',
     borderRadius: 30,
+    height: 60,
+    paddingHorizontal: 50,
+    //paddingVertical: 10,
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 20,
+    fontWeight: 'bold'
   },
+
+
 });
 
 export default App;

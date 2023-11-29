@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Keyboard } from 'react-native';
 
-const Filter2 = ({ nodes, txt, setSearch, setContentType, setSelectedRoom, bottomSheetRef, handleSelection }) => (
+const Filter2 = ({ nodes, txt, setSearch, setContentType, setSelectedRoom, bottomSheetRef, handleSelection, setNodeName, setNodeDept }) => (
   <View style={styles.scrollView}>
     {nodes
       .filter(node => node.name.includes(txt) && node.reachable === true)
@@ -13,6 +13,8 @@ const Filter2 = ({ nodes, txt, setSearch, setContentType, setSelectedRoom, botto
           onPress={() => {
             setSearch(filteredNode.name);
             setSelectedRoom(filteredNode.name);
+            setNodeName(filteredNode.name);
+            setNodeDept(filteredNode.dept);
             setContentType('result');
             bottomSheetRef.current?.close();
             handleSelection();
@@ -40,6 +42,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 5,
     borderRadius: 50, 
+    
     
   },
   buttonText: {
