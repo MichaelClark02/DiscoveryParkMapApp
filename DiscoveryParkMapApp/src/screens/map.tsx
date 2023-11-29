@@ -11,6 +11,8 @@ import Filter2 from "../components/Filter2";
 import { LatLng, dWing, bWing, aWing, outline,hWing, kWing, gWing, perks, dWing_internal, guideA, emerg1, emerg2, emerg3, rest1, rest2, supp1, supp2, s, eWing, eWing1, eWing2, eWing3, eWing4, guide} from '../components/Floor1';
 import graphData from '../components/Graph_test';
 import RouteInfoBar from "../components/RouteInfoBar";
+import StartButton from "../components/StartButton";
+import Destination from "../components/Destination";
 
 
 type Coordinate = [number, number];
@@ -43,6 +45,7 @@ export default function Map()  {
   const [shortestRoute, setShortestRoute] = useState([]);
   const [polylineCoordinates, setPolylineCoordinates] = useState([]);
   const [isEnabled, setIsEnabled] = useState(false);
+  const [destSelected, setDestSelected] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -57,25 +60,24 @@ export default function Map()  {
   const [txt, setTxt] = useState('');
   console.log(endNode);
 
+  useEffect(() => {
+    // This effect will be triggered whenever search or endNode is updated
+    if (endNode && search) {
+      calculateShortestRoute();
+    }
+  }, [search, endNode]);
+  
+  useEffect(() => {
+    // This effect will be triggered whenever shortestRoute is updated
+    if (shortestRoute.length > 0) {
+      // Log the shortest route for debugging
+      console.log('Shortest Route:', shortestRoute);
+
+    }
+  }, [shortestRoute]);
+  
   const handleStartRoute = () => {
-    setShowRouteInfo(false);
-    bottomSheetRef.current?.snapToIndex(0); 
-  };
-
-  const calculateShortestRoute = () => {
-    const startNode = 'E1'; // Update with your desired starting node
-    const endNode = search; // Update with your desired ending node
-
-    const path = route.path(startNode, endNode, { cost: true });
-
-    // Ensure the path is continuous
-    const continuousPath = [startNode, ...path.path];
-
-    setShortestRoute(continuousPath);
-    setPolylineCoordinates(path.coordinates); // Set the polyline coordinates
-  };
-
-  useEffect(()=> {
+    console.log('start')
     setEndNode(search)
     endNode ? (
       calculateShortestRoute()
@@ -93,7 +95,49 @@ export default function Map()  {
       setLat(location.coords.latitude)
       setLong(location.coords.longitude)
     })()
-  }, [lat, lon, search, endNode])
+  };
+
+  const handleSelection = () => {
+    setDestSelected(true)
+  }
+
+  const calculateShortestRoute = () => {
+    const startNode = 'E1'; // Update with your desired starting node
+    const endNode = search; // Update with your desired ending node
+
+    const path = route.path(startNode, endNode, { cost: true });
+
+    // Ensure the path is continuous
+    const continuousPath = [startNode, ...path.path];
+
+    setShortestRoute(continuousPath);
+    setPolylineCoordinates(path.coordinates); // Set the polyline coordinates
+  };
+
+  //Capitalize input
+  useEffect(() => {
+    setTxt((prevValue) => prevValue.toUpperCase());
+  }, [txt]);
+
+  // useEffect(()=> {
+  //   setEndNode(search)
+  //   endNode ? (
+  //     calculateShortestRoute()
+  //   ) : (
+  //     null
+  //   )
+  //   //calculateShortestRoute();
+  //   ;(async() => {
+  //     let { status } = await Location.requestForegroundPermissionsAsync()
+  //     if (status !== 'granted') {
+  //       console.log('permission to access location was denied')
+  //       return
+  //     }
+  //     let location = await Location.getCurrentPositionAsync({})
+  //     setLat(location.coords.latitude)
+  //     setLong(location.coords.longitude)
+  //   })()
+  // }, [lat, lon, search, endNode])
 
       const handleMapLongPress = (event) => {
         const { latitude, longitude } = event.nativeEvent.coordinate;
@@ -126,12 +170,6 @@ export default function Map()  {
               rotateEnabled
               onLongPress={handleMapLongPress} // Handle long press on the map
             >
-              {showRouteInfo && (
-                <RouteInfoBar
-                  roomName={selectedRoom}
-                  onStartRoute={handleStartRoute}
-                />
-              )} 
               {shortestRoute.map((nodeName, index) => {
                 const node = nodes.find((n) => n.getName() === nodeName) || { latitude: 0, longitude: 0 };
                 const nextNode = nodes.find((n) => n.getName() === shortestRoute[index + 1]);
@@ -159,11 +197,13 @@ export default function Map()  {
                   />
                 );
               })}
+
+              
               
               {(!isEnabled) ? 
                 // First floor case
                 (
-                <View style={styles.switchContainer}> 
+                <View style={styles.firstFloor}> 
                   <Overlay
                     bounds={[topLeftOverlay, bottomRightOverlay]}
                     image={{
@@ -437,11 +477,18 @@ export default function Map()  {
                     strokeColor="red"
                     strokeWidth={4}
                   />
+                  
+                  
                 </View>
+                
               ) :
               // 2nd floor case
               null}
 
+              {destSelected && (
+                  <StartButton 
+                  handleStartRoute ={handleStartRoute}/>
+              )}
               <View style={styles.switchContainer}>
                 <Switch
                   trackColor={{false: '#767577', true: '##0085'}}
@@ -453,7 +500,10 @@ export default function Map()  {
                 />
               
               </View>
+
+             
             </MapView>
+
             <BottomSheet
               ref={bottomSheetRef}
               index={0}
@@ -492,6 +542,8 @@ export default function Map()  {
                       setContentType(type);
                     }}
                     setSelectedRoom={setSelectedRoom}
+                    bottomSheetRef={bottomSheetRef}
+                    handleSelection={handleSelection}
                   />
                 )}
                 
@@ -511,6 +563,7 @@ const styles = StyleSheet.create({
     map: {
       width: '100%',
       height: '100%',
+      //position: 'relative'
     },
     bottomBar: {
       flex: 1,
@@ -525,9 +578,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         margin: 16,
         top: '40%',
-        right: 0
+        right: 0,
     
     },
+
+    firstFloor: {
+      //flex: 1
+    },
+
     switch: {
       transform: [{ rotate: '270deg' }],
       right: 0

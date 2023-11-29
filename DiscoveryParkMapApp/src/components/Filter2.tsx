@@ -1,9 +1,9 @@
 // FilteredNodesList.js
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Keyboard } from 'react-native';
 
-const Filter2 = ({ nodes, txt, setSearch, setContentType, setSelectedRoom }) => (
-  <ScrollView contentContainerStyle={styles.scrollView}>
+const Filter2 = ({ nodes, txt, setSearch, setContentType, setSelectedRoom, bottomSheetRef, handleSelection }) => (
+  <View style={styles.scrollView}>
     {nodes
       .filter(node => node.name.includes(txt) && node.reachable === true)
       .map(filteredNode => (
@@ -12,14 +12,20 @@ const Filter2 = ({ nodes, txt, setSearch, setContentType, setSelectedRoom }) => 
           style={styles.button}
           onPress={() => {
             setSearch(filteredNode.name);
-            setSelectedRoom(filteredNode.name); // Set the selected room
+            setSelectedRoom(filteredNode.name);
             setContentType('result');
+            bottomSheetRef.current?.close();
+            handleSelection();
+            Keyboard.dismiss();
           }}
         > 
-          <Text style={styles.buttonText}>{filteredNode.name}                  B-wing                 CSCE Dept</Text>
+          <Text style={styles.buttonText}>
+            <Text>{filteredNode.name}              {filteredNode.wing}                {filteredNode.dept}</Text>
+
+            </Text>
         </TouchableOpacity>
       ))}
-  </ScrollView>
+  </View>
 );
 
 const styles = StyleSheet.create({
@@ -27,16 +33,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    width: 395,
+    width: 360,
     height: 35, // Adjust the height of the TouchableOpacity if needed
     backgroundColor: 'white',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 5,
+    borderRadius: 50, 
+    
   },
   buttonText: {
     color: 'black', // Change the text color as needed
     fontSize: 16,
+    fontWeight: '400',
+    paddingTop: 5
   },
 });
 
