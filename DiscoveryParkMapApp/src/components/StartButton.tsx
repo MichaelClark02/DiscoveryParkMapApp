@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const App = ({ handleStartRoute }) => {
+const App = ({ getLocation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleStartRoute}>
+        <TouchableOpacity style={styles.button} onPress={getLocation}>
           <Text style={styles.buttonText}>Start Route</Text>
         </TouchableOpacity>
       </View>

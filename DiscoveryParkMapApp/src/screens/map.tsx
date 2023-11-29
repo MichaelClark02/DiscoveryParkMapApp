@@ -13,6 +13,7 @@ import graphData from '../components/Graph_test';
 import RouteInfoBar from "../components/RouteInfoBar";
 import StartButton from "../components/StartButton";
 import Destination from "../components/Destination";
+import LandingPage from "./LandingPage";
 
 
 type Coordinate = [number, number];
@@ -38,6 +39,7 @@ export default function Map()  {
   const [selectedRoom, setSelectedRoom] = useState('');
   const [lat, setLat] = useState(0);
   const [lon, setLong] = useState(0);
+  const [isLoading,setIsLoading] = useState(false);
 
   //search var
   const [search, setSearch] = useState('');
@@ -80,7 +82,26 @@ export default function Map()  {
     }
   }, [shortestRoute]);
   
-  const handleStartRoute = () => {
+  useEffect(()=> {
+    if (lat !== 0 && lon !==0) {
+      setIsLoading(false);
+      handleStartRoute();
+    }
+  }, [lat, lon])
+
+  const getLocation = async () => {
+    console.log("getlocation")
+    let location = await Location.getCurrentPositionAsync({})
+    console.log("PostAsync")
+    setLat(location.coords.latitude)
+    setLong(location.coords.longitude)
+    console.log("Lat "+location.coords.latitude + " long "+ location.coords.longitude)
+
+  }
+
+
+  const handleStartRoute = async () => {
+    //setIsLoading(true);
     console.log('start')
     setEndNode(search)
     endNode ? (
@@ -95,9 +116,8 @@ export default function Map()  {
         console.log('permission to access location was denied')
         return
       }
-      let location = await Location.getCurrentPositionAsync({})
-      setLat(location.coords.latitude)
-      setLong(location.coords.longitude)
+      
+      
     })()
   };
 
@@ -123,19 +143,22 @@ export default function Map()  {
     
         return nearestNode.getName();
       }
+    
   
   const calculateShortestRoute = () => {
 
     console.log("test")
+
     const startNode = findNearestNonReachableNode(lat,lon); // Update with your desired starting node
     console.log("urmom")
     console.log(startNode)
     const endNode = search; // Update with your desired ending node
-
+    console.log(endNode)
     const path = route.path(startNode, endNode, { cost: true });
-
+    console.log(path)
     // Ensure the path is continuous
     const continuousPath = [startNode, ...path.path];
+    console.log(continuousPath)
 
     setShortestRoute(continuousPath);
     setPolylineCoordinates(path.coordinates); // Set the polyline coordinates
@@ -180,7 +203,11 @@ export default function Map()  {
       return (
         <GestureHandlerRootView style={{flex: 1}}>
           <SafeAreaView>
-            <MapView
+            {isLoading ? (
+              <LandingPage />
+            ) : (
+              <View>
+              <MapView
               style={styles.map}
               showsBuildings
               showsUserLocation
@@ -214,7 +241,7 @@ export default function Map()  {
                     nextNodeCoordinates.latitude === 0 || nextNodeCoordinates.longitude === 0) {
                   return null;
                 }    
-                
+              
                 return (
                   <Polyline
                     key={`polyline-${index}`}
@@ -514,7 +541,7 @@ export default function Map()  {
 
               {destSelected && (
                   <StartButton 
-                  handleStartRoute ={handleStartRoute}/>
+                  getLocation ={getLocation}/>
               )}
               <View style={styles.switchContainer}>
                 <Switch
@@ -576,6 +603,9 @@ export default function Map()  {
                 
               </View>
             </BottomSheet>
+            </View>
+            )}
+           
           </SafeAreaView>
         </GestureHandlerRootView>
 
