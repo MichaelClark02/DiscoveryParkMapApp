@@ -24,7 +24,7 @@ const topLeftOverlay:Coordinate = [
   33.2517800, -97.155390
 ]
 
-const { route, nodes } = graphData;
+const { route, nodes, calculateDistance } = graphData;
 
 var floor1 = true;
 var op = 0.4;
@@ -58,6 +58,7 @@ export default function Map()  {
   }, []);
   
   const [txt, setTxt] = useState('');
+  console.log("endnode")
   console.log(endNode);
 
   useEffect(() => {
@@ -66,7 +67,10 @@ export default function Map()  {
       calculateShortestRoute();
     }
   }, [search, endNode]);
-  
+  useEffect(()=>{
+    console.log("useeffect")
+    console.log(findNearestNonReachableNode(lat,lon));
+  },[lat,lon])
   useEffect(() => {
     // This effect will be triggered whenever shortestRoute is updated
     if (shortestRoute.length > 0) {
@@ -101,8 +105,31 @@ export default function Map()  {
     setDestSelected(true)
   }
 
+      // Function to find the nearest non-reachable node
+      function findNearestNonReachableNode(currentLat, currentLon) {
+        const nonReachableNodes = nodes.filter(node => !node.reachable);
+    
+        // Calculate distances and find the nearest node
+        let nearestNode = null;
+        let minDistance = Infinity;
+    
+        nonReachableNodes.forEach(node => {
+          const distance = calculateDistance(currentLat, currentLon, node.latitude, node.longitude);
+          if (distance < minDistance) {
+            minDistance = distance;
+            nearestNode = node;
+          }
+        });
+    
+        return nearestNode.getName();
+      }
+  
   const calculateShortestRoute = () => {
-    const startNode = 'E1'; // Update with your desired starting node
+
+    console.log("test")
+    const startNode = findNearestNonReachableNode(lat,lon); // Update with your desired starting node
+    console.log("urmom")
+    console.log(startNode)
     const endNode = search; // Update with your desired ending node
 
     const path = route.path(startNode, endNode, { cost: true });

@@ -45,19 +45,19 @@ const s = new GraphNode(17, 33.25381924891953, -97.15252708643675, "B140", "room
 const nodes = [E1, B00, B20, B187, B187_ac1, B10, B140_ac1, B140, B142_ac1, B142];
 
 const route = new Graph();
+route.addNode('B20', { B187_ac1: calculateDistance(B20.latitude, B20.longitude, B187_ac1.latitude, B187_ac1.longitude) });
 route.addNode('E1', { B00:calculateDistance(E1.latitude, E1.longitude, B00.latitude, B00.longitude) });
 route.addNode('B00', { B10:calculateDistance(B00.latitude, B00.longitude, B10.latitude, B10.longitude)});
 route.addNode('B10', { B20:calculateDistance(B10.latitude, B10.longitude, B20.latitude, B20.longitude), B140_ac1:calculateDistance(B10.latitude, B10.longitude, B140_ac1.latitude, B140_ac1.longitude), B142_ac1:calculateDistance(B10.latitude, B10.longitude, B142_ac1.latitude, B142_ac1.longitude)});
 route.addNode('B140_ac1', { B140: calculateDistance(B140_ac1.latitude, B140_ac1.longitude, B140.latitude, B140.longitude) });
 route.addNode('B142_ac1', { B142: calculateDistance(B142_ac1.latitude, B142_ac1.longitude, B142.latitude, B142.longitude) });
-route.addNode('B20', { B187_ac1: calculateDistance(B20.latitude, B20.longitude, B187_ac1.latitude, B187_ac1.longitude) });
 route.addNode('B187_ac1', { B187: calculateDistance(B187_ac1.latitude, B187_ac1.longitude, B187.latitude, B187.longitude) });
 //route.addNode('f', { g: calculateDistance(f.latitude, f.longitude, g.latitude, g.longitude) });
 
 console.log(route.path('E1', 'B187'));
 
 
-exports.default = { route, nodes };
+exports.default = { route, nodes, calculateDistance };
 
 
 // Function to calculate the linear distance between two points
