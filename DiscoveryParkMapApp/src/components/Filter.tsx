@@ -28,7 +28,7 @@ const Filter = () => {
       
 
       <View style={styles.container}>
-      <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#FF5A5F'}]}>
+      <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#AED581'}]}>
         <MaterialIcons name="stairs" size={30} color="white" style={styles.icon} />
         <View style={[styles.colorCode, {backgroundColor: 'orange'}]}>
         </View>
@@ -37,7 +37,7 @@ const Filter = () => {
       </View>
       
     <View style={styles.container}>
-    <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#4CAF50'}]}>
+    <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#9575CD'}]}>
         
         <FontAwesome5 name="money-check-alt" size={30} color="white" />
         <View style={[styles.colorCode, {backgroundColor: 'purple'}]}>
@@ -49,7 +49,7 @@ const Filter = () => {
      
     
       <View style={styles.container}>
-      <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#FFC107'}]}>
+      <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#FF4081'}]}>
         <FontAwesome name="fire-extinguisher" size={30} color="white" />
         <View style={[styles.colorCode, {backgroundColor: 'red'}]}>
         </View>
@@ -58,7 +58,7 @@ const Filter = () => {
       </View>
       
     <View style={styles.container}>
-    <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#7E57C2'}]}>
+    <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#FFC107'}]}>
       <Entypo name="shopping-cart" size={30} color="white" />
         <View style={[styles.colorCode, {backgroundColor: 'cyan'}]}>
         </View>
