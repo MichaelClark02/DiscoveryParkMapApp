@@ -220,7 +220,7 @@ export default function Map()  {
                 latitudeDelta: 0.0025,
                 longitudeDelta: 0.0025,
               }}
-              mapType="hybrid"
+              //mapType="hybrid"
               rotateEnabled
               onLongPress={handleMapLongPress} // Handle long press on the map
             >
@@ -291,8 +291,8 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="#FF0000"
-                    strokeWidth={6}
+                    strokeColor="rgba(5, 5, 5,0.2)"
+                    strokeWidth={4}
                   />
 
                   <Polyline
@@ -300,7 +300,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="green"
+                    strokeColor="rgba(18, 92, 22, 0.5)"
                     strokeWidth={4}
                   />
 
@@ -309,7 +309,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="green"
+                    strokeColor="rgba(18, 92, 22, 0.5)"
                     strokeWidth={4}
                   />
 
@@ -334,7 +334,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="green"
+                    strokeColor="rgba(18, 92, 22, 0.5)"
                     strokeWidth={4}
                   />
 
@@ -352,7 +352,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="green"
+                    strokeColor="rgba(18, 92, 22, 0.5)"
                     strokeWidth={4}
                   />
 
@@ -369,7 +369,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="green"
+                    strokeColor="rgba(18, 92, 22, 0.5)"
                     strokeWidth={4}
                   />
                   <Polygon
@@ -385,7 +385,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="green"
+                    strokeColor="rgba(18, 92, 22, 0.5)"
                     strokeWidth={4}
                   />
                   <Polygon
@@ -453,7 +453,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="green"
+                    strokeColor="rgba(18, 92, 22, 0.5)"
                     strokeWidth={4}
                   />
                   <Polygon
@@ -468,7 +468,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="green"
+                    strokeColor="rgba(18, 92, 22, 0.5)"
                     strokeWidth={4}
                   />
                   <Polygon
@@ -483,7 +483,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="green"
+                    strokeColor="rgba(18, 92, 22, 0.5)"
                     strokeWidth={4}
                   />
                   <Polygon
@@ -498,7 +498,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="green"
+                    strokeColor="rgba(18, 92, 22, 0.5)"
                     strokeWidth={4}
                   />
                   <Polygon
@@ -513,7 +513,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="green"
+                    strokeColor="rgba(18, 92, 22, 0.5)"
                     strokeWidth={4}
                   />
                   <Polygon
@@ -528,7 +528,7 @@ export default function Map()  {
                       latitude: location.latitude,
                       longitude: location.longitude,
                     }))}
-                    strokeColor="red"
+                    strokeColor="rgba(5, 5, 5,0.2)"
                     strokeWidth={4}
                   />
                   
