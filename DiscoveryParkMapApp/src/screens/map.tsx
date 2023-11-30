@@ -55,6 +55,7 @@ export default function Map()  {
   const [showBottomSheet, setShowBottomSheet] = useState(true);
   const [inRoute, setInRoute] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
   
 
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -62,16 +63,11 @@ export default function Map()  {
   useEffect(() => {
     // This effect will be triggered whenever destSelected is updated
     if (destSelected && nodeName && nodeDept) {
-      // Render StartButton after a delay of 500 milliseconds
-      const timeoutId = setTimeout(() => {
-        setShowStartButton(true);
-        
-      }, 500);
+      // Render StartButton
+      setShowStartButton(true)
 
       // Clear the timeout if the component unmounts or if destSelected changes
-      return () => {
-        clearTimeout(timeoutId);
-      };
+
     }
   }, [destSelected]);
 
@@ -93,6 +89,9 @@ export default function Map()  {
     }
   }, [search, endNode]);
 
+  useEffect(()=>{
+    console.log(`startbutton: ${showStartButton}`)
+  },[showStartButton])
 
   useEffect(()=>{
     console.log("useeffect")
@@ -115,6 +114,8 @@ export default function Map()  {
       handleStartRoute();
     }
   }, [lat, lon])
+
+ 
 
 
 
@@ -145,7 +146,7 @@ export default function Map()  {
   const handleStartRoute = async () => {
     //setIsLoading(true);
     setInRoute(true);
-    console.log('start')
+    console.log('start route')
     setShowStartButton(false)
     setEndNode(search)
     bottomSheetRef.current?.close();
@@ -631,6 +632,9 @@ export default function Map()  {
               onPress={()=> {
                 openSheet();
                 setInRoute(false);
+                setLat(0);
+                setLong(0);
+                //setDestSelected(false);
               }}>
                 <Text style={styles.endRouteText}>End Route</Text>
               </TouchableOpacity>
