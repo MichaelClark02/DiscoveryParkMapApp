@@ -565,4 +565,82 @@ export const eWing4:LatLng[] = [
     { latitude: 33.25423756671523, longitude: -97.1537870541215 },
     { latitude: 33.254095697767674, longitude: -97.15351916849613 },
     { latitude: 33.25391065096813, longitude: -97.1536623314023 },
+];
+
+export const fWing:LatLng[] = [
+    //{ latitude: 33.252764473575766, longitude: -97.15304609388112},
+    { latitude: 33.25270279041307, longitude: -97.15292505919933 },
+    { latitude: 33.25322092762646, longitude: -97.1525351330638 },
+    { latitude: 33.2533207415852, longitude: -97.15272724628448 },
+    { latitude: 33.25280204420808, longitude: -97.1531181782484 },
+    { latitude: 33.252764473575766, longitude: -97.15304609388112},
+    { latitude: 33.25280204420808, longitude: -97.1531181782484 },
+
+    { latitude: 33.253319900456795, longitude: -97.15272925794125 },
+    { latitude: 33.25322877816668, longitude: -97.15279564261436 },
+    { latitude: 33.253128122972655, longitude: -97.1526038646698 },
+
+    { latitude: 33.25303868274476, longitude: -97.15267091989519 },
+    { latitude: 33.25308354305859, longitude: -97.15275608003138 },
+    { latitude: 33.252948401293324, longitude: -97.15285632759333 },
+    { latitude: 33.25290494279745, longitude: -97.1527711674571 },
+
+    { latitude: 33.25270279041307, longitude: -97.15292505919933 },
+    { latitude: 33.2527013885225, longitude: -97.15292371809483 },
+    { latitude: 33.252764473575766, longitude: -97.15304709970951 },
+    { latitude: 33.252980644679546, longitude: -97.15288415551184 },
+    { latitude: 33.25301681333341, longitude: -97.15295523405075 },
+
+];
+
+export const fWing_outline:LatLng[] = [
+    { latitude: 33.25322092762646, longitude: -97.1525351330638 },
+    { latitude: 33.25270082776626, longitude: -97.15292472392322 },
+    { latitude: 33.25280204420808, longitude: -97.1531181782484 },
+    { latitude: 33.2533207415852, longitude: -97.15272724628448 },
+
+];
+
+export const fWing2:LatLng[] = [
+    { latitude: 33.252718771963956, longitude: -97.152863368392 },
+    { latitude: 33.25320326390842, longitude: -97.1525016054511 },
+    { latitude: 33.2530546642342, longitude: -97.1522082388401 },
+    { latitude: 33.25252895581117, longitude: -97.15259682387114 },
+
+];
+
+export const fWing_2:LatLng[] = [
+    { latitude: 33.253047374432356, longitude: -97.1522092446685},
+    { latitude: 33.25320326390842, longitude: -97.1525016054511 },
+    { latitude: 33.25309587964086, longitude: -97.15258073061705 },
+    { latitude: 33.25296185940381, longitude: -97.1523282676935 },
+    { latitude: 33.252991299013246, longitude: -97.15230613946916 },
+    { latitude: 33.25297167260807, longitude: -97.15226858854294 },
+    { latitude: 33.253047374432356, longitude: -97.1522092446685 },
+]
+
+export const fWing_3:LatLng[] = [
+    { latitude: 33.25295092468921, longitude: -97.15268734842539 },
+    { latitude: 33.253077655143706, longitude: -97.15259313583374 },
+    { latitude: 33.25292400846282, longitude: -97.15230312198399 },
+    { latitude: 33.25279615627422, longitude: -97.15239968150854 },
+    { latitude: 33.252950363934566, longitude: -97.15268801897763 },
+]
+
+export const fWing_4:LatLng[] = [
+    { latitude: 33.25271568780522, longitude: -97.15286538004875 },
+    { latitude: 33.2529304571428, longitude: -97.1527037769556 },
+    { latitude: 33.25283512878135, longitude: -97.1525237336755 },
+    { latitude: 33.25262148072298, longitude: -97.15268600732088 },
+    { latitude: 33.25271568780522, longitude: -97.15286538004875 },
+]
+
+export const fWing_5:LatLng[] = [
+    { latitude: 33.252777090580956, longitude: -97.15241242200136 },
+    { latitude: 33.25282279216226, longitude: -97.1524992585182 },
+    { latitude: 33.2526083029385, longitude: -97.152659855783 },
+    { latitude: 33.25256147973074, longitude: -97.15257201343775 },
+    { latitude: 33.252777090580956, longitude: -97.15241242200136 },
+
+
 ]
