@@ -634,7 +634,7 @@ export default function Map()  {
                 setInRoute(false);
                 setLat(0);
                 setLong(0);
-                //setDestSelected(false);
+                setDestSelected(false);
               }}>
                 <Text style={styles.endRouteText}>End Route</Text>
               </TouchableOpacity>
