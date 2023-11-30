@@ -41,6 +41,8 @@ const B187 = new GraphNode(14, 33.25367765966773, -97.1527473628521, "B187", "ro
 const B187_ac1 = new GraphNode(15, 33.25376401511989, -97.15268466621637, "B187_ac1", "hallway", false);
 const B10 = new GraphNode(16, 33.25382990315099, -97.15234570205212, "B10", "hallway", false);
 const s = new GraphNode(17, 33.25381924891953, -97.15252708643675, "B140", "room", true);
+const bath1 = new GraphNode(18, 33.25431158520513, -97.15293109416962, "Bathroom 1", "bathroom", true);
+const bath1_ac = new GraphNode(19, 33.25436850089527, -97.15289287269114, "bath_ac1", "hallway", false );
 
 
 const nodes = [E1, B00, B20, B187, B187_ac1, B10, B140_ac1, B140, B142_ac1, B142];
@@ -54,6 +56,7 @@ route.addNode('B20', { B10: calculateDistance(B20.latitude, B20.longitude, B10.l
 route.addNode('B140_ac1', { B20:calculateDistance(B10.latitude, B10.longitude, B140_ac1.latitude, B140_ac1.longitude),B140: calculateDistance(B140_ac1.latitude, B140_ac1.longitude, B140.latitude, B140.longitude) });
 route.addNode('B142_ac1', { B20:calculateDistance(B10.latitude, B10.longitude, B142_ac1.latitude, B142_ac1.longitude),B142: calculateDistance(B142_ac1.latitude, B142_ac1.longitude, B142.latitude, B142.longitude) });
 route.addNode('B187_ac1', { B187: calculateDistance(B187_ac1.latitude, B187_ac1.longitude, B187.latitude, B187.longitude) });
+
 //route.addNode('f', { g: calculateDistance(f.latitude, f.longitude, g.latitude, g.longitude) });
 
 console.log(route.path('B20', 'B187'));
