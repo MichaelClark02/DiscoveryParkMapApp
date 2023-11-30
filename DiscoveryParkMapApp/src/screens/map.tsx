@@ -25,7 +25,7 @@ const topLeftOverlay:Coordinate = [
   33.2517800, -97.155390
 ]
 
-const { route, nodes, calculateDistance } = graphData;
+const { route, nodes, calculateDistance, GraphNode } = graphData;
 
 var floor1 = true;
 var op = 0.4;
@@ -168,6 +168,7 @@ export default function Map()  {
       
       
     })()
+    
   };
 
   
@@ -177,23 +178,23 @@ export default function Map()  {
   }
 
       // Function to find the nearest non-reachable node
-      function findNearestNonReachableNode(currentLat, currentLon) {
-        const nonReachableNodes = nodes.filter(node => !node.reachable);
+  function findNearestNonReachableNode(currentLat, currentLon) {
+    const nonReachableNodes = nodes.filter(node => !node.reachable);
     
-        // Calculate distances and find the nearest node
-        let nearestNode = null;
-        let minDistance = Infinity;
+    // Calculate distances and find the nearest node
+    let nearestNode = null;
+    let minDistance = Infinity;
     
-        nonReachableNodes.forEach(node => {
-          const distance = calculateDistance(currentLat, currentLon, node.latitude, node.longitude);
-          if (distance < minDistance) {
-            minDistance = distance;
-            nearestNode = node;
-          }
-        });
-    
-        return nearestNode.getName();
+    nonReachableNodes.forEach(node => {
+      const distance = calculateDistance(currentLat, currentLon, node.latitude, node.longitude);
+      if (distance < minDistance&& node.getName()!="userLocation") {
+        minDistance = distance;
+        nearestNode = node;
       }
+    });
+    
+      return nearestNode;
+    }
     
   
   const calculateShortestRoute = () => {
@@ -201,18 +202,23 @@ export default function Map()  {
     console.log("test")
 
     const startNode = findNearestNonReachableNode(lat,lon); // Update with your desired starting node
+    const startNodeName = startNode.getName();
     console.log("urmom")
     console.log(startNode)
     const endNode = search; // Update with your desired ending node
     console.log(endNode)
-    const path = route.path(startNode, endNode, { cost: true });
+    const myLocation = new GraphNode(-1,lat,lon,"userLocation","userLocation",false)
+    nodes.push(myLocation)
+    //route.addNode("myLocation",{ startNode:0 })
+    const path = route.path(startNodeName, endNode, { cost: true });
     console.log(path)
     // Ensure the path is continuous
-    const continuousPath = [startNode, ...path.path];
-    console.log(continuousPath)
-
-    setShortestRoute(continuousPath);
+    const continuousPath = [startNodeName, ...path.path];
+    
+    console.log(continuousPath);
+    setShortestRoute([myLocation.getName(),...continuousPath]);
     setPolylineCoordinates(path.coordinates); // Set the polyline coordinates
+    console.log(shortestRoute);
   };
 
   //Capitalize input
