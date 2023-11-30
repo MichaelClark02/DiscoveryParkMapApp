@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef } from "react";
-import { Text, View, StyleSheet, SafeAreaView,TouchableOpacity, Button, Switch } from 'react-native'
+import { Text, View, StyleSheet, SafeAreaView,TouchableOpacity, Button, Switch, ActivityIndicator } from 'react-native'
 import MapView from 'react-native-maps'
 import { Marker, Overlay,AnimatedRegion ,PROVIDER_GOOGLE,Polyline, Polygon} from "react-native-maps";
 import { Component, useState, useEffect } from 'react';
@@ -33,6 +33,7 @@ var op = 0.4;
 
 
 
+
 export default function Map()  {
   const [contentType, setContentType] = useState('filter');
   const [showRouteInfo, setShowRouteInfo] = useState(false);
@@ -51,6 +52,8 @@ export default function Map()  {
   const [showStartButton, setShowStartButton] = useState(false);
   const [nodeName, setNodeName] = useState(null)
   const [nodeDept, setNodeDept] = useState(null)
+  const [showBottomSheet, setShowBottomSheet] = useState(true);
+  const [inRoute, setInRoute] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   
 
@@ -62,6 +65,7 @@ export default function Map()  {
       // Render StartButton after a delay of 500 milliseconds
       const timeoutId = setTimeout(() => {
         setShowStartButton(true);
+        
       }, 500);
 
       // Clear the timeout if the component unmounts or if destSelected changes
@@ -72,7 +76,7 @@ export default function Map()  {
   }, [destSelected]);
 
   // variables
-  const snapPoints = useMemo(() => ['25%', '80%', '70%'], []);
+  const snapPoints = useMemo(() => ['25%', '30%', '70%'], []);
   
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -88,10 +92,14 @@ export default function Map()  {
       calculateShortestRoute();
     }
   }, [search, endNode]);
+
+
   useEffect(()=>{
     console.log("useeffect")
     console.log(findNearestNonReachableNode(lat,lon));
   },[lat,lon])
+
+
   useEffect(() => {
     // This effect will be triggered whenever shortestRoute is updated
     if (shortestRoute.length > 0) {
@@ -108,21 +116,39 @@ export default function Map()  {
     }
   }, [lat, lon])
 
+
+
   const getLocation = async () => {
-    console.log("getlocation")
+    //console.log("getlocation")
+    //setShowBottomSheet(false);
+    setIsLoading(true);
     let location = await Location.getCurrentPositionAsync({})
     console.log("PostAsync")
     setLat(location.coords.latitude)
     setLong(location.coords.longitude)
     console.log("Lat "+location.coords.latitude + " long "+ location.coords.longitude)
-
+    
   }
 
+  const handleCancel = () => {
+    setDestSelected(false);
+    setShowStartButton(false);
+    setTimeout(openSheet, 500);
+  
+  }
+
+  const openSheet = () => {
+    bottomSheetRef.current?.expand();
+    //bottomSheetRef.current?.snapToPosition(0);
+  }
 
   const handleStartRoute = async () => {
     //setIsLoading(true);
+    setInRoute(true);
     console.log('start')
+    setShowStartButton(false)
     setEndNode(search)
+    bottomSheetRef.current?.close();
     endNode ? (
       calculateShortestRoute()
     ) : (
@@ -140,9 +166,10 @@ export default function Map()  {
     })()
   };
 
+  
+
   const handleSelection = () => {
     setDestSelected(true)
-
   }
 
       // Function to find the nearest non-reachable node
@@ -222,10 +249,7 @@ export default function Map()  {
       };
       return (
         <GestureHandlerRootView style={{flex: 1}}>
-          <View>
-            {isLoading ? (
-              <LandingPage />
-            ) : (
+          <View style={styles.container}>
               <View>
               <MapView
               style={styles.map}
@@ -234,6 +258,7 @@ export default function Map()  {
               followsUserLocation
               provider={PROVIDER_GOOGLE}
               userLocationPriority="high"
+              showsIndoorLevelPicker
               initialRegion={{
                 latitude: 33.25405149775475,
                 longitude: -97.15271196603254,
@@ -244,6 +269,20 @@ export default function Map()  {
               rotateEnabled
               onLongPress={handleMapLongPress} // Handle long press on the map
             >
+               <View style={styles.header}>
+              
+                {
+                  !isEnabled ? (
+                    <Text style={styles.headerText}>Floor 1</Text>
+                  ) : (
+                    <Text style={styles.headerText}>Floor 2</Text>
+                  )}
+                
+              
+            </View>
+
+           
+            
               {shortestRoute.map((nodeName, index) => {
                 const node = nodes.find((n) => n.getName() === nodeName) || { latitude: 0, longitude: 0 };
                 const nextNode = nodes.find((n) => n.getName() === shortestRoute[index + 1]);
@@ -560,71 +599,91 @@ export default function Map()  {
               null}
 
 
-              <View style={styles.switchContainer}>
+              
+
+
+             
+            </MapView>
+            <View style={styles.switchContainer}>
                 <Switch
-                  trackColor={{false: '#767577', true: '##0085'}}
+                  trackColor={{false: '#767577', true: '#2ecc71'}}
                   thumbColor={isEnabled ? '#white' : '#f4f3f4'}
                   ios_backgroundColor="#3e3e3e"
                   onValueChange={toggleSwitch}
                   value={isEnabled}
                   style={styles.switch}
                 />
+                
+                
               
               </View>
-
-             
-            </MapView>
-
-            <BottomSheet
-              ref={bottomSheetRef}
-              index={0}
-              snapPoints={snapPoints}
-              onChange={handleSheetChanges}
-              backgroundStyle={styles.sheetBackground}
-              keyboardBehavior="fillParent"
-              animateOnMount
-            >
-              <BottomSheetTextInput style={styles.input} placeholder="Where to?"
-                onFocus={() => {
-                  // Set the snap point to 80% when the TextInput is focused
-                  bottomSheetRef.current?.snapToPosition(1);
-                }}
-                onChangeText={newText => {
-                  setTxt(newText);
-                  setContentType(newText.trim() !== '' ? 'result' : 'filter');
-                }}
-                onSubmitEditing={searchText => {
-                  setSearch(txt);
-                  setContentType('result')
-                }}
+              {isLoading && (
+                <View style={styles.activity}>
+              <ActivityIndicator 
+                size={'large'}
                 />
-              <View style={styles.contentContainer}>
-                {contentType === 'filter' ? (
-                  <Filter />
-                ) : (
-                  <Filter2
-                    nodes={nodes}
-                    txt={txt}
-                    setSearch={setSearch}
-                    setContentType={(type) => {
-                      if (type === 'result') {
-                        setShowRouteInfo(true);
-                      }
-                      setContentType(type);
-                    }}
-                    setSelectedRoom={setSelectedRoom}
-                    bottomSheetRef={bottomSheetRef}
-                    handleSelection={handleSelection}
-                    setNodeName={setNodeName}
-                    setNodeDept={setNodeDept}
-                  />
-                )}
-                
               </View>
-            </BottomSheet>
-              {showStartButton && <StartButton nodeName={nodeName} nodeDept={nodeDept}/>}
-            </View>
+
+              )}
+
+              {inRoute && (
+              <TouchableOpacity style={styles.endRoute}>
+                <Text style={styles.endRouteText}>End Route</Text>
+              </TouchableOpacity>
             )}
+              
+              
+                    <BottomSheet
+                  ref={bottomSheetRef}
+                  index={0}
+                  snapPoints={snapPoints}
+                  onChange={handleSheetChanges}
+                  backgroundStyle={styles.sheetBackground}
+                  keyboardBehavior="fillParent"
+                  animateOnMount
+                >
+                  <BottomSheetTextInput style={styles.input} placeholder="Where to?"
+                    onFocus={() => {
+                      bottomSheetRef.current?.snapToPosition(1);
+                    }}
+                    onChangeText={newText => {
+                      setTxt(newText);
+                      setContentType(newText.trim() !== '' ? 'result' : 'filter');
+                    }}
+                    onSubmitEditing={searchText => {
+                      setSearch(txt);
+                      setContentType('result')
+                    }}
+                    />
+                  <View style={styles.contentContainer}>
+                    {contentType === 'filter' ? (
+                      <Filter />
+                    ) : (
+                      <Filter2
+                        nodes={nodes}
+                        txt={txt}
+                        setSearch={setSearch}
+                        setContentType={(type) => {
+                          if (type === 'result') {
+                            setShowRouteInfo(true);
+                          }
+                          setContentType(type);
+                        }}
+                        setSelectedRoom={setSelectedRoom}
+                        bottomSheetRef={bottomSheetRef}
+                        handleSelection={handleSelection}
+                        setNodeName={setNodeName}
+                        setNodeDept={setNodeDept}
+                      />
+                    )}
+                    
+                  </View>
+                </BottomSheet>
+              
+            
+              {showStartButton && <StartButton nodeName={nodeName} nodeDept={nodeDept} getLocation={getLocation} handleCancel={handleCancel}/>}
+            </View>
+            
            
           </View>
         </GestureHandlerRootView>
@@ -635,12 +694,12 @@ export default function Map()  {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 20
+        // margin: 20
+        position: 'relative'
     },
     map: {
       width: '100%',
       height: '100%',
-      //position: 'relative'
     },
     bottomBar: {
       flex: 1,
@@ -653,10 +712,10 @@ const styles = StyleSheet.create({
     
     switchContainer: {
         position: 'absolute',
-        margin: 16,
+        // margin: 16,
         top: '40%',
         right: 0,
-    
+        //backgroundColor: 'black'
     },
 
     firstFloor: {
@@ -665,7 +724,9 @@ const styles = StyleSheet.create({
 
     switch: {
       transform: [{ rotate: '270deg' }],
-      right: 0
+      left: 0,
+
+
     },
     contentContainer: {
       flex: 1,
@@ -679,9 +740,57 @@ const styles = StyleSheet.create({
       fontSize: 16,
       lineHeight: 20,
       padding: 10,
-
+      borderRadius: 15,
       backgroundColor: 'rgba(151, 151, 151, 0.25)',
 
+    },
+    header: {
+      flex:1,
+      height: 90,
+      backgroundColor: '#2ecc71',
+      position: 'absolute',
+      top:0,
+      width: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: 42
+    },
+    headerText: {
+     color: 'white',
+     fontWeight: '400',
+     fontSize: 25
+    },
+    activity: {
+      flex: 1,
+     position: 'absolute',
+     top: '50%',
+     backgroundColor: 'white',
+     right: '42%',
+     borderRadius: 10,
+     padding: 10
+    }, 
+    
+    endRoute: {
+      //flex:1,
+      height: 90,
+      backgroundColor: '#D9534F',
+      position: 'absolute',
+      bottom:0,
+      width: 400,
+      //marginHorizontal: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+
+      //paddingTop: 42
+    },
+
+    endRouteText: {
+      color: 'white',
+     fontWeight: '400',
+     fontSize: 25,
+      position: 'absolute',
+     bottom: 5
     }
+
 
 })

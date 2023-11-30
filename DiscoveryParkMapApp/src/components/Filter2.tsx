@@ -16,13 +16,16 @@ const Filter2 = ({ nodes, txt, setSearch, setContentType, setSelectedRoom, botto
             setNodeName(filteredNode.name);
             setNodeDept(filteredNode.dept);
             setContentType('result');
-            bottomSheetRef.current?.close();
+            bottomSheetRef.current?.snapToPosition(0);
             handleSelection();
             Keyboard.dismiss();
           }}
         > 
           <Text style={styles.buttonText}>
-            <Text>{filteredNode.name}              {filteredNode.wing}                {filteredNode.dept}</Text>
+            <Text style={{fontWeight: 'bold'}}>{filteredNode.name}              </Text>
+            <Text>
+            {filteredNode.wing}                {filteredNode.dept}
+            </Text>
 
             </Text>
         </TouchableOpacity>
