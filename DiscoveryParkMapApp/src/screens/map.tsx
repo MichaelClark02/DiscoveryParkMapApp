@@ -8,7 +8,7 @@ import BottomSheet, { BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Filter from "../components/Filter";
 import Filter2 from "../components/Filter2";
-import { LatLng, dWing, bWing, aWing, outline,hWing, kWing, gWing, perks, dWing_internal, guideA, emerg1, emerg2, emerg3, rest1, rest2, supp1, supp2, s, eWing, eWing1, eWing2, eWing3, eWing4, guide} from '../components/Floor1';
+import { LatLng, dWing, bWing, aWing, outline,hWing, kWing, gWing, perks, dWing_internal, guideA, emerg1, emerg2, emerg3, rest1, rest2, supp1, supp2, s, eWing, eWing1, eWing2, eWing3, eWing4, guide, fWing, fWing_outline, fWing2, fWing_2, fWing_3, fWing_4, fWing_5} from '../components/Floor1';
 import graphData from '../components/Graph_test';
 import RouteInfoBar from "../components/RouteInfoBar";
 import StartButton from "../components/StartButton";
@@ -572,8 +572,82 @@ export default function Map()  {
                     strokeColor="rgba(5, 5, 5,0.2)"
                     strokeWidth={4}
                   />
+                  <Polygon
+                    coordinates={fWing_outline.map((location: LatLng) => ({
+                        latitude: location.latitude,
+                        longitude: location.longitude,
+                      }))}
+                      fillColor="rgba(0, 69, 255, 0.5)" // Specify the fill color (green with some transparency)
+                  />
+                  <Polyline
+                    coordinates={fWing.map((location: LatLng) => ({
+                      latitude: location.latitude,
+                      longitude: location.longitude,
+                    }))}
+                    strokeColor="rgba(24, 89, 32, 0.75)"
+                    strokeWidth={4}
+                  />
+                  <Polygon
+                    coordinates={fWing_2.map((location: LatLng) => ({
+                        latitude: location.latitude,
+                        longitude: location.longitude,
+                      }))}
+                      fillColor="rgba(0, 69, 255, 0.5)" // Specify the fill color (green with some transparency)
+                  />
                   
-                  
+                  <Polyline
+                    coordinates={fWing_2.map((location: LatLng) => ({
+                      latitude: location.latitude,
+                      longitude: location.longitude,
+                    }))}
+                    strokeColor="rgba(24, 89, 32, 0.75)"
+                    strokeWidth={4}
+                  />
+                  <Polygon
+                    coordinates={fWing_3.map((location: LatLng) => ({
+                        latitude: location.latitude,
+                        longitude: location.longitude,
+                      }))}
+                      fillColor="rgba(0, 69, 255, 0.5)" // Specify the fill color (green with some transparency)
+                  />
+                  <Polyline
+                    coordinates={fWing_3.map((location: LatLng) => ({
+                      latitude: location.latitude,
+                      longitude: location.longitude,
+                    }))}
+                    strokeColor="rgba(24, 89, 32, 0.75)"
+                    strokeWidth={4}
+                  />
+                  <Polygon
+                    coordinates={fWing_4.map((location: LatLng) => ({
+                        latitude: location.latitude,
+                        longitude: location.longitude,
+                      }))}
+                      fillColor="rgba(0, 69, 255, 0.5)" // Specify the fill color (green with some transparency)
+                  />
+                  <Polyline
+                    coordinates={fWing_4.map((location: LatLng) => ({
+                      latitude: location.latitude,
+                      longitude: location.longitude,
+                    }))}
+                    strokeColor="rgba(24, 89, 32, 0.75)"
+                    strokeWidth={4}
+                  />
+                  <Polygon
+                    coordinates={fWing_5.map((location: LatLng) => ({
+                        latitude: location.latitude,
+                        longitude: location.longitude,
+                      }))}
+                      fillColor="rgba(0, 69, 255, 0.5)" // Specify the fill color (green with some transparency)
+                  />
+                  <Polyline
+                    coordinates={fWing_5.map((location: LatLng) => ({
+                      latitude: location.latitude,
+                      longitude: location.longitude,
+                    }))}
+                    strokeColor="rgba(24, 89, 32, 0.75)"
+                    strokeWidth={4}
+                  />
                 </View>
                 
               ) :
