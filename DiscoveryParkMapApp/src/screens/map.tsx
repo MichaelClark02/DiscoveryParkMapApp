@@ -139,7 +139,7 @@ export default function Map()  {
 
   const openSheet = () => {
     bottomSheetRef.current?.expand();
-    //bottomSheetRef.current?.snapToPosition(0);
+    bottomSheetRef.current?.snapToPosition(0);
   }
 
   const handleStartRoute = async () => {
@@ -627,7 +627,11 @@ export default function Map()  {
               )}
 
               {inRoute && (
-              <TouchableOpacity style={styles.endRoute}>
+              <TouchableOpacity style={styles.endRoute} 
+              onPress={()=> {
+                openSheet();
+                setInRoute(false);
+              }}>
                 <Text style={styles.endRouteText}>End Route</Text>
               </TouchableOpacity>
             )}
@@ -786,10 +790,10 @@ const styles = StyleSheet.create({
 
     endRouteText: {
       color: 'white',
-     fontWeight: '400',
+     fontWeight: '600',
      fontSize: 25,
       position: 'absolute',
-     bottom: 5
+     bottom: 30
     }
 
 
