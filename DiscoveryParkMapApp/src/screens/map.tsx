@@ -54,6 +54,7 @@ export default function Map()  {
   const [nodeDept, setNodeDept] = useState(null)
   const [showBottomSheet, setShowBottomSheet] = useState(true);
   const [inRoute, setInRoute] = useState(false);
+  const [showRoute, setShowRoute] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   
@@ -112,6 +113,7 @@ export default function Map()  {
     if (lat !== 0 && lon !==0) {
       setIsLoading(false);
       handleStartRoute();
+      setShowRoute(true);
     }
   }, [lat, lon])
 
@@ -134,6 +136,7 @@ export default function Map()  {
   const handleCancel = () => {
     setDestSelected(false);
     setShowStartButton(false);
+    setShowRoute(false);
     setTimeout(openSheet, 500);
   
   }
@@ -288,36 +291,9 @@ export default function Map()  {
               
             </View>
 
-
-              {shortestRoute.map((nodeName, index) => {
-                const node = nodes.find((n) => n.getName() === nodeName) || { latitude: 0, longitude: 0 };
-                const nextNode = nodes.find((n) => n.getName() === shortestRoute[index + 1]);
-
-                if (!nextNode) {
-                  // Stop rendering polylines if nextNode is not found
-                  return null;
-                }
-              
-                const nodeCoordinates = { latitude: node.latitude, longitude: node.longitude };
-                const nextNodeCoordinates = { latitude: nextNode.latitude, longitude: nextNode.longitude };
-              
-                // Check if any coordinate is 0, if yes, return null to avoid rendering
-                if (nodeCoordinates.latitude === 0 || nodeCoordinates.longitude === 0 ||
-                    nextNodeCoordinates.latitude === 0 || nextNodeCoordinates.longitude === 0) {
-                  return null;
-                }    
-              
-                return (
-                  <Polyline
-                    key={`polyline-${index}`}
-                    coordinates={[nodeCoordinates, nextNodeCoordinates]}
-                    strokeColor="blue"
-                    strokeWidth={4}
-                  />
-                );
-              })}
-
-              
+           
+            
+             
               
               {(!isEnabled) ? 
                 // First floor case
@@ -604,6 +580,38 @@ export default function Map()  {
               // 2nd floor case
               null}
 
+              
+             {showRoute && shortestRoute.map((nodeName, index) => {
+                const node = nodes.find((n) => n.getName() === nodeName) || { latitude: 0, longitude: 0 };
+                const nextNode = nodes.find((n) => n.getName() === shortestRoute[index + 1]);
+
+                if (!nextNode) {
+                  // Stop rendering polylines if nextNode is not found
+                  return null;
+                }
+              
+                const nodeCoordinates = { latitude: node.latitude, longitude: node.longitude };
+                const nextNodeCoordinates = { latitude: nextNode.latitude, longitude: nextNode.longitude };
+              
+                // Check if any coordinate is 0, if yes, return null to avoid rendering
+                if (nodeCoordinates.latitude === 0 || nodeCoordinates.longitude === 0 ||
+                    nextNodeCoordinates.latitude === 0 || nextNodeCoordinates.longitude === 0) {
+                  return null;
+                }    
+              
+                return (
+                  
+                  <Polyline
+                    key={`polyline-${index}`}
+                    coordinates={[nodeCoordinates, nextNodeCoordinates]}
+                    strokeColor="blue"
+                    strokeWidth={6}
+                    lineJoin="round"
+                  />
+                );
+              })}
+
+              
 
               
 
@@ -640,6 +648,7 @@ export default function Map()  {
                 setLat(0);
                 setLong(0);
                 setDestSelected(false);
+                setShowRoute(false);
               }}>
                 <Text style={styles.endRouteText}>End Route</Text>
               </TouchableOpacity>
