@@ -204,6 +204,8 @@ export default function Map()  {
         setSelectedRoom(filteredNode.name);
         setNodeName(filteredNode.name);
         handleSelection();
+        setContentType('result');
+        setSearch(filteredNode.name);
         bottomSheetRef.current?.snapToPosition(0);
       }
     })
