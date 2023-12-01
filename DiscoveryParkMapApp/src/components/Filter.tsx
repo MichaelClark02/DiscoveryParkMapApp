@@ -3,20 +3,14 @@ import {View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 
-const Filter = () => {
-  const [bathroom, setBathroom] = useState(false);
-  const filterChange= () => {
-    setBathroom(previousState => !previousState);
-  }
-  const bathroomColor = {
-    backgroundColor: 'green',
-  };
+const Filter = ({ handleBathroom, handleExits, handleStairs }) => {
+
   
 
   return (
     <View style={styles.wrapper}> 
     <View style={styles.container}>
-    <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#4285F4'}]} onPress={filterChange}>
+    <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#4285F4'}]} onPress={handleBathroom}>
         <FontAwesome5 name="toilet" size={30} color="white" style={styles.icon} />
         <View style={[styles.colorCode, {backgroundColor: 'green'}]}> 
         </View>
@@ -28,7 +22,7 @@ const Filter = () => {
       
 
       <View style={styles.container}>
-      <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#AED581'}]}>
+      <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#AED581'}]} onPress={handleStairs}>
         <MaterialIcons name="stairs" size={30} color="white" style={styles.icon} />
         <View style={[styles.colorCode, {backgroundColor: 'orange'}]}>
         </View>
@@ -49,7 +43,7 @@ const Filter = () => {
      
     
       <View style={styles.container}>
-      <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#FF4081'}]}>
+      <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#FF4081'}]} onPress={handleExits}>
         <FontAwesome name="fire-extinguisher" size={30} color="white" />
         <View style={[styles.colorCode, {backgroundColor: 'red'}]}>
         </View>

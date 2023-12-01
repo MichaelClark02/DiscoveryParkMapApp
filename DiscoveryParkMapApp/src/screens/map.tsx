@@ -14,6 +14,10 @@ import RouteInfoBar from "../components/RouteInfoBar";
 import StartButton from "../components/StartButton";
 import Destination from "../components/Destination";
 import LandingPage from "./LandingPage";
+import { bathrooms, exits, stairs } from '../components/FilterMapping'
+import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+
 
 
 type Coordinate = [number, number];
@@ -55,7 +59,17 @@ export default function Map()  {
   const [showBottomSheet, setShowBottomSheet] = useState(true);
   const [inRoute, setInRoute] = useState(false);
   const [showRoute, setShowRoute] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const [bathroomFilter, setBathroomFilter] = useState(false);
+  const [exitFilter, setExitFilter] = useState(false)
+  const [stairsFilter, setStairsFilter] = useState(false)
+
+
+  const toggleSwitch = () => {
+  setIsEnabled(previousState => !previousState);
+  setBathroomFilter(false);
+  setExitFilter(false);
+  setStairsFilter(false);
+  }
 
   
 
@@ -175,6 +189,25 @@ export default function Map()  {
 
   const handleSelection = () => {
     setDestSelected(true)
+    console.log('selected')
+  }
+
+  const handleBathroom = () => {
+    setBathroomFilter((prevState)=>!prevState)
+    setExitFilter(false)
+    setStairsFilter(false)
+  }
+
+  const handleExits = () => {
+    setExitFilter((prevState)=>!prevState)
+    setBathroomFilter(false)
+    setStairsFilter(false)
+  }
+
+  const handleStairs = () => {
+    setStairsFilter((prevState)=>!prevState)
+    setBathroomFilter(false)
+    setExitFilter(false)
   }
 
       // Function to find the nearest non-reachable node
@@ -685,7 +718,55 @@ export default function Map()  {
                 );
               })}
 
-              
+        
+        {bathroomFilter && (
+          bathrooms.map((bathroom)=>(
+            <Marker
+            key={bathroom.id}
+            coordinate={{
+              latitude: bathroom.latitude,
+              longitude: bathroom.longitude,
+            }}
+          
+            >
+              <FontAwesome5 name="toilet" size={24} color="white" style={styles.bathroomStyles}
+ />
+
+            </Marker>
+          ))
+        )}
+
+        {exitFilter && (
+          exits.map((exit)=>(
+            <Marker
+            key={exit.id}
+            coordinate={{
+              latitude: exit.latitude,
+              longitude: exit.longitude,
+            }}
+            >
+        <FontAwesome name="fire-extinguisher" size={24} color="white" style={styles.exitStyles} />
+
+            </Marker>
+          ))
+        )}
+
+      {stairsFilter && (
+          stairs.map((stair)=>(
+            <Marker
+            key={stair.id}
+            coordinate={{
+              latitude: stair.latitude,
+              longitude: stair.longitude,
+            }}
+            >
+       <MaterialIcons name="stairs" size={24} color="white" style={styles.stairStyles} />
+
+            </Marker>
+          ))
+        )}
+
+
 
               
 
@@ -694,7 +775,7 @@ export default function Map()  {
             </MapView>
             <View style={styles.switchContainer}>
                 <Switch
-                  trackColor={{false: '#767577', true: '#2ecc71'}}
+                  trackColor={{false: '#767577', true: '#4bbd7d'}}
                   thumbColor={isEnabled ? '#white' : '#f4f3f4'}
                   ios_backgroundColor="#3e3e3e"
                   onValueChange={toggleSwitch}
@@ -753,7 +834,11 @@ export default function Map()  {
                     />
                   <View style={styles.contentContainer}>
                     {contentType === 'filter' ? (
-                      <Filter />
+                      <Filter 
+                        handleBathroom={handleBathroom}
+                        handleExits={handleExits}
+                        handleStairs={handleStairs}
+                        />
                     ) : (
                       <Filter2
                         nodes={nodes}
@@ -843,7 +928,7 @@ const styles = StyleSheet.create({
     header: {
       flex:1,
       height: 90,
-      backgroundColor: '#2ecc71',
+      backgroundColor: '#4bbd7d',
       position: 'absolute',
       top:0,
       width: '100%',
@@ -886,7 +971,21 @@ const styles = StyleSheet.create({
      fontSize: 25,
       position: 'absolute',
      bottom: 30
+    },
+    bathroomStyles: {
+      backgroundColor: '#4285F4',
+      padding: 5,
+      borderRadius: 50
+    },
+    stairStyles: {
+      backgroundColor: "#AED581",
+      padding: 5
+    },
+    exitStyles: {
+      backgroundColor: "#FF4081",
+      padding: 5
     }
+
 
 
 })
