@@ -43,7 +43,7 @@ const B10 = new GraphNode(16, 33.25382990315099, -97.15234570205212, "B10", "hal
 const s = new GraphNode(17, 33.25381924891953, -97.15252708643675, "B140", "room", true);
 const bath1 = new GraphNode(18, 33.25431158520513, -97.15293109416962, "bath1", 'bathroom', true);
 const bath1_ac = new GraphNode(19, 33.254374949468655, -97.15289019048214, "bath1_ac", 'hallway', false);
-const bath2 = new GraphNode(20, 33.25418625840702, -97.15269103646278, 'bath2', 'bathroom', true);
+const bath2 = new GraphNode(20, 33.25418625840702, -97.15269103646278, 'Bathroom 2', 'bathroom', true);
 const bath2_ac = new GraphNode(21, 33.25427205261039, -97.15263940393925, 'bath2_ac', 'hallway', false);
 
 

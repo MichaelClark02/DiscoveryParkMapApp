@@ -1,6 +1,6 @@
 export const bathrooms = [
-  { id: 1, latitude: 33.25431158520513, longitude: -97.15293109416962},
-  // { id: 2, latitude: 33.25418625840702, longitude: -97.15269103646278},
+  // { id: 1, latitude: 33.25431158520513, longitude: -97.15293109416962},
+  { id: 2, latitude: 33.25418625840702, longitude: -97.15269103646278, nodeIndex: 20},
   // { id: 3, latitude: 33.25323606795338, longitude: -97.15327978134155},
   // { id: 4, latitude: 33.25318924508202, longitude: -97.15318489819765},
   // { id: 5, latitude: 33.253522331789, longitude: -97.15294450521469},

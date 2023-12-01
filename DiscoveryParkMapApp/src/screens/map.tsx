@@ -198,6 +198,17 @@ export default function Map()  {
     setStairsFilter(false)
   }
 
+  const handleFilterPress = (nodeIndex) => {
+    nodes.filter(filteredNode=> {
+      if (filteredNode.index === nodeIndex) {
+        setSelectedRoom(filteredNode.name);
+        setNodeName(filteredNode.name);
+        handleSelection();
+        bottomSheetRef.current?.snapToPosition(0);
+      }
+    })
+  }
+
   const handleExits = () => {
     setExitFilter((prevState)=>!prevState)
     setBathroomFilter(false)
@@ -727,10 +738,11 @@ export default function Map()  {
               latitude: bathroom.latitude,
               longitude: bathroom.longitude,
             }}
-          
+            onPress={()=>handleFilterPress(bathroom.nodeIndex)}
             >
               <FontAwesome5 name="toilet" size={24} color="white" style={styles.bathroomStyles}
  />
+            
 
             </Marker>
           ))
@@ -761,7 +773,6 @@ export default function Map()  {
             }}
             >
        <MaterialIcons name="stairs" size={24} color="white" style={styles.stairStyles} />
-
             </Marker>
           ))
         )}
