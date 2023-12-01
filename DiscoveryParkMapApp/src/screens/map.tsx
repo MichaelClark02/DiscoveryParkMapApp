@@ -77,7 +77,7 @@ export default function Map()  {
 
   useEffect(() => {
     // This effect will be triggered whenever destSelected is updated
-    if (destSelected && nodeName && nodeDept) {
+    if (destSelected && nodeName) {
       // Render StartButton
       setShowStartButton(true)
 
@@ -189,7 +189,7 @@ export default function Map()  {
 
   const handleSelection = () => {
     setDestSelected(true)
-    console.log('selected')
+    //console.log('selected')
   }
 
   const handleBathroom = () => {

@@ -48,14 +48,14 @@ const bath2_ac = new GraphNode(21, 33.25427205261039, -97.15263940393925, 'bath2
 
 
 
-let nodes = [E1, B00, B20, B187, B187_ac1, B10, B140_ac1, B140, B142_ac1, B142, bath2, bath2_ac];
+let nodes = [E1, B00, B01, B20, B187, B187_ac1, B10, B140_ac1, B140, B142_ac1, B142, bath2, bath2_ac];
 
 let route = new Graph();
 route.addNode('E1', { B00:calculateDistance(E1.latitude, E1.longitude, B00.latitude, B00.longitude) });
-route.addNode('B00', { B00:calculateDistance(E1.latitude, E1.longitude, B00.latitude, B00.longitude),B10:calculateDistance(B00.latitude, B00.longitude, B10.latitude, B10.longitude)});
+route.addNode('B00', { B00:calculateDistance(E1.latitude, E1.longitude, B00.latitude, B00.longitude),B10:calculateDistance(B00.latitude, B00.longitude, B10.latitude, B10.longitude), B01: calculateDistance(B00.latitude, B00.longitude, B01.latitude, B01.longitude)});
 route.addNode('B10', {B00:calculateDistance(B00.latitude, B00.longitude, B10.latitude, B10.longitude), B20:calculateDistance(B10.latitude, B10.longitude, B20.latitude, B20.longitude), B140_ac1:calculateDistance(B10.latitude, B10.longitude, B140_ac1.latitude, B140_ac1.longitude), B142_ac1:calculateDistance(B10.latitude, B10.longitude, B142_ac1.latitude, B142_ac1.longitude)});
 route.addNode('B20', {B10:calculateDistance(B10.latitude, B10.longitude, B20.latitude, B20.longitude),B187_ac1: calculateDistance(B20.latitude, B20.longitude, B187_ac1.latitude, B187_ac1.longitude) });
-route.addNode('B20', { B10: calculateDistance(B20.latitude, B20.longitude, B10.latitude, B10.longitude), bath2_ac: calculateDistance(B20.latitude, B20.longitude, bath2_ac.latitude, bath2_ac.longitude) });
+route.addNode('B01', { bath2_ac: calculateDistance(B01.latitude, B01.longitude, bath2_ac.latitude, bath2_ac.longitude)});
 route.addNode('B140_ac1', { B20:calculateDistance(B10.latitude, B10.longitude, B140_ac1.latitude, B140_ac1.longitude),B140: calculateDistance(B140_ac1.latitude, B140_ac1.longitude, B140.latitude, B140.longitude) });
 route.addNode('B142_ac1', { B20:calculateDistance(B10.latitude, B10.longitude, B142_ac1.latitude, B142_ac1.longitude),B142: calculateDistance(B142_ac1.latitude, B142_ac1.longitude, B142.latitude, B142.longitude) });
 route.addNode('B187_ac1', { B187: calculateDistance(B187_ac1.latitude, B187_ac1.longitude, B187.latitude, B187.longitude) });
