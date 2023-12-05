@@ -14,7 +14,7 @@ import RouteInfoBar from "../components/RouteInfoBar";
 import StartButton from "../components/StartButton";
 import Destination from "../components/Destination";
 import LandingPage from "./LandingPage";
-import { bathrooms, exits, stairs, ATMs } from '../components/FilterMapping'
+import { bathrooms, exits, stairs, ATMs, vendings } from '../components/FilterMapping'
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 
@@ -64,6 +64,7 @@ export default function Map()  {
   const [showFilterName, setShowFilterName] = useState(false)
   const [recents, setRecents] = useState([])
   const [atmFilter, setAtmFilter] = useState(false)
+  const [vendingFilter, setVendingFilter] = useState(false)
 
   const toggleSwitch = () => {
   setIsEnabled(previousState => !previousState);
@@ -144,9 +145,7 @@ const data = useMemo(() => recents, [recents]);
     console.log(findNearestNonReachableNode(lat,lon));
   },[lat,lon])
 
-  useEffect(()=>{
-    console.log(`name: ${displayName}`)
-  }, [displayName])
+
 
   useEffect(() => {
     // This effect will be triggered whenever shortestRoute is updated
@@ -242,6 +241,7 @@ const data = useMemo(() => recents, [recents]);
     setExitFilter(false)
     setStairsFilter(false)
     setAtmFilter(false)
+    setVendingFilter(false)
   }
 
   const handleATM = () => {
@@ -249,6 +249,7 @@ const data = useMemo(() => recents, [recents]);
     setExitFilter(false)
     setStairsFilter(false)
     setBathroomFilter(false)
+    setVendingFilter(false)
   }
 
   const handleFilterPress = (node) => {
@@ -256,7 +257,6 @@ const data = useMemo(() => recents, [recents]);
       if (filteredNode.index === node.nodeIndex) {
         setSelectedRoom(filteredNode.name);
         setNodeName(filteredNode.name);
-        setDisplayName(node.displayName)
         handleSelection();
         setContentType('result');
         setSearch(filteredNode.name);
@@ -271,6 +271,7 @@ const data = useMemo(() => recents, [recents]);
     setBathroomFilter(false)
     setStairsFilter(false)
     setAtmFilter(false)
+    setVendingFilter(false)
   }
 
   const handleStairs = () => {
@@ -278,6 +279,15 @@ const data = useMemo(() => recents, [recents]);
     setBathroomFilter(false)
     setExitFilter(false)
     setAtmFilter(false)
+    setVendingFilter(false)
+  }
+
+  const handleVending = () => {
+    setVendingFilter((prevState)=>!prevState)
+    setBathroomFilter(false)
+    setExitFilter(false)
+    setAtmFilter(false)
+    setStairsFilter(false)
   }
 
       // Function to find the nearest non-reachable node
@@ -837,8 +847,33 @@ const data = useMemo(() => recents, [recents]);
         )}
 
 
-
+{atmFilter && (
+          ATMs.map((ATM)=>(
+            <Marker
+            key={ATM.id}
+            coordinate={{
+              latitude: ATM.latitude,
+              longitude: ATM.longitude,
+            }}
+            >
+        <FontAwesome5 name="money-check-alt" size={24} color="white" style={styles.ATMstyles} />
+            </Marker>
+          ))
+        )}
               
+              {vendingFilter && (
+          vendings.map((vending)=>(
+            <Marker
+            key={vending.id}
+            coordinate={{
+              latitude: vending.latitude,
+              longitude: vending.longitude,
+            }}
+            >
+       <Entypo name="shopping-cart" size={24} color="white" style={styles.vendingStyles} />
+            </Marker>
+          ))
+        )}
 
 
              
@@ -909,6 +944,7 @@ const data = useMemo(() => recents, [recents]);
                         handleExits={handleExits}
                         handleStairs={handleStairs}
                         handleATM={handleATM}
+                        handleVending={handleVending}
                         />
                     ) : (
                       <Filter2
@@ -940,7 +976,7 @@ const data = useMemo(() => recents, [recents]);
                 </BottomSheet>
               
             
-              {showStartButton && <StartButton nodeName={nodeName} nodeDept={nodeDept} showFilterName={showFilterName} displayName={displayName} getLocation={getLocation} handleCancel={handleCancel}/>}
+              {showStartButton && <StartButton nodeName={nodeName} nodeDept={nodeDept} showFilterName={showFilterName} getLocation={getLocation} handleCancel={handleCancel}/>}
             </View>
             
            
@@ -1063,6 +1099,14 @@ const styles = StyleSheet.create({
       backgroundColor: "#FF4081",
       padding: 5
     }, 
+    ATMstyles: {
+      backgroundColor: "#9575CD",
+      padding: 5
+    }, 
+    vendingStyles: {
+      backgroundColor: "#FFC107",
+      padding: 5
+    },
     listHeader: {
       fontWeight: 'bold',
       fontSize: 12,

@@ -36,3 +36,7 @@ export const stairs = [
 export const ATMs = [
   {id: 1, latitude: 33.25433149168225, longitude: -97.15281542390585}
 ]
+
+export const vendings = [
+  {id: 1, latitude: 33.25433149168225, longitude: -97.15281542390585}
+]

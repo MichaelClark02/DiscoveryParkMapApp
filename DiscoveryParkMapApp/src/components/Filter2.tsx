@@ -5,7 +5,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Keyboard } from '
 const Filter2 = ({ nodes, txt, setSearch, setContentType, setSelectedRoom, bottomSheetRef, handleSelection, setNodeName, setNodeDept, addToRecents }) => (
   <View style={styles.scrollView}>
     {nodes
-      .filter(node => node.name.includes(txt) && node.reachable === true && (!node.name.includes('bath')))
+      .filter(node => node.name.includes(txt) && node.reachable === true)
       .map(filteredNode => (
         <TouchableOpacity
           key={filteredNode.name}
