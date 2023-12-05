@@ -4,7 +4,7 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 
-const App = ({ nodeName, nodeDept, getLocation, handleCancel }) => {
+const App = ({ nodeName, nodeDept, getLocation, handleCancel, showFilterName, displayName }) => {
   // ref
   const bottomSheetRef2 = useRef<BottomSheet>(null);
 
@@ -46,7 +46,11 @@ const App = ({ nodeName, nodeDept, getLocation, handleCancel }) => {
         <View style={styles.contentContainer}>
           <View style={{flex: 1, flexDirection: 'column'}}>
         <Text style={styles.description}>
-              {nodeName}
+              {showFilterName ? (
+                <Text>{displayName}</Text>
+              ) : (
+                <Text>{nodeName}</Text>
+              )}
             </Text>
             <Text style={{color: 'grey'}}>
               {nodeDept}

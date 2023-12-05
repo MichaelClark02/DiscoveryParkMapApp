@@ -644,3 +644,9 @@ export const fWing_5:LatLng[] = [
 
 
 ]
+
+
+export const urmom:LatLng[] = [
+    { latitude: 33.25357420123769, longitude: -97.15259280055761 },
+    { latitude: 33.25404018376895, longitude: -97.15219952166082 },
+]

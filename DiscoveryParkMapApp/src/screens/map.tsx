@@ -62,6 +62,8 @@ export default function Map()  {
   const [bathroomFilter, setBathroomFilter] = useState(false);
   const [exitFilter, setExitFilter] = useState(false)
   const [stairsFilter, setStairsFilter] = useState(false)
+  const [displayName, setDisplayName] = useState('')
+  const [showFilterName, setShowFilterName] = useState(false)
 
 
   const toggleSwitch = () => {
@@ -113,6 +115,9 @@ export default function Map()  {
     console.log(findNearestNonReachableNode(lat,lon));
   },[lat,lon])
 
+  useEffect(()=>{
+    console.log(`name: ${displayName}`)
+  }, [displayName])
 
   useEffect(() => {
     // This effect will be triggered whenever shortestRoute is updated
@@ -130,6 +135,7 @@ export default function Map()  {
       setShowRoute(true);
     }
   }, [lat, lon])
+
 
  
 
@@ -188,6 +194,7 @@ export default function Map()  {
   
 
   const handleSelection = () => {
+    setShowFilterName(false)
     setDestSelected(true)
     //console.log('selected')
   }
@@ -198,15 +205,17 @@ export default function Map()  {
     setStairsFilter(false)
   }
 
-  const handleFilterPress = (nodeIndex) => {
+  const handleFilterPress = (node) => {
     nodes.filter(filteredNode=> {
-      if (filteredNode.index === nodeIndex) {
+      if (filteredNode.index === node.nodeIndex) {
         setSelectedRoom(filteredNode.name);
         setNodeName(filteredNode.name);
+        setDisplayName(node.displayName)
         handleSelection();
         setContentType('result');
         setSearch(filteredNode.name);
         bottomSheetRef.current?.snapToPosition(0);
+        setShowFilterName(true);
       }
     })
   }
@@ -740,7 +749,7 @@ export default function Map()  {
               latitude: bathroom.latitude,
               longitude: bathroom.longitude,
             }}
-            onPress={()=>handleFilterPress(bathroom.nodeIndex)}
+            onPress={()=>handleFilterPress(bathroom)}
             >
               <FontAwesome5 name="toilet" size={24} color="white" style={styles.bathroomStyles}
  />
@@ -875,7 +884,7 @@ export default function Map()  {
                 </BottomSheet>
               
             
-              {showStartButton && <StartButton nodeName={nodeName} nodeDept={nodeDept} getLocation={getLocation} handleCancel={handleCancel}/>}
+              {showStartButton && <StartButton nodeName={nodeName} nodeDept={nodeDept} showFilterName={showFilterName} displayName={displayName} getLocation={getLocation} handleCancel={handleCancel}/>}
             </View>
             
            

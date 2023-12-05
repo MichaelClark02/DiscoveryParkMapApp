@@ -42,13 +42,14 @@ const B187_ac1 = new GraphNode(15, 33.25376401511989, -97.15268466621637, "B187_
 const B10 = new GraphNode(16, 33.25382990315099, -97.15234570205212, "B10", "hallway", false);
 const s = new GraphNode(17, 33.25381924891953, -97.15252708643675, "B140", "room", true);
 const bath1 = new GraphNode(18, 33.25431158520513, -97.15293109416962, "bath1", 'bathroom', true);
-const bath1_ac = new GraphNode(19, 33.254374949468655, -97.15289019048214, "bath1_ac", 'hallway', false);
+const bath1_ac = new GraphNode(19, 33.254270370371906, -97.15290863066912, "bath1_ac", 'hallway', false);
+const bath1_ac2 = new GraphNode(19, 33.25434831405375, -97.1528523042798, "bath1_ac2", 'hallway', false);
 const bath2 = new GraphNode(20, 33.25418625840702, -97.15269103646278, 'bath2', 'bathroom', true);
 const bath2_ac = new GraphNode(21, 33.25427205261039, -97.15263940393925, 'bath2_ac', 'hallway', false);
 
 
 
-let nodes = [E1, B00, B01, B20, B187, B187_ac1, B10, B140_ac1, B140, B142_ac1, B142, bath2, bath2_ac];
+let nodes = [E1, B00, B01, B20, B187, B187_ac1, B10, B140_ac1, B140, B142_ac1, B142, bath2, bath2_ac, bath1_ac, bath1_ac2];
 
 let route = new Graph();
 route.addNode('E1', { B00:calculateDistance(E1.latitude, E1.longitude, B00.latitude, B00.longitude) });
@@ -60,11 +61,11 @@ route.addNode('B140_ac1', { B20:calculateDistance(B10.latitude, B10.longitude, B
 route.addNode('B142_ac1', { B20:calculateDistance(B10.latitude, B10.longitude, B142_ac1.latitude, B142_ac1.longitude),B142: calculateDistance(B142_ac1.latitude, B142_ac1.longitude, B142.latitude, B142.longitude) });
 route.addNode('B187_ac1', { B187: calculateDistance(B187_ac1.latitude, B187_ac1.longitude, B187.latitude, B187.longitude) });
 route.addNode('bath2_ac', { B20: calculateDistance(bath2_ac.latitude, bath2_ac.longitude, B20.latitude, B20.longitude), bath2: calculateDistance( bath2_ac.latitude, bath2_ac.longitude, bath2.latitude, bath2.longitude)})
-
+route.addNode('bath1_ac', { B20: calculateDistance(bath1_ac.latitude, bath1_ac.longitude, B20.latitude, B20.longitude), bath1: calculateDistance( bath1_ac.latitude, bath1_ac.longitude, bath1.latitude, bath1.longitude)})
 
 //route.addNode('f', { g: calculateDistance(f.latitude, f.longitude, g.latitude, g.longitude) });
 
-console.log(route.path('B20', 'bath2'));
+console.log(route.path('B20', 'bath1'));
 
 
 exports.default = { route, nodes, calculateDistance,GraphNode };
