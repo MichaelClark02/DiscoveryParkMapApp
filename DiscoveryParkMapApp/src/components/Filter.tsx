@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 
-const Filter = ({ handleBathroom, handleExits, handleStairs }) => {
+const Filter = ({ handleBathroom, handleExits, handleStairs, handleATM }) => {
   const [listData, setListData] = useState([
     { id: '1', title: 'Item 1', description: 'Description 1' },
     { id: '2', title: 'Item 2', description: 'Description 2' },
@@ -39,7 +39,7 @@ const Filter = ({ handleBathroom, handleExits, handleStairs }) => {
       </View>
       
     <View style={styles.container}>
-    <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#9575CD'}]}>
+    <TouchableOpacity style={[styles.iconContainer, {backgroundColor: '#9575CD'}]} onPress={handleATM}>
         
         <FontAwesome5 name="money-check-alt" size={30} color="white" />
         <View style={[styles.colorCode, {backgroundColor: 'purple'}]}>

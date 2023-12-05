@@ -14,7 +14,7 @@ import RouteInfoBar from "../components/RouteInfoBar";
 import StartButton from "../components/StartButton";
 import Destination from "../components/Destination";
 import LandingPage from "./LandingPage";
-import { bathrooms, exits, stairs } from '../components/FilterMapping'
+import { bathrooms, exits, stairs, ATMs } from '../components/FilterMapping'
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 
@@ -63,6 +63,7 @@ export default function Map()  {
   const [displayName, setDisplayName] = useState('')
   const [showFilterName, setShowFilterName] = useState(false)
   const [recents, setRecents] = useState([])
+  const [atmFilter, setAtmFilter] = useState(false)
 
   const toggleSwitch = () => {
   setIsEnabled(previousState => !previousState);
@@ -240,6 +241,14 @@ const data = useMemo(() => recents, [recents]);
     setBathroomFilter((prevState)=>!prevState)
     setExitFilter(false)
     setStairsFilter(false)
+    setAtmFilter(false)
+  }
+
+  const handleATM = () => {
+    setAtmFilter((prevState)=>!prevState)
+    setExitFilter(false)
+    setStairsFilter(false)
+    setBathroomFilter(false)
   }
 
   const handleFilterPress = (node) => {
@@ -261,12 +270,14 @@ const data = useMemo(() => recents, [recents]);
     setExitFilter((prevState)=>!prevState)
     setBathroomFilter(false)
     setStairsFilter(false)
+    setAtmFilter(false)
   }
 
   const handleStairs = () => {
     setStairsFilter((prevState)=>!prevState)
     setBathroomFilter(false)
     setExitFilter(false)
+    setAtmFilter(false)
   }
 
       // Function to find the nearest non-reachable node
@@ -897,6 +908,7 @@ const data = useMemo(() => recents, [recents]);
                         handleBathroom={handleBathroom}
                         handleExits={handleExits}
                         handleStairs={handleStairs}
+                        handleATM={handleATM}
                         />
                     ) : (
                       <Filter2

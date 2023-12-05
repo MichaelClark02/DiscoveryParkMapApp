@@ -1,12 +1,12 @@
 export const bathrooms = [
   { id: 1, latitude: 33.25431158520513, longitude: -97.15293109416962},
   
-  // { id: 2, latitude: 33.25418625840702, longitude: -97.15269103646278, nodeIndex: 20, displayName: "Bathroom 2"},
-  // { id: 3, latitude: 33.25323606795338, longitude: -97.15327978134155},
-  // { id: 4, latitude: 33.25318924508202, longitude: -97.15318489819765},
-  // { id: 5, latitude: 33.253522331789, longitude: -97.15294450521469},
-  // { id: 6, latitude: 33.253435976098, longitude: -97.15278055518866},
-  // { id: 7, latitude: 33.25307008496686, longitude: -97.15213548392057},
+  { id: 2, latitude: 33.25418625840702, longitude: -97.15269103646278, nodeIndex: 20, displayName: "Bathroom 2"},
+  { id: 3, latitude: 33.25323606795338, longitude: -97.15327978134155},
+  { id: 4, latitude: 33.25318924508202, longitude: -97.15318489819765},
+  { id: 5, latitude: 33.253522331789, longitude: -97.15294450521469},
+  { id: 6, latitude: 33.253435976098, longitude: -97.15278055518866},
+  { id: 7, latitude: 33.25307008496686, longitude: -97.15213548392057},
 ]
 
 export const exits = [
@@ -31,4 +31,8 @@ export const stairs = [
   { id: 6, latitude: 33.254193267740526, longitude: -97.15205434709787},
 
 
+]
+
+export const ATMs = [
+  {id: 1, latitude: 33.25433149168225, longitude: -97.15281542390585}
 ]
