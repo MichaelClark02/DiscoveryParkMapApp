@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Keyboard } from 'react-native';
 
-const Filter2 = ({ nodes, txt, setSearch, setContentType, setSelectedRoom, bottomSheetRef, handleSelection, setNodeName, setNodeDept }) => (
+const Filter2 = ({ nodes, txt, setSearch, setContentType, setSelectedRoom, bottomSheetRef, handleSelection, setNodeName, setNodeDept, addToRecents }) => (
   <View style={styles.scrollView}>
     {nodes
       .filter(node => node.name.includes(txt) && node.reachable === true && (!node.name.includes('bath')))
@@ -19,6 +19,7 @@ const Filter2 = ({ nodes, txt, setSearch, setContentType, setSelectedRoom, botto
             bottomSheetRef.current?.snapToPosition(0);
             handleSelection();
             Keyboard.dismiss();
+            addToRecents(filteredNode);
           }}
         > 
           <Text style={styles.buttonText}>

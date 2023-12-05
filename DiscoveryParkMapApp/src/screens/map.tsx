@@ -4,7 +4,7 @@ import MapView from 'react-native-maps'
 import { Marker, Overlay,AnimatedRegion ,PROVIDER_GOOGLE,Polyline, Polygon} from "react-native-maps";
 import { Component, useState, useEffect } from 'react';
 import * as Location from 'expo-location';
-import BottomSheet, { BottomSheetTextInput } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetTextInput, BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Filter from "../components/Filter";
 import Filter2 from "../components/Filter2";
@@ -36,8 +36,6 @@ var op = 0.4;
 
 
 
-
-
 export default function Map()  {
   const [contentType, setContentType] = useState('filter');
   const [showRouteInfo, setShowRouteInfo] = useState(false);
@@ -64,7 +62,7 @@ export default function Map()  {
   const [stairsFilter, setStairsFilter] = useState(false)
   const [displayName, setDisplayName] = useState('')
   const [showFilterName, setShowFilterName] = useState(false)
-
+  const [recents, setRecents] = useState([])
 
   const toggleSwitch = () => {
   setIsEnabled(previousState => !previousState);
@@ -73,9 +71,39 @@ export default function Map()  {
   setStairsFilter(false);
   }
 
+  const renderItem = useCallback(
+    ({ item }) => (
+      <TouchableOpacity style={styles.recentButton}>
+        <Text style={styles.recentButtonText}>
+            <Text style={{fontWeight: 'bold'}}>{item.name}              </Text>
+            <Text>
+            {item.wing}                {item.dept}
+            </Text>
+
+            </Text>
+      </TouchableOpacity>
+    ),
+    []
+  );
   
+  const renderHeader = () => (
+    // Your header content goes here
+    <Text style={styles.listHeader}>Recents </Text>
+  );
 
   const bottomSheetRef = useRef<BottomSheet>(null);
+
+  
+const handleSnapPress = useCallback((index) => {
+  bottomSheetRef.current?.snapToIndex(1);
+}, []);
+
+
+const keyExtractor = useCallback((item, index) => index.toString(), []);
+
+const data = useMemo(() => recents, [recents]);
+
+
 
   useEffect(() => {
     // This effect will be triggered whenever destSelected is updated
@@ -191,7 +219,16 @@ export default function Map()  {
     
   };
 
-  
+  const addToRecents = (node) => {
+    //console.log(`added ${node.name}`)
+    const nodeExists = recents.some(existingNode => existingNode.id === node.id);
+
+    if (!nodeExists) {
+      // If the node doesn't exist, create a new array with the new node
+      const newArray = [...recents, node];
+      setRecents(newArray);
+    }
+  }
 
   const handleSelection = () => {
     setShowFilterName(false)
@@ -877,9 +914,16 @@ export default function Map()  {
                         handleSelection={handleSelection}
                         setNodeName={setNodeName}
                         setNodeDept={setNodeDept}
+                        addToRecents={addToRecents}
                       />
                     )}
-                    
+                     <BottomSheetFlatList
+                    data={data}
+                    //keyExtractor={(i) => i}
+                    renderItem={renderItem}
+                    ListHeaderComponent={renderHeader}
+                    contentContainerStyle={styles.contentContainer}
+                    />
                   </View>
                 </BottomSheet>
               
@@ -1006,7 +1050,31 @@ const styles = StyleSheet.create({
     exitStyles: {
       backgroundColor: "#FF4081",
       padding: 5
-    }
+    }, 
+    listHeader: {
+      fontWeight: 'bold',
+      fontSize: 12,
+      marginBottom: 5,
+      alignContent: 'flex-start'
+    },
+    recentButton: {
+      width: 360,
+      height: 35, // Adjust the height of the TouchableOpacity if needed
+      backgroundColor: 'white',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginVertical: 5,
+      borderRadius: 50, 
+      
+    },
+    recentButtonText: {
+      color: 'black', // Change the text color as needed
+      fontSize: 16,
+      fontWeight: '400',
+      paddingTop: 5,
+      flex: 1,
+      justifyContent: 'space-between'
+    },
 
 
 
