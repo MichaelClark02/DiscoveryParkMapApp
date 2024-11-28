@@ -27,7 +27,7 @@ The **Discovery Park Map App** uses **Dijkstra's algorithm** to find the shortes
 * Cross-platform app available on both iOS and Android
 
 ## ✨ Features
-<img src="DiscoveryParkMapApp/assets/screen.png" width="400" height="auto" alt="Feature Demo"><img src="DiscoveryParkMapApp/assets/screen-2.png" width="400" height="auto" alt="Feature Demo">
+<img src="DiscoveryParkMapApp/assets/screen.png" width="400" height="auto" alt="Feature Demo">     <img src="DiscoveryParkMapApp/assets/screen-2.png" width="400" height="auto" alt="Feature Demo">
 
 * **Browsable Map**: View detailed floor plans of the building
 * **Filter Bar**: Filter resources like bathrooms, stairs, ATMs, emergency exits, and vending machines
@@ -42,7 +42,7 @@ The **Discovery Park Map App** uses **Dijkstra's algorithm** to find the shortes
 The **Discovery Park Map App** utilizes a variety of technologies to ensure a seamless and efficient experience across multiple platforms. Below is an overview of the key technologies and platforms used in the development process.
 
 <p>
-  <img src="DiscoveryParkMapApp/assets/react-native.svg" width="50" height="auto" alt="React Native Icon">  <img src="DiscoveryParkMapApp/assets/postgres.png" width="50" height="auto" alt="PostgreSQL Icon">  <img src="DiscoveryParkMapApp/assets/nodejs.png" width="50" height="auto" alt="nodejs Icon">  <img src="DiscoveryParkMapApp/assets/expo-go.png" width="50" height="auto" alt="expogo Icon">
+  <img src="DiscoveryParkMapApp/assets/react-native.svg" width="80" height="auto" alt="React Native Icon">  <img src="DiscoveryParkMapApp/assets/postgres.png" width="80" height="auto" alt="PostgreSQL Icon">  <img src="DiscoveryParkMapApp/assets/nodejs.png" width="80" height="auto" alt="nodejs Icon">  <img src="DiscoveryParkMapApp/assets/expo-go.png" width="100" height="auto" alt="expogo Icon">
 </p>
 
 * **Platform**: iOS and Android  
