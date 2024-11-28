@@ -1,6 +1,6 @@
 # Discovery Park Map App
 
-<img src="DiscoveryParkMapApp/assets/logo.png" width="200" height="auto" alt="Discovery Park Map App Logo">
+<img src="DiscoveryParkMapApp/assets/discovery-logo.png" width="200" height="auto" alt="Discovery Park Map App Logo">
 
 A mobile application designed to help university students navigate the College of Engineering campus, find resources like restrooms, vending machines, and more, using real-time pathfinding.
 
@@ -16,7 +16,7 @@ A mobile application designed to help university students navigate the College o
 * [Lessons Learned](#lessons-learned)
 
 ## 📝 Overview
-<img src="DiscoveryParkMapApp/assets/app-card.png" width="600" height="auto" alt="System Overview">
+<img src="DiscoveryParkMapApp/assets/app-card.png" width="800" height="auto" alt="System Overview">
 
 The **Discovery Park Map App** uses **Dijkstra's algorithm** to find the shortest path between two locations within the College of Engineering campus. The app is designed to make it easier for incoming students and faculty to navigate the building and find essential resources such as bathrooms, vending machines, and more.
 
