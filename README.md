@@ -21,14 +21,13 @@ A mobile application designed to help university students navigate the College o
 The **Discovery Park Map App** uses **Dijkstra's algorithm** to find the shortest path between two locations within the College of Engineering campus. The app is designed to make it easier for incoming students and faculty to navigate the building and find essential resources such as bathrooms, vending machines, and more.
 
 ### Key Highlights
-<img src="assets/use-case.png" width="400" height="auto" alt="Use Case">
 
 * Indoor navigation using real-time directions
 * Find specific resources like restrooms, ATMs, and more
 * Cross-platform app available on both iOS and Android
 
 ## ✨ Features
-<img src="DiscoveryParkMapApp/assets/screen.png" width="400" height="auto" alt="Feature Demo">
+<img src="DiscoveryParkMapApp/assets/screen.png" width="400" height="auto" alt="Feature Demo"><img src="DiscoveryParkMapApp/assets/screen.png" width="400" height="auto" alt="Feature Demo">
 
 * **Browsable Map**: View detailed floor plans of the building
 * **Filter Bar**: Filter resources like bathrooms, stairs, ATMs, emergency exits, and vending machines
@@ -42,7 +41,7 @@ The **Discovery Park Map App** uses **Dijkstra's algorithm** to find the shortes
 
 * **Platform**: iOS and Android
 * **Development Environment**: React Native
-* **Database**: Local
+* **Database**: Postgresql-local
 
 ## 🎯 Scope
 The scope of this project encompasses the development of a cross-platform mobile application (iOS and Android) for indoor navigation. The app will enable users to:
@@ -90,7 +89,6 @@ We welcome contributions to improve the app! Here's how you can get started:
 4. Submit a pull request with a detailed explanation of your work
 
 ## 🚀 Future Improvements
-<img src="assets/future-improvements.png" width="400" height="auto" alt="Future Improvements">
 
 * Mapping more wings of Discovery Park
 * Expanding on directions with common navigation features (e.g., voice over directions, showing next steps at the top of the screen)
