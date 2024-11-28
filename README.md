@@ -37,13 +37,12 @@ The **Discovery Park Map App** uses **Dijkstra's algorithm** to find the shortes
 * **Favorite Destinations**: Save favorite locations for easy access
 
 
-markdown
-Copy code
+
 ## 🛠 Platforms and Technologies
 The **Discovery Park Map App** utilizes a variety of technologies to ensure a seamless and efficient experience across multiple platforms. Below is an overview of the key technologies and platforms used in the development process.
 
 <p>
-  <img src="assets/icons/react-native.png" width="50" height="auto" alt="React Native Icon"><img src="assets/icons/postgresql.png" width="50" height="auto" alt="PostgreSQL Icon"><img src="assets/icons/ios.png" width="50" height="auto" alt="iOS Icon"><img src="assets/icons/android.png" width="50" height="auto" alt="Android Icon">
+  <img src="assets/icons/react-native.png" width="50" height="auto" alt="React Native Icon"><img src="assets/icons/postgresql.png" width="50" height="auto" alt="PostgreSQL Icon"><img src="assets/icons/nodejs.png" width="50" height="auto" alt="nodejs Icon"><img src="assets/icons/expo-go.png" width="50" height="auto" alt="expogo Icon">
 </p>
 
 * **Platform**: iOS and Android  
