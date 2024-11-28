@@ -42,7 +42,7 @@ The **Discovery Park Map App** uses **Dijkstra's algorithm** to find the shortes
 The **Discovery Park Map App** utilizes a variety of technologies to ensure a seamless and efficient experience across multiple platforms. Below is an overview of the key technologies and platforms used in the development process.
 
 <p>
-  <img src="DiscoveryParkMapApp/assets/react-native.svg" width="50" height="auto" alt="React Native Icon">  <img src="DiscoveryParkMapApp/assets/postgres.png" width="50" height="auto" alt="PostgreSQL Icon">  <img src="DiscoveryParkMapApp/assets/nodejs.web" width="50" height="auto" alt="nodejs Icon">  <img src="DiscoveryParkMapApp/assets/expo-go.png" width="50" height="auto" alt="expogo Icon">
+  <img src="DiscoveryParkMapApp/assets/react-native.svg" width="50" height="auto" alt="React Native Icon">  <img src="DiscoveryParkMapApp/assets/postgres.png" width="50" height="auto" alt="PostgreSQL Icon">  <img src="DiscoveryParkMapApp/assets/nodejs.jpg" width="50" height="auto" alt="nodejs Icon">  <img src="DiscoveryParkMapApp/assets/expo-go.png" width="50" height="auto" alt="expogo Icon">
 </p>
 
 * **Platform**: iOS and Android  
