@@ -130,7 +130,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## 💬 Credits
 Special thanks to everyone who contributed to the app's development, including the students, faculty, and other contributors. This project was developed to enhance the campus experience for students and faculty alike.
 
-<img src="DiscoveryParkMapApp/assets/team-1.png" width="500" height="auto" alt="System Overview"> <img src="DiscoveryParkMapApp/assets/team-1-2.png" width="500" height="auto" alt="System Overview">
-<img src="DiscoveryParkMapApp/assets/team-2.png" width="500" height="auto" alt="System Overview"> <img src="DiscoveryParkMapApp/assets/team-2-2.png" width="500" height="auto" alt="System Overview">
-<img src="DiscoveryParkMapApp/assets/team-3.png" width="500" height="auto" alt="System Overview"> <img src="DiscoveryParkMapApp/assets/team-3-2.png" width="500" height="auto" alt="System Overview">
+<img src="DiscoveryParkMapApp/assets/team-1.png" width="300" height="auto" alt="team pics"> <img src="DiscoveryParkMapApp/assets/team-1-2.png" width="300" height="auto" alt="team pics">
+<img src="DiscoveryParkMapApp/assets/team-2.png" width="300" height="auto" alt="team pics"> <img src="DiscoveryParkMapApp/assets/team-2-2.png" width="300" height="auto" alt="team pics">
+<img src="DiscoveryParkMapApp/assets/team-3.png" width="300" height="auto" alt="team pics"> <img src="DiscoveryParkMapApp/assets/team-3-2.png" width="300" height="auto" alt="team pics">
 
