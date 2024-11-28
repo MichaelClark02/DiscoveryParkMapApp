@@ -1,77 +1,107 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<README>
-    <Title>Discovery Park Map App</Title>
+# Discovery Park Map App
 
-    <Summary>
-        The aim of this application is to help university students get around the College of Engineering campus. It is intended to be used to find other resources like restrooms, vending machines, etc.
-        The functionality for the app has been implemented by using Dijkstra's algorithm to find the shortest path between two nodes (rooms or resources) in a graph.
-        This app will significantly reduce the first-day stress for incoming students and faculty by giving them clear directions around the building.
-    </Summary>
+<img src="assets/logo.png" width="200" height="auto" alt="Discovery Park Map App Logo">
 
-    <Features>
-        <Feature>Browsable Map</Feature>
-        <Feature>Functional map</Feature>
-        <Feature>Filter Bar to change filters for amenities</Feature>
-        <Feature>Search Bar for room lookup</Feature>
-        <Feature>Floor Toggle to change room levels</Feature>
-        <Feature>Recent routes</Feature>
-        <Feature>Ability to show favorite destinations</Feature>
-    </Features>
+A mobile application designed to help university students navigate the College of Engineering campus, find resources like restrooms, vending machines, and more, using real-time pathfinding.
 
-    <PlatformsAndTechnologies>
-        <Platform>iOS and Android</Platform>
-        <DevelopmentEnvironment>React Native</DevelopmentEnvironment>
-        <Database>Local</Database>
-    </PlatformsAndTechnologies>
+## 📚 Table of Contents
+* [Overview](#overview)
+* [Features](#features)
+* [Platforms and Technologies](#platforms-and-technologies)
+* [Scope](#scope)
+* [Requirements](#requirements)
+* [Installation and Usage](#installation-and-usage)
+* [Contributing](#contributing)
+* [Future Improvements](#future-improvements)
+* [Lessons Learned](#lessons-learned)
 
-    <Scope>
-        The scope of this project encompasses the development of a cross-platform mobile application (iOS and Android) for indoor navigation. 
-        The app will enable users to:
-        <Point>Access detailed indoor maps and floor plans</Point>
-        <Point>Receive directions to desired destinations</Point>
-        <Point>Explore points of interest (POIs) within the indoor area</Point>
-        <Point>Search for specific locations and POIs</Point>
-        <Point>Ensure user-friendly accessibility</Point>
-    </Scope>
+## 📝 Overview
+<img src="assets/system-design.png" width="600" height="auto" alt="System Overview">
 
-    <Requirements>
-        <Requirement>The system shall allow the user to search for a destination from a list of classrooms</Requirement>
-        <Requirement>The system shall offer navigation for the user from their current location to their destination</Requirement>
-        <Requirement>The system shall allow users to filter and show: Bathrooms, Stairs, ATMs, Emergency Exits, and Vending Machines</Requirement>
-        <Requirement>The system shall provide a uniform look and feel across the application</Requirement>
-    </Requirements>
+The **Discovery Park Map App** uses **Dijkstra's algorithm** to find the shortest path between two locations within the College of Engineering campus. The app is designed to make it easier for incoming students and faculty to navigate the building and find essential resources such as bathrooms, vending machines, and more.
 
-    <InstallationAndUsage>
-        <Step>Clone the repository: <Command>git clone https://github.com/MichaelClark02/DiscoveryParkMapApp.git</Command></Step>
-        <Step>Navigate to the project directory: <Command>cd DiscoveryParkMapApp</Command></Step>
-        <Step>Install dependencies: <Command>npm install</Command></Step>
-        <Step>Start the development server: <Command>npm start</Command></Step>
-        <Step>Follow the instructions in the terminal to run the app on your device or emulator.</Step>
-    </InstallationAndUsage>
+### Key Highlights
+<img src="assets/use-case.png" width="400" height="auto" alt="Use Case">
 
-    <Contributing>
-        <Step>Fork the repository</Step>
-        <Step>Create a new branch: <Command>git checkout -b feature/my-new-feature</Command></Step>
-        <Step>Make your changes and commit them: <Command>git commit -am 'Add some feature'</Command></Step>
-        <Step>Push to the branch: <Command>git push origin feature/my-new-feature</Command></Step>
-        <Step>Submit a pull request</Step>
-    </Contributing>
+* Indoor navigation using real-time directions
+* Find specific resources like restrooms, ATMs, and more
+* Cross-platform app available on both iOS and Android
 
-    <FutureImprovements>
-        <Improvement>Mapping more wings of Discovery Park</Improvement>
-        <Improvement>Expanding on directions with common navigation application features (voice over directions, showing next steps at the top of the screen, etc.)</Improvement>
-    </FutureImprovements>
+## ✨ Features
+<img src="assets/demo.png" width="400" height="auto" alt="Feature Demo">
 
-    <LessonsLearned>
-        <Lesson>How to utilize the Agile methodology in order to develop quickly</Lesson>
-        <Lesson>The workflow for mobile app development</Lesson>
-        <Lesson>Usability and UI Design</Lesson>
-    </LessonsLearned>
+* **Browsable Map**: View detailed floor plans of the building
+* **Filter Bar**: Filter resources like bathrooms, stairs, ATMs, emergency exits, and vending machines
+* **Search Bar**: Search for rooms and resources quickly
+* **Floor Toggle**: Toggle between different floors of the building
+* **Recent Routes**: Access recently used routes for quick navigation
+* **Favorite Destinations**: Save favorite locations for easy access
 
-    <Images>
-        <LogoImage>logo.png</LogoImage>
-        <PlatformImage>platforms.png</PlatformImage>
-        <ScopeImage>scope_diagram.png</ScopeImage>
-    </Images>
+## 🛠 Platforms and Technologies
+<img src="assets/platforms.png" width="400" height="auto" alt="Platforms and Technologies">
 
-</README>
+* **Platform**: iOS and Android
+* **Development Environment**: React Native
+* **Database**: Local
+
+## 🎯 Scope
+The scope of this project encompasses the development of a cross-platform mobile application (iOS and Android) for indoor navigation. The app will enable users to:
+
+* Access detailed indoor maps and floor plans
+* Receive directions to their desired destinations
+* Explore points of interest (POIs) within the building
+* Search for specific locations and POIs
+* Ensure user-friendly accessibility
+
+## 📋 Requirements
+
+* The system shall allow the user to search for a destination from a list of classrooms
+* The system shall offer navigation for the user from their current location to their destination
+* The system shall allow users to filter and show: Bathrooms, Stairs, ATMs, Emergency Exits, and Vending Machines
+* The system shall provide a uniform look and feel across the application
+
+## ⚙️ Installation and Usage
+
+### Steps
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/MichaelClark02/DiscoveryParkMapApp.git
+    cd DiscoveryParkMapApp
+    ```
+
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+3. Start the development server:
+    ```bash
+    npm start
+    ```
+
+4. Follow the instructions in the terminal to run the app on your device or emulator.
+
+## 🤝 Contributing
+We welcome contributions to improve the app! Here's how you can get started:
+
+1. Fork the repository
+2. Create a new branch for your feature or fix
+3. Commit and push your changes
+4. Submit a pull request with a detailed explanation of your work
+
+## 🚀 Future Improvements
+<img src="assets/future-improvements.png" width="400" height="auto" alt="Future Improvements">
+
+* Mapping more wings of Discovery Park
+* Expanding on directions with common navigation features (e.g., voice over directions, showing next steps at the top of the screen)
+
+## 💡 Lessons Learned
+* How to utilize the Agile methodology to develop quickly
+* The workflow for mobile app development
+* Usability and UI Design
+
+## 📄 License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## 💬 Credits
+Special thanks to everyone who contributed to the app's development, including the students, faculty, and other contributors. This project was developed to enhance the campus experience for students and faculty alike.
