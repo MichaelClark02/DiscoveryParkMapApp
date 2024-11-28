@@ -36,12 +36,39 @@ The **Discovery Park Map App** uses **Dijkstra's algorithm** to find the shortes
 * **Recent Routes**: Access recently used routes for quick navigation
 * **Favorite Destinations**: Save favorite locations for easy access
 
-## 🛠 Platforms and Technologies
-<img src="assets/platforms.png" width="400" height="auto" alt="Platforms and Technologies">
 
-* **Platform**: iOS and Android
-* **Development Environment**: React Native
-* **Database**: Postgresql-local
+markdown
+Copy code
+## 🛠 Platforms and Technologies
+The **Discovery Park Map App** utilizes a variety of technologies to ensure a seamless and efficient experience across multiple platforms. Below is an overview of the key technologies and platforms used in the development process.
+
+<p>
+  <img src="assets/icons/react-native.png" width="50" height="auto" alt="React Native Icon"><img src="assets/icons/postgresql.png" width="50" height="auto" alt="PostgreSQL Icon"><img src="assets/icons/ios.png" width="50" height="auto" alt="iOS Icon"><img src="assets/icons/android.png" width="50" height="auto" alt="Android Icon">
+</p>
+
+* **Platform**: iOS and Android  
+  The app is designed to be cross-platform, ensuring that it runs smoothly on both iOS and Android devices. This enables wide accessibility for all users within the university community.
+
+* **Development Environment**: React Native  
+  We used **React Native** for building the app's user interface. React Native allows for the development of cross-platform mobile applications using a single codebase, which streamlines the development process and maintains consistency across both platforms.
+
+* **Database**: PostgreSQL (Local)  
+  **PostgreSQL** is used for storing user data, including search history, favorite destinations, and recent routes. We opted for a local database to ensure fast access to data and to minimize reliance on external servers. PostgreSQL provides the robustness and flexibility needed for the app’s data storage requirements.
+
+* **Navigation Algorithm**: Dijkstra’s Algorithm  
+  The app leverages **Dijkstra's Algorithm** to calculate the shortest path between two nodes (e.g., rooms or resources) on the campus map. This ensures that users can get precise and efficient directions for indoor navigation.
+
+* **Backend Framework**: Node.js with Express  
+  The backend is powered by **Node.js** with **Express** for handling requests, routing, and serving data to the frontend. This lightweight server ensures quick data retrieval and response times for the user.
+
+* **Map Integration**: Custom Indoor Map  
+  For the map feature, we integrated custom indoor maps that allow users to explore different floors and rooms within Discovery Park. The maps are interactive and dynamically updated based on user input, showing their location in real-time.
+
+* **Version Control**: Git & GitHub  
+  We used **Git** for version control and **GitHub** for collaboration and source code management. This allowed the team to efficiently work on the app, manage different branches, and keep track of changes in the codebase.
+
+* **Deployment**: Expo for React Native  
+  **Expo** is used for developing and building the React Native app. It simplifies the setup process and provides powerful development tools for testing and building the app on iOS and Android devices without needing a native build process.
 
 ## 🎯 Scope
 The scope of this project encompasses the development of a cross-platform mobile application (iOS and Android) for indoor navigation. The app will enable users to:
