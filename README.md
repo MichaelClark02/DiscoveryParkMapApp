@@ -1,6 +1,6 @@
 # Discovery Park Map App
 
-<img src="DiscoveryParkMapApp/assets/discovery-logo.png" width="200" height="auto" alt="Discovery Park Map App Logo">
+<img src="DiscoveryParkMapApp/assets/discovery-logo.png" width="250" height="auto" alt="Discovery Park Map App Logo">
 
 A mobile application designed to help university students navigate the College of Engineering campus, find resources like restrooms, vending machines, and more, using real-time pathfinding.
 
@@ -42,7 +42,7 @@ The **Discovery Park Map App** uses **Dijkstra's algorithm** to find the shortes
 The **Discovery Park Map App** utilizes a variety of technologies to ensure a seamless and efficient experience across multiple platforms. Below is an overview of the key technologies and platforms used in the development process.
 
 <p>
-  <img src="DiscoveryParkMapApp/assets/react-native.svg" width="80" height="auto" alt="React Native Icon">  <img src="DiscoveryParkMapApp/assets/postgres.png" width="80" height="auto" alt="PostgreSQL Icon">  <img src="DiscoveryParkMapApp/assets/nodejs.png" width="80" height="auto" alt="nodejs Icon">  <img src="DiscoveryParkMapApp/assets/expo-go.png" width="100" height="auto" alt="expogo Icon">
+  <img src="DiscoveryParkMapApp/assets/react-native.svg" width="80" height="auto" alt="React Native Icon">        <img src="DiscoveryParkMapApp/assets/postgres.png" width="80" height="auto" alt="PostgreSQL Icon">        <img src="DiscoveryParkMapApp/assets/nodejs.png" width="80" height="auto" alt="nodejs Icon">        <img src="DiscoveryParkMapApp/assets/expo-go.png" width="150" height="auto" alt="expogo Icon">
 </p>
 
 * **Platform**: iOS and Android  
